@@ -16,7 +16,7 @@ Supported functions:
 	- Offering changes to flowchart owner;
 	
 Development Team:
-Veselov Ilya
-Kochetov Pavel
-Chugunov Evgeni
-Peskov Dmitri
+Veselov Ilya; 
+Kochetov Pavel; 
+Chugunov Evgeni; 
+Peskov Dmitri.
