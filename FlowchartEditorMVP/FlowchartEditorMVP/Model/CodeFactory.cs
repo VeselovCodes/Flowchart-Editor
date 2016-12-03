@@ -9,4 +9,7 @@ namespace FlowchartEditorMVP.Model
     class CodeFactory
     {
     }
+
+    class CppFactory : CodeFactory
+    { }
 }

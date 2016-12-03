@@ -9,4 +9,8 @@ namespace FlowchartEditorMVP.Model
     class ICode
     {
     }
+
+    class CppCode : ICode
+    {
+    }
 }

@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace FlowchartEditorMVP.Model
 {
-    class Flowchart
+    class IFlowchart
     {
+
+    }
+
+    class Flowchart : IFlowchart
+    {
+
     }
 }
