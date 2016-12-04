@@ -57,6 +57,14 @@ namespace FlowchartEditorMVP.Model
         {
             return edgesNumber;
         }
+
+        public IEnumerable<int> getAdjList(int nodeNumber) // Получение смежных вершин по номеру конкретной вершины
+        {
+            foreach (var adjElement in adj[nodeNumber])
+            {
+                yield return adjElement;
+            }
+        }
     }
 
     class Node
