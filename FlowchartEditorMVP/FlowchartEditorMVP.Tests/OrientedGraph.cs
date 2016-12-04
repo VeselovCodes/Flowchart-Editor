@@ -23,6 +23,7 @@ namespace FlowchartEditorMVP.Model
             for (int i = 0; i < nodesNumber; i++)
             {
                 adj[i] = new List<int>();
+                nodes[i] = new Node();
                 nodes[i].nodeNum = i;
             }
         }
@@ -49,18 +50,23 @@ namespace FlowchartEditorMVP.Model
 
         public int countNodes()
         {
-            return nodesNumber;
+            return adj.Length;
+        }
+
+        public int countEdges()
+        {
+            return edgesNumber;
         }
     }
 
     class Node
     {
-        public int nodeNum; // Номер узла графа
+        public int nodeNum = 0; // Номер узла графа
     }
 
     class Edge
     {
-        public Node outNode; // Начальный узел 
-        public Node inNode; // Конечный узел
+        public Node outNode = new Node(); // Начальный узел 
+        public Node inNode = new Node(); // Конечный узел
     }
 }
