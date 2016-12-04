@@ -6,19 +6,23 @@ using System.Threading.Tasks;
 
 namespace FlowchartEditorMVP.Model
 {
-    class IBlock
+    interface IBlock
     {
+        void Draw();
     }
 
     class SquareBlock : IBlock
     {
+        public void Draw() { }
     }
 
     class IfBlock : IBlock
     {
+        public void Draw() { }
     }
 
     class ConnecterBlock : IBlock
     {
+        public void Draw() { }
     }
 }

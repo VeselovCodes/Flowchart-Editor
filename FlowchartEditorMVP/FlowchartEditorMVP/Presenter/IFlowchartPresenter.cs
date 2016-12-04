@@ -9,4 +9,12 @@ namespace FlowchartEditorMVP.Presenter
     class IFlowchartPresenter
     {
     }
+
+    class MasterPresenter : IFlowchartPresenter
+    {
+    }
+
+    class ReviewerPreesenter : IFlowchartPresenter
+    {
+    }
 }

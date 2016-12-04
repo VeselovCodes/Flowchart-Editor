@@ -9,4 +9,8 @@ namespace FlowchartEditorMVP.Presenter
     class IAccountPresenter
     {
     }
+
+    class AccountPresenter : IAccountPresenter
+    {
+    }
 }
