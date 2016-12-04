@@ -8,7 +8,6 @@ namespace FlowchartEditorMVP.Model
 {
     class IBlock
     {
-
     }
 
     class SquareBlock : IBlock
