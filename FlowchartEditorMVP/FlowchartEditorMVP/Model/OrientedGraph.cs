@@ -47,7 +47,7 @@ namespace FlowchartEditorMVP.Model
             adj[node.nodeNum] = new List<int>();
         }
 
-        public int countNodes()
+        public int countNodes() // Подсчет числа узлов
         {
             return nodesNumber;
         }
