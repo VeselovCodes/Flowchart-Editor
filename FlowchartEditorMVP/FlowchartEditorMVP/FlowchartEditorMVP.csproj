@@ -46,11 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\IBlock.cs" />
     <Compile Include="Model\CodeFactory.cs" />
     <Compile Include="Model\DataManagement.cs" />
-    <Compile Include="Model\IBlock.cs" />
-    <Compile Include="Model\ICode.cs" />
     <Compile Include="Model\IFlowchart.cs" />
+    <Compile Include="Model\ICode.cs" />
     <Compile Include="Model\OrientedGraph.cs" />
     <Compile Include="Presenter\IAccountPresenter.cs" />
     <Compile Include="Presenter\IFlowchartPresenter.cs" />
@@ -67,14 +67,14 @@
     <Compile Include="View\EnterView.Designer.cs">
       <DependentUpon>EnterView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\FlowchartDrower.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="View\FlowchartDrower.Designer.cs">
       <DependentUpon>FlowchartDrower.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\MasterView.cs">
       <SubType>Form</SubType>
     </Compile>

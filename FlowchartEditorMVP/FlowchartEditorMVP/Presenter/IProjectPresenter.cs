@@ -9,4 +9,9 @@ namespace FlowchartEditorMVP.Presenter
     class IProjectPresenter
     {
     }
+
+    class ProjectPresenter : IProjectPresenter
+    {
+    }
+        
 }

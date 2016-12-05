@@ -6,10 +6,16 @@ using System.Threading.Tasks;
 
 namespace FlowchartEditorMVP.Model
 {
-    class CodeFactory
+    interface CodeFactory
     {
+        ICode CreateCode(Flowchart flowchart);
     }
 
     class CppFactory : CodeFactory
-    { }
+    {
+        public ICode CreateCode(Flowchart flowchart)
+        {
+            return new CppCode();
+        }
+    }
 }
