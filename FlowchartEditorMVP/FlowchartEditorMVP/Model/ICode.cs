@@ -14,10 +14,14 @@ namespace FlowchartEditorMVP.Model
 
     class CppCode : ICode
     {
+        private string[] code;
+
         public Flowchart ToFlowchart() 
         {
             return new Flowchart();
         }
+
+
 
         public void WriteFile(/*PATH*/) { }
     }

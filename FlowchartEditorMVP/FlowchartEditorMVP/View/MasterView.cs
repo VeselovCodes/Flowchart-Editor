@@ -10,11 +10,18 @@ using System.Windows.Forms;
 
 namespace FlowchartEditorMVP.View
 {
-    public partial class MasterView : Form
+    public partial class MasterView : Form , IView
     {
         public MasterView()
         {
             InitializeComponent();
         }
+
+        private void MasterView_Load(object sender, EventArgs e)
+        {
+
+        }
+        public void Open() { }
+        public void Close() { }
     }
 }

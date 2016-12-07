@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FlowchartEditorMVP.Presenter;
+using FlowchartEditorMVP.View;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,11 +12,32 @@ using System.Windows.Forms;
 
 namespace FlowchartEditorMVP
 {
-    public partial class Form1 : Form
+    public partial class EnterView : Form , IView
     {
-        public Form1()
+        private IEnterPresenter presenter;
+
+        public EnterView()
         {
             InitializeComponent();
+        }
+
+        private void enterButton_Click(object sender, EventArgs e)
+        {
+            presenter.Login(loginInputTextbox.Text, passwordInputTextbox.Text);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            presenter = new EnterPresenter(this);
+        }       
+
+
+        private void registerButton_Click(object sender, EventArgs e)
+        {
+            RegisterView registerView = new RegisterView();
+
+            this.Hide();
+            registerView.Show();
         }
     }
 }

@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlowchartEditorMVP.Model
-{
+//namespace FlowchartEditorMVP.Model
+
     class OrientedGraph
     {
         private List<int>[] adj; // Список смежности
@@ -63,4 +63,4 @@ namespace FlowchartEditorMVP.Model
         public Node outNode; // Начальный узел 
         public Node inNode; // Конечный узел
     }
-}
+

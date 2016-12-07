@@ -10,11 +10,19 @@ using System.Windows.Forms;
 
 namespace FlowchartEditorMVP.View
 {
-    public partial class ModeView : Form
+    public partial class ModeView : Form , IView
     {
         public ModeView()
         {
             InitializeComponent();
         }
+
+        private void ModeView_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        public void Open() { }
+        public void Close() { }
     }
 }

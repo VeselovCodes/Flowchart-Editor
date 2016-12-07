@@ -10,11 +10,19 @@ using System.Windows.Forms;
 
 namespace FlowchartEditorMVP.View
 {
-    public partial class NewFlowchartView : Form
+    public partial class NewFlowchartView : Form , IView
     {
         public NewFlowchartView()
         {
             InitializeComponent();
         }
+
+        private void NewFlowchartView_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        public void Open() { }
+        public void Close() { }
     }
 }
