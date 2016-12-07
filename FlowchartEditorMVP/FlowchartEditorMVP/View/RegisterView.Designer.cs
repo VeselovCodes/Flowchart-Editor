@@ -143,7 +143,7 @@
             this.Controls.Add(this.passwordInputTextbox);
             this.Controls.Add(this.loginInputTextbox);
             this.Name = "RegisterView";
-            this.Text = "FlowchartEditor";
+            this.Text = "Flowchart Editor";
             this.Load += new System.EventHandler(this.RegisterView_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -107,7 +107,7 @@
             this.loginHeaderLabel.TabIndex = 7;
             this.loginHeaderLabel.Text = "Log in";
             // 
-            // Form1
+            // EnterView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -120,8 +120,8 @@
             this.Controls.Add(this.loginInputLabel);
             this.Controls.Add(this.passwordInputTextbox);
             this.Controls.Add(this.loginInputTextbox);
-            this.Name = "Form1";
-            this.Text = "FlowchartEditor";
+            this.Name = "EnterView";
+            this.Text = "Flowchart Editor";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

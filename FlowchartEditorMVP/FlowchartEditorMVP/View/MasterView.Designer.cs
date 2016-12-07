@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.actionsGroupBox = new System.Windows.Forms.GroupBox();
+            this.toDatabaseButton = new System.Windows.Forms.Button();
             this.codeTextbox = new System.Windows.Forms.TextBox();
             this.toCodeButton = new System.Windows.Forms.Button();
             this.removeButton = new System.Windows.Forms.Button();
@@ -44,7 +45,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.applyButton = new System.Windows.Forms.Button();
             this.declineButton = new System.Windows.Forms.Button();
-            this.toDatabaseButton = new System.Windows.Forms.Button();
             this.actionsGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.flowchartPictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -66,6 +66,15 @@
             this.actionsGroupBox.TabIndex = 3;
             this.actionsGroupBox.TabStop = false;
             this.actionsGroupBox.Text = "Actions";
+            // 
+            // toDatabaseButton
+            // 
+            this.toDatabaseButton.Location = new System.Drawing.Point(6, 475);
+            this.toDatabaseButton.Name = "toDatabaseButton";
+            this.toDatabaseButton.Size = new System.Drawing.Size(152, 60);
+            this.toDatabaseButton.TabIndex = 7;
+            this.toDatabaseButton.Text = "To Database";
+            this.toDatabaseButton.UseVisualStyleBackColor = true;
             // 
             // codeTextbox
             // 
@@ -206,15 +215,6 @@
             this.declineButton.Text = "Decline";
             this.declineButton.UseVisualStyleBackColor = true;
             // 
-            // toDatabaseButton
-            // 
-            this.toDatabaseButton.Location = new System.Drawing.Point(6, 475);
-            this.toDatabaseButton.Name = "toDatabaseButton";
-            this.toDatabaseButton.Size = new System.Drawing.Size(152, 60);
-            this.toDatabaseButton.TabIndex = 7;
-            this.toDatabaseButton.Text = "To Database";
-            this.toDatabaseButton.UseVisualStyleBackColor = true;
-            // 
             // MasterView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -228,7 +228,7 @@
             this.Controls.Add(this.flowchartPictureBox);
             this.Controls.Add(this.actionsGroupBox);
             this.Name = "MasterView";
-            this.Text = "MasterView";
+            this.Text = "Flowchart Editor";
             this.Load += new System.EventHandler(this.MasterView_Load);
             this.actionsGroupBox.ResumeLayout(false);
             this.actionsGroupBox.PerformLayout();
