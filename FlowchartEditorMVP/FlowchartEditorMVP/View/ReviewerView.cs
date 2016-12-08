@@ -28,11 +28,6 @@ namespace FlowchartEditorMVP.View
             flowchartPresenter = new ReviewerPresenter();
         }
 
-        private void actionsGroupBox_Enter(object sender, EventArgs e)
-        {
-
-        }
-
         private void addBlockButton_Click(object sender, EventArgs e)
         {
             flowchartPresenter.AddBlock(codeTextbox.Text, xCoordsClick, yCoordsClick);
@@ -72,6 +67,18 @@ namespace FlowchartEditorMVP.View
                 editBlockButton.Enabled = true;
                 removeButton.Enabled = true;
             }
+        }
+
+        private void toDatabaseButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            ChooseFlowchartView chooseFlowchartView = new ChooseFlowchartView();
+            this.Hide();
+            chooseFlowchartView.Show();
         }
     }
 }

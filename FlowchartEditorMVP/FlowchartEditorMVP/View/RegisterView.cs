@@ -30,6 +30,9 @@ namespace FlowchartEditorMVP.View
             if (passwordInputTextbox.Text == passwordRepeatInputTextbox.Text)
                 presenter.Register(loginInputTextbox.Text, passwordInputTextbox.Text);
             else exceptionLabel.Text = "Incorrect repeated password";
+            EnterView enterView = new EnterView();// Будет в ветке if
+            this.Hide();// Будет в ветке if
+            enterView.Show();// Будет в ветке if
         }
 
         private void backButton_Click(object sender, EventArgs e)

@@ -24,6 +24,9 @@ namespace FlowchartEditorMVP
         private void enterButton_Click(object sender, EventArgs e)
         {
             presenter.Login(loginInputTextbox.Text, passwordInputTextbox.Text);
+            ChooseFlowchartView chooseFlowchartView = new ChooseFlowchartView();
+            this.Hide();
+            chooseFlowchartView.Show();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -35,7 +38,6 @@ namespace FlowchartEditorMVP
         private void registerButton_Click(object sender, EventArgs e)
         {
             RegisterView registerView = new RegisterView();
-
             this.Hide();
             registerView.Show();
         }

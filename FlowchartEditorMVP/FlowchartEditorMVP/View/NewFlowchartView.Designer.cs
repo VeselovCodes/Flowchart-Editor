@@ -31,7 +31,6 @@
             this.flowchartNameLabel = new System.Windows.Forms.Label();
             this.flowchartNameInputTextbox = new System.Windows.Forms.TextBox();
             this.browseFileOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.browseFileSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.browseFileButton = new System.Windows.Forms.Button();
             this.languageLabel = new System.Windows.Forms.Label();
             this.pathTextbox = new System.Windows.Forms.TextBox();
@@ -64,6 +63,7 @@
             this.browseFileButton.TabIndex = 2;
             this.browseFileButton.Text = "Browse file";
             this.browseFileButton.UseVisualStyleBackColor = true;
+            this.browseFileButton.Click += new System.EventHandler(this.browseFileButton_Click);
             // 
             // languageLabel
             // 
@@ -88,6 +88,7 @@
             this.languageComboBox.Name = "languageComboBox";
             this.languageComboBox.Size = new System.Drawing.Size(250, 21);
             this.languageComboBox.TabIndex = 4;
+            this.languageComboBox.SelectedIndexChanged += new System.EventHandler(this.languageComboBox_SelectedIndexChanged);
             // 
             // createButton
             // 
@@ -97,6 +98,7 @@
             this.createButton.TabIndex = 2;
             this.createButton.Text = "Create";
             this.createButton.UseVisualStyleBackColor = true;
+            this.createButton.Click += new System.EventHandler(this.createButton_Click);
             // 
             // backButton
             // 
@@ -106,6 +108,7 @@
             this.backButton.TabIndex = 2;
             this.backButton.Text = "Back";
             this.backButton.UseVisualStyleBackColor = true;
+            this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
             // NewFlowchartView
             // 
@@ -133,7 +136,6 @@
         private System.Windows.Forms.Label flowchartNameLabel;
         private System.Windows.Forms.TextBox flowchartNameInputTextbox;
         private System.Windows.Forms.OpenFileDialog browseFileOpenFileDialog;
-        private System.Windows.Forms.SaveFileDialog browseFileSaveFileDialog;
         private System.Windows.Forms.Button browseFileButton;
         private System.Windows.Forms.Label languageLabel;
         private System.Windows.Forms.TextBox pathTextbox;

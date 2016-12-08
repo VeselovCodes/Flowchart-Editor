@@ -14,10 +14,17 @@ namespace FlowchartEditorMVP.Presenter
         bool IsEdge(int xCoordsClick, int yCoordsClick);
         bool IsSquareBlock(int xCoordsClick, int yCoordsClick);
         void ToCode();
+        void Apply();
+        void Decline();
     }
 
     class MasterPresenter : IFlowchartPresenter
     {
+        public void Apply() { }
+        public void Decline() { }
+        public void ToCode() { }
+        public bool IsEdge(int xCoordsClick, int yCoordsClick) { return true; }
+        public bool IsSquareBlock(int xCoordsClick, int yCoordsClick) { return true; }
         public void Run() { }
         public void AddBlock(string str, int x, int y) { }
         public void EditBlock(string str, int x, int y) { }
@@ -26,6 +33,11 @@ namespace FlowchartEditorMVP.Presenter
 
     class ReviewerPresenter : IFlowchartPresenter
     {
+        public void Apply() { }
+        public void Decline() { }
+        public void ToCode() { }
+        public bool IsEdge(int xCoordsClick, int yCoordsClick) { return true; }
+        public bool IsSquareBlock(int xCoordsClick, int yCoordsClick) { return true; }
         public void Run() { }
         public void AddBlock(string str, int x, int y) { }
         public void EditBlock(string str, int x, int y) { }

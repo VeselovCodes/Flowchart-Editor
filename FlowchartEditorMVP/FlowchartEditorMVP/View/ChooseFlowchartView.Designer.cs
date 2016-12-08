@@ -70,6 +70,7 @@
             this.openButton.TabIndex = 1;
             this.openButton.Text = "Open";
             this.openButton.UseVisualStyleBackColor = true;
+            this.openButton.Click += new System.EventHandler(this.openButton_Click);
             // 
             // createNewButton
             // 
@@ -79,6 +80,7 @@
             this.createNewButton.TabIndex = 1;
             this.createNewButton.Text = "Create new";
             this.createNewButton.UseVisualStyleBackColor = true;
+            this.createNewButton.Click += new System.EventHandler(this.createNewButton_Click);
             // 
             // changeUserButton
             // 
@@ -88,6 +90,7 @@
             this.changeUserButton.TabIndex = 1;
             this.changeUserButton.Text = "Change user";
             this.changeUserButton.UseVisualStyleBackColor = true;
+            this.changeUserButton.Click += new System.EventHandler(this.changeUserButton_Click);
             // 
             // ChooseFlowchartView
             // 

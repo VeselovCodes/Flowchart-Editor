@@ -36,7 +36,7 @@
             this.editBlockButton = new System.Windows.Forms.Button();
             this.addBlockButton = new System.Windows.Forms.Button();
             this.flowchartPictureBox = new System.Windows.Forms.PictureBox();
-            this.changeModeButton = new System.Windows.Forms.Button();
+            this.backButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.reviewsDataGridView = new System.Windows.Forms.DataGridView();
             this.loginColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -75,6 +75,7 @@
             this.toDatabaseButton.TabIndex = 7;
             this.toDatabaseButton.Text = "To Database";
             this.toDatabaseButton.UseVisualStyleBackColor = true;
+            this.toDatabaseButton.Click += new System.EventHandler(this.toDatabaseButton_Click);
             // 
             // codeTextbox
             // 
@@ -92,6 +93,7 @@
             this.toCodeButton.TabIndex = 5;
             this.toCodeButton.Text = "To Code";
             this.toCodeButton.UseVisualStyleBackColor = true;
+            this.toCodeButton.Click += new System.EventHandler(this.toCodeButton_Click);
             // 
             // removeButton
             // 
@@ -102,6 +104,7 @@
             this.removeButton.TabIndex = 3;
             this.removeButton.Text = "Remove";
             this.removeButton.UseVisualStyleBackColor = true;
+            this.removeButton.Click += new System.EventHandler(this.removeButton_Click);
             // 
             // editBlockButton
             // 
@@ -112,6 +115,7 @@
             this.editBlockButton.TabIndex = 2;
             this.editBlockButton.Text = "Edit block";
             this.editBlockButton.UseVisualStyleBackColor = true;
+            this.editBlockButton.Click += new System.EventHandler(this.editBlockButton_Click);
             // 
             // addBlockButton
             // 
@@ -122,6 +126,7 @@
             this.addBlockButton.TabIndex = 1;
             this.addBlockButton.Text = "Add block";
             this.addBlockButton.UseVisualStyleBackColor = true;
+            this.addBlockButton.Click += new System.EventHandler(this.addBlockButton_Click);
             // 
             // flowchartPictureBox
             // 
@@ -130,15 +135,17 @@
             this.flowchartPictureBox.Size = new System.Drawing.Size(500, 600);
             this.flowchartPictureBox.TabIndex = 4;
             this.flowchartPictureBox.TabStop = false;
+            this.flowchartPictureBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.flowchartPictureBox_MouseClick);
             // 
-            // changeModeButton
+            // backButton
             // 
-            this.changeModeButton.Location = new System.Drawing.Point(342, 619);
-            this.changeModeButton.Name = "changeModeButton";
-            this.changeModeButton.Size = new System.Drawing.Size(152, 60);
-            this.changeModeButton.TabIndex = 7;
-            this.changeModeButton.Text = "Change mode";
-            this.changeModeButton.UseVisualStyleBackColor = true;
+            this.backButton.Location = new System.Drawing.Point(342, 619);
+            this.backButton.Name = "backButton";
+            this.backButton.Size = new System.Drawing.Size(152, 60);
+            this.backButton.TabIndex = 7;
+            this.backButton.Text = "Back";
+            this.backButton.UseVisualStyleBackColor = true;
+            this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -205,6 +212,7 @@
             this.applyButton.TabIndex = 7;
             this.applyButton.Text = "Apply";
             this.applyButton.UseVisualStyleBackColor = true;
+            this.applyButton.Click += new System.EventHandler(this.applyButton_Click);
             // 
             // declineButton
             // 
@@ -214,6 +222,7 @@
             this.declineButton.TabIndex = 7;
             this.declineButton.Text = "Decline";
             this.declineButton.UseVisualStyleBackColor = true;
+            this.declineButton.Click += new System.EventHandler(this.declineButton_Click);
             // 
             // MasterView
             // 
@@ -224,7 +233,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.declineButton);
             this.Controls.Add(this.applyButton);
-            this.Controls.Add(this.changeModeButton);
+            this.Controls.Add(this.backButton);
             this.Controls.Add(this.flowchartPictureBox);
             this.Controls.Add(this.actionsGroupBox);
             this.Name = "MasterView";
@@ -250,7 +259,7 @@
         private System.Windows.Forms.Button editBlockButton;
         private System.Windows.Forms.Button addBlockButton;
         private System.Windows.Forms.PictureBox flowchartPictureBox;
-        private System.Windows.Forms.Button changeModeButton;
+        private System.Windows.Forms.Button backButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.DataGridView reviewsDataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn loginColumn;
