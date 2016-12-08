@@ -8,12 +8,12 @@ namespace FlowchartEditorMVP.Model
 {
     interface CodeFactory
     {
-        ICode CreateCode(Flowchart flowchart);
+        ICode CreateCode(IFlowchart flowchart);
     }
 
     class CppFactory : CodeFactory
     {
-        public ICode CreateCode(Flowchart flowchart)
+        public ICode CreateCode(IFlowchart flowchart)
         {
             return new CppCode();
         }

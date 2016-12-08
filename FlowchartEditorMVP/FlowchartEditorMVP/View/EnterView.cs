@@ -14,7 +14,7 @@ namespace FlowchartEditorMVP
 {
     public partial class EnterView : Form , IView
     {
-        private IEnterPresenter presenter;
+        private IAccountPresenter presenter;
 
         public EnterView()
         {
@@ -23,15 +23,20 @@ namespace FlowchartEditorMVP
 
         private void enterButton_Click(object sender, EventArgs e)
         {
-            presenter.Login(loginInputTextbox.Text, passwordInputTextbox.Text);
-            ChooseFlowchartView chooseFlowchartView = new ChooseFlowchartView();
+            /*if (presenter.Login(loginInputTextbox.Text, passwordInputTextbox.Text))
+            {
+                this.Hide();
+                ChooseFlowchartView chooseFlowchartView = new ChooseFlowchartView();
+                chooseFlowchartView.Show();
+            }*/
             this.Hide();
+            ChooseFlowchartView chooseFlowchartView = new ChooseFlowchartView(loginInputTextbox.Text);
             chooseFlowchartView.Show();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            presenter = new EnterPresenter(this);
+            presenter = new AccountPresenter(this);
         }       
 
 

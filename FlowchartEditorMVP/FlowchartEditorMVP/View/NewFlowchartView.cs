@@ -17,6 +17,7 @@ namespace FlowchartEditorMVP.View
         {
             InitializeComponent();
         }
+        string pathVar;
 
         private INewFlowchartPresenter flowchartPresenter;
 
@@ -29,20 +30,23 @@ namespace FlowchartEditorMVP.View
         {
             if (browseFileOpenFileDialog.ShowDialog() == DialogResult.OK)
             {
-                pathTextbox.Text = browseFileOpenFileDialog.FileName;
+                pathVar = pathTextbox.Text = browseFileOpenFileDialog.FileName;
+
             }
         }
 
         private void createButton_Click(object sender, EventArgs e)
         {
-            MasterView masterView = new MasterView();
+
+            MasterView masterView = new MasterView(flowchartNameInputTextbox.Text, 
+                flowchartPresenter.GetLogin(), pathVar);
             this.Hide();
             masterView.Show();
         }
 
         private void backButton_Click(object sender, EventArgs e)
         {
-            ChooseFlowchartView chooseFlowchartView = new ChooseFlowchartView();
+            ChooseFlowchartView chooseFlowchartView = new ChooseFlowchartView(flowchartPresenter.GetLogin());
             this.Hide();
             chooseFlowchartView.Show();
         }

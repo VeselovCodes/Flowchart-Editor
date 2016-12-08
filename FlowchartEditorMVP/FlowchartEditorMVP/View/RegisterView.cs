@@ -13,7 +13,7 @@ namespace FlowchartEditorMVP.View
 {
     public partial class RegisterView : Form , IView
     {
-        private IRegisterPresenter presenter;
+        private IAccountPresenter presenter;
 
         public RegisterView()
         {
@@ -22,17 +22,20 @@ namespace FlowchartEditorMVP.View
 
         private void RegisterView_Load(object sender, EventArgs e)
         {
-            presenter = new RegisterPresenter();
+            presenter = new AccountPresenter(this);
         }
 
         private void registerButton_Click(object sender, EventArgs e)
         {
-            if (passwordInputTextbox.Text == passwordRepeatInputTextbox.Text)
-                presenter.Register(loginInputTextbox.Text, passwordInputTextbox.Text);
-            else exceptionLabel.Text = "Incorrect repeated password";
-            EnterView enterView = new EnterView();// Будет в ветке if
-            this.Hide();// Будет в ветке if
-            enterView.Show();// Будет в ветке if
+            if (passwordInputTextbox.Text == passwordRepeatInputTextbox.Text 
+                && presenter.Register(loginInputTextbox.Text, passwordInputTextbox.Text))
+            {                
+                EnterView enterView = new EnterView();
+                this.Hide();
+                enterView.Show();
+            }
+            else exceptionLabel.Text = "Registration error";
+            
         }
 
         private void backButton_Click(object sender, EventArgs e)

@@ -15,17 +15,29 @@ namespace FlowchartEditorMVP.View
     {
         private int xCoordsClick;
         private int yCoordsClick;
-
         private IFlowchartPresenter flowchartPresenter;
 
-        public MasterView()
+        public MasterView(string name, string owner, string path)
+        {            
+            InitializeComponent();
+            flowchartPresenter = new MasterPresenter(name, owner, path);
+        }
+        public MasterView(string name, string owner)
         {
             InitializeComponent();
+            flowchartPresenter = new MasterPresenter(name, owner);
         }
 
         private void MasterView_Load(object sender, EventArgs e)
         {
-            flowchartPresenter = new MasterPresenter();
+            List<Tuple<string, string>> flowchartReviewsLogins = flowchartPresenter.GetReviewsAndLogins();
+
+            /*for (int i = 0; i < 10; i++)
+            {
+                reviewsDataGridView.Rows.Add();
+                reviewsDataGridView.Rows[i].Cells[0].Value = flowchartReviewsLogins[i].Item1;
+                reviewsDataGridView.Rows[i].Cells[1].Value = flowchartReviewsLogins[i].Item2;
+            }*/
         }
 
         private void addBlockButton_Click(object sender, EventArgs e)
@@ -45,7 +57,7 @@ namespace FlowchartEditorMVP.View
 
         private void toDatabaseButton_Click(object sender, EventArgs e)
         {
-
+            flowchartPresenter.ToDataBase();
         }
 
         private void toCodeButton_Click(object sender, EventArgs e)
@@ -55,7 +67,7 @@ namespace FlowchartEditorMVP.View
 
         private void applyButton_Click(object sender, EventArgs e)
         {
-            flowchartPresenter.Apply();
+            flowchartPresenter.Apply("Name", "Reviewer");
         }
 
         private void declineButton_Click(object sender, EventArgs e)
@@ -79,9 +91,16 @@ namespace FlowchartEditorMVP.View
 
         private void backButton_Click(object sender, EventArgs e)
         {
-            ChooseFlowchartView chooseFlowchartView = new ChooseFlowchartView();
+            ChooseFlowchartView chooseFlowchartView = new ChooseFlowchartView(flowchartPresenter.GetLogin());
             this.Hide();
             chooseFlowchartView.Show();
+        }
+
+        private void reviewsDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+            flowchartPresenter.LoadReviewedFlowchart(reviewsDataGridView.Rows[e.RowIndex].Cells[1].Value.ToString()
+                , reviewsDataGridView.Rows[e.RowIndex].Cells[0].Value.ToString());
         }
     }
 }

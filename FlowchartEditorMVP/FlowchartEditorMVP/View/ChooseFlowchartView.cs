@@ -14,17 +14,25 @@ namespace FlowchartEditorMVP.View
     public partial class ChooseFlowchartView : Form , IView
     {
         private IChooseFlowchartPresenter presenter;
-        private IEnterPresenter enterPresenter;
-
-        public ChooseFlowchartView()
+        private string owner;
+        private string name;
+                
+        public ChooseFlowchartView(string login)
         {
             InitializeComponent();
+            presenter = new ChooseFlowchartPresenter(login);
         }
 
         private void ChooseFlowchartView_Load(object sender, EventArgs e)
         {
-            presenter = new ChooseFlowchartPresenter();
-            enterPresenter = new EnterPresenter(this);
+            //List<Tuple<string, string>> flowchartNamesLogins = presenter.GetNamesAndLogins();
+
+            /*for (int i = 0; i < 10; i++)
+            {
+                flowchartDataGridView.Rows.Add();
+                flowchartDataGridView.Rows[i].Cells[0].Value = flowchartNamesLogins[i].Item1;
+                flowchartDataGridView.Rows[i].Cells[1].Value = flowchartNamesLogins[i].Item2;
+            }*/
         }
 
         private void changeUserButton_Click(object sender, EventArgs e)
@@ -35,20 +43,17 @@ namespace FlowchartEditorMVP.View
         }
 
         private void openButton_Click(object sender, EventArgs e)
-        {
-            string str1 = "reviewer"; // Заменить на первый textbox
+        {           
 
-            string str2 = "reviewer"; // Заменить на второй textbox
-
-            if (enterPresenter.loginType(str1, str2) == "master")
+            if (owner == presenter.GetLogin())
             {
-                MasterView masterView = new MasterView();
+                MasterView masterView = new MasterView(name, owner);
                 this.Hide();
                 masterView.Show();
             }
-            else if (enterPresenter.loginType(str1, str2) == "reviewer")
+            else 
             {
-                ReviewerView reviewerView = new ReviewerView();
+                ReviewerView reviewerView = new ReviewerView(name, owner);
                 this.Hide();
                 reviewerView.Show();
             }
@@ -59,6 +64,12 @@ namespace FlowchartEditorMVP.View
             NewFlowchartView newFlowchartView = new NewFlowchartView();
             this.Hide();
             newFlowchartView.Show();
+        }
+
+        private void flowchartDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            owner = flowchartDataGridView.Rows[e.RowIndex].Cells[1].Value.ToString();
+            name = flowchartDataGridView.Rows[e.RowIndex].Cells[0].Value.ToString();
         }
     }
 }
