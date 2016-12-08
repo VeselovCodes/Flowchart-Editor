@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="FlowchartEditorMVP.Model.CppFactory" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Model\CodeFactory.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FlowchartEditorMVP.Model.DataManagement" Collapsed="true">
+    <Position X="9.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABABARACAAAAAAAAAAAAAAABAACBAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\DataManagement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FlowchartEditorMVP.Model.StartBlock" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAggAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Model\IBlock.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FlowchartEditorMVP.Model.SquareBlock" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAggAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Model\IBlock.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FlowchartEditorMVP.Model.IfBlock" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAggAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Model\IBlock.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FlowchartEditorMVP.Model.ConnecterBlock" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAggAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\IBlock.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FlowchartEditorMVP.Model.CppCode" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAgAA=</HashCode>
+      <FileName>Model\ICode.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FlowchartEditorMVP.Model.Flowchart" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAIAAACAAAAAACAIAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Model\IFlowchart.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FlowchartEditorMVP.Model.OrientedGraph" Collapsed="true">
+    <Position X="18.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAIAEAAAAAAIAAAAAAAAAAAAQAAAAAAgAAhAAAACAAA=</HashCode>
+      <FileName>Model\OrientedGraph.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FlowchartEditorMVP.Model.Node" Collapsed="true">
+    <Position X="16.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Model\OrientedGraph.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FlowchartEditorMVP.Model.Edge" Collapsed="true">
+    <Position X="11.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\OrientedGraph.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FlowchartEditorMVP.Presenter.AccountPresenter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQAQAAAAAAI=</HashCode>
+      <FileName>Presenter\IAccountPresenter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FlowchartEditorMVP.Presenter.ChooseFlowchartPresenter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAEAI=</HashCode>
+      <FileName>Presenter\IChooseFlowchartPresenter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FlowchartEditorMVP.Presenter.MasterPresenter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAMAgAABAAAAAAAEAAAAACIAAgSAgAAAAUAAAIAAI=</HashCode>
+      <FileName>Presenter\IFlowchartPresenter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FlowchartEditorMVP.Presenter.ReviewerPresenter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAMAoAABAAAAAAAEAAAAACAAAgSAgAAAAUAAAIAAI=</HashCode>
+      <FileName>Presenter\IFlowchartPresenter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FlowchartEditorMVP.Presenter.NewFlowchartPresenter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAI=</HashCode>
+      <FileName>Presenter\INewFlowchartPresenter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FlowchartEditorMVP.Program" Collapsed="true">
+    <Position X="9.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FlowchartEditorMVP.EnterView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgACAAQEAAAECRAAAjAAAgAIAAAAQAAAAAAAA=</HashCode>
+      <FileName>View\EnterView.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FlowchartEditorMVP.Properties.Resources" Collapsed="true">
+    <Position X="13.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FlowchartEditorMVP.Properties.Settings" Collapsed="true">
+    <Position X="18.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FlowchartEditorMVP.View.ChooseFlowchartView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACACgABAAQCAAAACIAAlAAAIAIAgAAAAKAA=</HashCode>
+      <FileName>View\ChooseFlowchartView.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FlowchartEditorMVP.View.FlowchartDrower" Collapsed="true">
+    <Position X="16.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAACAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\FlowchartDrower.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FlowchartEditorMVP.View.MasterView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AARAABAIICQBADAABACIAkASQwABABAAAEAAUCAgACg=</HashCode>
+      <FileName>View\MasterView.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FlowchartEditorMVP.View.NewFlowchartView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAACAAQAECAAGAAAASQQABEAAQAAgAAgACAgg=</HashCode>
+      <FileName>View\NewFlowchartView.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FlowchartEditorMVP.View.RegisterView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgACAQAAEAAECRAAADAQQgAIAAAAEAAAAAAAg=</HashCode>
+      <FileName>View\RegisterView.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FlowchartEditorMVP.View.ReviewerView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAIACQAACAABACAAGASQwAAABAAAEAACCAgQAg=</HashCode>
+      <FileName>View\ReviewerView.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="FlowchartEditorMVP.Model.CodeFactory" Collapsed="true">
+    <Position X="9.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Model\CodeFactory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FlowchartEditorMVP.Model.IBlock" Collapsed="true">
+    <Position X="11.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAggAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\IBlock.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FlowchartEditorMVP.Model.ICode" Collapsed="true">
+    <Position X="13.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAgAA=</HashCode>
+      <FileName>Model\ICode.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FlowchartEditorMVP.Model.IFlowchart" Collapsed="true">
+    <Position X="15" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAIAAACAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\IFlowchart.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FlowchartEditorMVP.Presenter.IAccountPresenter" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Presenter\IAccountPresenter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FlowchartEditorMVP.Presenter.IChooseFlowchartPresenter" Collapsed="true">
+    <Position X="7.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presenter\IChooseFlowchartPresenter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FlowchartEditorMVP.Presenter.IFlowchartPresenter" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAMAgAABAAAAAAAEAAAAACAAAgSAAAAAAEAAAIAAA=</HashCode>
+      <FileName>Presenter\IFlowchartPresenter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FlowchartEditorMVP.Presenter.INewFlowchartPresenter" Collapsed="true">
+    <Position X="5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presenter\INewFlowchartPresenter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FlowchartEditorMVP.Presenter.IPresenter" Collapsed="true">
+    <Position X="3.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Presenter\IPresenter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FlowchartEditorMVP.View.IView" Collapsed="true">
+    <Position X="16.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\IView.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

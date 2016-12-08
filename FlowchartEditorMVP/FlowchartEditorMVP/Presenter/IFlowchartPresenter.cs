@@ -15,22 +15,16 @@ namespace FlowchartEditorMVP.Presenter
         bool IsEdge(int xCoordsClick, int yCoordsClick);
         bool IsSquareBlock(int xCoordsClick, int yCoordsClick);
         void ToCode();
-<<<<<<< HEAD
         void Apply(string name, string owner);
         void Decline();
         List<Tuple<string, string>> GetReviewsAndLogins();
         void LoadReviewedFlowchart(string reviewer, string name);
         void ToDataBase();
         string GetLogin();
-=======
-        void Apply();
-        void Decline();
->>>>>>> 723512b7e7e62caa86dea53a07175f6354214b4a
     }
 
     class MasterPresenter : IFlowchartPresenter
     {
-<<<<<<< HEAD
         private IFlowchart flowchart;
         private DataManagement data;
         private CodeFactory code;
@@ -55,9 +49,6 @@ namespace FlowchartEditorMVP.Presenter
             return data.GetLogin();
         }
         public void Apply(string name, string owner) { }
-=======
-        public void Apply() { }
->>>>>>> 723512b7e7e62caa86dea53a07175f6354214b4a
         public void Decline() { }
         public void ToCode() { }
         public bool IsEdge(int xCoordsClick, int yCoordsClick) { return true; }
@@ -66,7 +57,6 @@ namespace FlowchartEditorMVP.Presenter
         public void AddBlock(string str, int x, int y) { }
         public void EditBlock(string str, int x, int y) { }
         public void RemoveBlock(int x, int y) { }
-<<<<<<< HEAD
         public List<Tuple<string, string>> GetReviewsAndLogins()
         {
             return new List<Tuple<string, string>>();
@@ -79,13 +69,10 @@ namespace FlowchartEditorMVP.Presenter
         {
             data.AddToDB(flowchart);
         }
-=======
->>>>>>> 723512b7e7e62caa86dea53a07175f6354214b4a
     }
 
     class ReviewerPresenter : IFlowchartPresenter
     {
-<<<<<<< HEAD
         private IFlowchart flowchart;
         private DataManagement data;
         private CodeFactory codeF;
@@ -135,16 +122,5 @@ namespace FlowchartEditorMVP.Presenter
         {
             data.AddToDB(flowchart);
         }
-=======
-        public void Apply() { }
-        public void Decline() { }
-        public void ToCode() { }
-        public bool IsEdge(int xCoordsClick, int yCoordsClick) { return true; }
-        public bool IsSquareBlock(int xCoordsClick, int yCoordsClick) { return true; }
-        public void Run() { }
-        public void AddBlock(string str, int x, int y) { }
-        public void EditBlock(string str, int x, int y) { }
-        public void RemoveBlock(int x, int y) { }
->>>>>>> 723512b7e7e62caa86dea53a07175f6354214b4a
     }
 }

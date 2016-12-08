@@ -39,12 +39,9 @@
             // 
             // flowchartDataGridView
             // 
-<<<<<<< HEAD
             this.flowchartDataGridView.AllowUserToAddRows = false;
             this.flowchartDataGridView.AllowUserToDeleteRows = false;
             this.flowchartDataGridView.AllowUserToResizeRows = false;
-=======
->>>>>>> 723512b7e7e62caa86dea53a07175f6354214b4a
             this.flowchartDataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.flowchartDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.flowchartDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -55,10 +52,7 @@
             this.flowchartDataGridView.Name = "flowchartDataGridView";
             this.flowchartDataGridView.Size = new System.Drawing.Size(400, 600);
             this.flowchartDataGridView.TabIndex = 0;
-<<<<<<< HEAD
             this.flowchartDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.flowchartDataGridView_CellClick);
-=======
->>>>>>> 723512b7e7e62caa86dea53a07175f6354214b4a
             // 
             // flowchartColumn
             // 
@@ -106,11 +100,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-<<<<<<< HEAD
             this.ClientSize = new System.Drawing.Size(984, 733);
-=======
-            this.ClientSize = new System.Drawing.Size(984, 741);
->>>>>>> 723512b7e7e62caa86dea53a07175f6354214b4a
             this.Controls.Add(this.createNewButton);
             this.Controls.Add(this.changeUserButton);
             this.Controls.Add(this.openButton);

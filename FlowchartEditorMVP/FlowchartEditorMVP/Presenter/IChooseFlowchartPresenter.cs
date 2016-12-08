@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 ﻿using FlowchartEditorMVP.Model;
 using System;
-=======
-﻿using System;
->>>>>>> 723512b7e7e62caa86dea53a07175f6354214b4a
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +9,6 @@ namespace FlowchartEditorMVP.Presenter
 {
     interface IChooseFlowchartPresenter : IPresenter
     {
-<<<<<<< HEAD
         List<Tuple<string, string>> GetNamesAndLogins();
         string GetLogin();
     }
@@ -39,12 +34,5 @@ namespace FlowchartEditorMVP.Presenter
         {
             return data.GetNamesAndLogins();
         }
-=======
-    }
-
-    class ChooseFlowchartPresenter : IChooseFlowchartPresenter
-    {
-        public void Run() { }
->>>>>>> 723512b7e7e62caa86dea53a07175f6354214b4a
     }
 }

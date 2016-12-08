@@ -14,16 +14,10 @@ namespace FlowchartEditorMVP.View
     public partial class ChooseFlowchartView : Form , IView
     {
         private IChooseFlowchartPresenter presenter;
-<<<<<<< HEAD
         private string owner;
         private string name;
                 
         public ChooseFlowchartView(string login)
-=======
-        private IEnterPresenter enterPresenter;
-
-        public ChooseFlowchartView()
->>>>>>> 723512b7e7e62caa86dea53a07175f6354214b4a
         {
             InitializeComponent();
             presenter = new ChooseFlowchartPresenter(login);
@@ -76,46 +70,6 @@ namespace FlowchartEditorMVP.View
         {
             owner = flowchartDataGridView.Rows[e.RowIndex].Cells[1].Value.ToString();
             name = flowchartDataGridView.Rows[e.RowIndex].Cells[0].Value.ToString();
-        }
-
-        private void ChooseFlowchartView_Load(object sender, EventArgs e)
-        {
-            presenter = new ChooseFlowchartPresenter();
-            enterPresenter = new EnterPresenter(this);
-        }
-
-        private void changeUserButton_Click(object sender, EventArgs e)
-        {
-            EnterView enterView = new EnterView();
-            this.Hide();
-            enterView.Show();
-        }
-
-        private void openButton_Click(object sender, EventArgs e)
-        {
-            string str1 = "reviewer"; // Заменить на первый textbox
-
-            string str2 = "reviewer"; // Заменить на второй textbox
-
-            if (enterPresenter.loginType(str1, str2) == "master")
-            {
-                MasterView masterView = new MasterView();
-                this.Hide();
-                masterView.Show();
-            }
-            else if (enterPresenter.loginType(str1, str2) == "reviewer")
-            {
-                ReviewerView reviewerView = new ReviewerView();
-                this.Hide();
-                reviewerView.Show();
-            }
-        }
-
-        private void createNewButton_Click(object sender, EventArgs e)
-        {
-            NewFlowchartView newFlowchartView = new NewFlowchartView();
-            this.Hide();
-            newFlowchartView.Show();
         }
     }
 }

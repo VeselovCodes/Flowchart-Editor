@@ -54,19 +54,10 @@
     <Compile Include="Model\ICode.cs" />
     <Compile Include="Model\OrientedGraph.cs" />
     <Compile Include="Presenter\IChooseFlowchartPresenter.cs" />
-<<<<<<< HEAD
     <Compile Include="Presenter\IAccountPresenter.cs" />
     <Compile Include="Presenter\IFlowchartPresenter.cs" />
     <Compile Include="Presenter\INewFlowchartPresenter.cs" />
     <Compile Include="Presenter\IPresenter.cs" />
-=======
-    <Compile Include="Presenter\IEnterPresenter.cs" />
-    <Compile Include="Presenter\IFlowchartPresenter.cs" />
-    <Compile Include="Presenter\IModePresenter.cs" />
-    <Compile Include="Presenter\INewFlowchartPresenter.cs" />
-    <Compile Include="Presenter\IPresenter.cs" />
-    <Compile Include="Presenter\IRegisterPresenter.cs" />
->>>>>>> 723512b7e7e62caa86dea53a07175f6354214b4a
     <Compile Include="View\ChooseFlowchartView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,12 +124,6 @@
     <EmbeddedResource Include="View\MasterView.resx">
       <DependentUpon>MasterView.cs</DependentUpon>
     </EmbeddedResource>
-<<<<<<< HEAD
-=======
-    <EmbeddedResource Include="View\ModeView.resx">
-      <DependentUpon>ModeView.cs</DependentUpon>
-    </EmbeddedResource>
->>>>>>> 723512b7e7e62caa86dea53a07175f6354214b4a
     <EmbeddedResource Include="View\NewFlowchartView.resx">
       <DependentUpon>NewFlowchartView.cs</DependentUpon>
     </EmbeddedResource>
@@ -148,15 +133,12 @@
     <EmbeddedResource Include="View\ReviewerView.resx">
       <DependentUpon>ReviewerView.cs</DependentUpon>
     </EmbeddedResource>
-<<<<<<< HEAD
     <None Include="ClassDiagram1.cd" />
     <None Include="ClassDiagram2.cd" />
     <None Include="ClassDiagram3.cd" />
     <None Include="ClassDiagram4.cd" />
     <None Include="ClassDiagram5.cd" />
     <None Include="ClassDiagram6.cd" />
-=======
->>>>>>> 723512b7e7e62caa86dea53a07175f6354214b4a
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
