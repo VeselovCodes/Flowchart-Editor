@@ -28,133 +28,104 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.errorLabel = new System.Windows.Forms.Label();
-            this.backButton = new System.Windows.Forms.Button();
+            this.flowchartNameLabel = new System.Windows.Forms.Label();
+            this.flowchartNameInputTextbox = new System.Windows.Forms.TextBox();
+            this.browseFileOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.browseFileButton = new System.Windows.Forms.Button();
+            this.languageLabel = new System.Windows.Forms.Label();
+            this.pathTextbox = new System.Windows.Forms.TextBox();
+            this.languageComboBox = new System.Windows.Forms.ComboBox();
             this.createButton = new System.Windows.Forms.Button();
-            this.langComboBox = new System.Windows.Forms.ComboBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.filePathLabel = new System.Windows.Forms.Label();
-            this.fileButton = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
-            this.nameTextBox = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.backButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // errorLabel
+            // flowchartNameLabel
             // 
-            this.errorLabel.ForeColor = System.Drawing.Color.Red;
-            this.errorLabel.Location = new System.Drawing.Point(33, 16);
-            this.errorLabel.Name = "errorLabel";
-            this.errorLabel.Size = new System.Drawing.Size(216, 13);
-            this.errorLabel.TabIndex = 19;
-            this.errorLabel.Text = "Некорректное имя блок-схемы";
-            this.errorLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.errorLabel.Visible = false;
+            this.flowchartNameLabel.AutoSize = true;
+            this.flowchartNameLabel.Location = new System.Drawing.Point(248, 78);
+            this.flowchartNameLabel.Name = "flowchartNameLabel";
+            this.flowchartNameLabel.Size = new System.Drawing.Size(88, 13);
+            this.flowchartNameLabel.TabIndex = 0;
+            this.flowchartNameLabel.Text = "Flowchart name: ";
             // 
-            // backButton
+            // flowchartNameInputTextbox
             // 
-            this.backButton.Location = new System.Drawing.Point(104, 220);
-            this.backButton.Name = "backButton";
-            this.backButton.Size = new System.Drawing.Size(75, 23);
-            this.backButton.TabIndex = 18;
-            this.backButton.Text = "Назад";
-            this.backButton.UseVisualStyleBackColor = true;
+            this.flowchartNameInputTextbox.Location = new System.Drawing.Point(368, 75);
+            this.flowchartNameInputTextbox.Name = "flowchartNameInputTextbox";
+            this.flowchartNameInputTextbox.Size = new System.Drawing.Size(250, 20);
+            this.flowchartNameInputTextbox.TabIndex = 1;
+            // 
+            // browseFileButton
+            // 
+            this.browseFileButton.Location = new System.Drawing.Point(251, 126);
+            this.browseFileButton.Name = "browseFileButton";
+            this.browseFileButton.Size = new System.Drawing.Size(75, 23);
+            this.browseFileButton.TabIndex = 2;
+            this.browseFileButton.Text = "Browse file";
+            this.browseFileButton.UseVisualStyleBackColor = true;
+            this.browseFileButton.Click += new System.EventHandler(this.browseFileButton_Click);
+            // 
+            // languageLabel
+            // 
+            this.languageLabel.AutoSize = true;
+            this.languageLabel.Location = new System.Drawing.Point(248, 181);
+            this.languageLabel.Name = "languageLabel";
+            this.languageLabel.Size = new System.Drawing.Size(58, 13);
+            this.languageLabel.TabIndex = 3;
+            this.languageLabel.Text = "Language:";
+            // 
+            // pathTextbox
+            // 
+            this.pathTextbox.Location = new System.Drawing.Point(368, 128);
+            this.pathTextbox.Name = "pathTextbox";
+            this.pathTextbox.Size = new System.Drawing.Size(250, 20);
+            this.pathTextbox.TabIndex = 1;
+            // 
+            // languageComboBox
+            // 
+            this.languageComboBox.FormattingEnabled = true;
+            this.languageComboBox.Location = new System.Drawing.Point(368, 178);
+            this.languageComboBox.Name = "languageComboBox";
+            this.languageComboBox.Size = new System.Drawing.Size(250, 21);
+            this.languageComboBox.TabIndex = 4;
+            this.languageComboBox.SelectedIndexChanged += new System.EventHandler(this.languageComboBox_SelectedIndexChanged);
             // 
             // createButton
             // 
-            this.createButton.Location = new System.Drawing.Point(104, 174);
+            this.createButton.Location = new System.Drawing.Point(453, 233);
             this.createButton.Name = "createButton";
             this.createButton.Size = new System.Drawing.Size(75, 23);
-            this.createButton.TabIndex = 17;
-            this.createButton.Text = "Создать";
+            this.createButton.TabIndex = 2;
+            this.createButton.Text = "Create";
             this.createButton.UseVisualStyleBackColor = true;
-            this.createButton.Click += new System.EventHandler(this.button12_Click);
+            this.createButton.Click += new System.EventHandler(this.createButton_Click);
             // 
-            // langComboBox
+            // backButton
             // 
-            this.langComboBox.FormattingEnabled = true;
-            this.langComboBox.Items.AddRange(new object[] {
-            "C++",
-            "Pascal"});
-            this.langComboBox.Location = new System.Drawing.Point(164, 144);
-            this.langComboBox.Name = "langComboBox";
-            this.langComboBox.Size = new System.Drawing.Size(93, 21);
-            this.langComboBox.TabIndex = 16;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(21, 147);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(137, 13);
-            this.label11.TabIndex = 15;
-            this.label11.Text = "Язык программирования";
-            // 
-            // filePathLabel
-            // 
-            this.filePathLabel.Location = new System.Drawing.Point(15, 95);
-            this.filePathLabel.Name = "filePathLabel";
-            this.filePathLabel.Size = new System.Drawing.Size(254, 44);
-            this.filePathLabel.TabIndex = 14;
-            this.filePathLabel.Text = "...";
-            // 
-            // fileButton
-            // 
-            this.fileButton.Location = new System.Drawing.Point(119, 64);
-            this.fileButton.Name = "fileButton";
-            this.fileButton.Size = new System.Drawing.Size(75, 23);
-            this.fileButton.TabIndex = 13;
-            this.fileButton.Text = "Обзор";
-            this.fileButton.UseVisualStyleBackColor = true;
-            this.fileButton.Click += new System.EventHandler(this.button11_Click);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(33, 69);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(80, 13);
-            this.label9.TabIndex = 12;
-            this.label9.Text = "Файл с кодом";
-            // 
-            // nameTextBox
-            // 
-            this.nameTextBox.Location = new System.Drawing.Point(119, 32);
-            this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(138, 20);
-            this.nameTextBox.TabIndex = 11;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(21, 35);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(92, 13);
-            this.label8.TabIndex = 10;
-            this.label8.Text = "Имя блок-схемы";
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.backButton.Location = new System.Drawing.Point(453, 304);
+            this.backButton.Name = "backButton";
+            this.backButton.Size = new System.Drawing.Size(75, 23);
+            this.backButton.TabIndex = 2;
+            this.backButton.Text = "Back";
+            this.backButton.UseVisualStyleBackColor = true;
+            this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
             // NewFlowchartView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
-            this.Controls.Add(this.errorLabel);
+            this.ClientSize = new System.Drawing.Size(884, 361);
+            this.Controls.Add(this.languageComboBox);
+            this.Controls.Add(this.languageLabel);
             this.Controls.Add(this.backButton);
             this.Controls.Add(this.createButton);
-            this.Controls.Add(this.langComboBox);
-            this.Controls.Add(this.label11);
-            this.Controls.Add(this.filePathLabel);
-            this.Controls.Add(this.fileButton);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.nameTextBox);
-            this.Controls.Add(this.label8);
+            this.Controls.Add(this.browseFileButton);
+            this.Controls.Add(this.pathTextbox);
+            this.Controls.Add(this.flowchartNameInputTextbox);
+            this.Controls.Add(this.flowchartNameLabel);
             this.Name = "NewFlowchartView";
-            this.Text = "NewFlowchartView";
+            this.Text = "Flowchart Editor";
+            this.Load += new System.EventHandler(this.NewFlowchartView_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -162,16 +133,14 @@
 
         #endregion
 
-        private System.Windows.Forms.Label errorLabel;
-        private System.Windows.Forms.Button backButton;
+        private System.Windows.Forms.Label flowchartNameLabel;
+        private System.Windows.Forms.TextBox flowchartNameInputTextbox;
+        private System.Windows.Forms.OpenFileDialog browseFileOpenFileDialog;
+        private System.Windows.Forms.Button browseFileButton;
+        private System.Windows.Forms.Label languageLabel;
+        private System.Windows.Forms.TextBox pathTextbox;
+        private System.Windows.Forms.ComboBox languageComboBox;
         private System.Windows.Forms.Button createButton;
-        private System.Windows.Forms.ComboBox langComboBox;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label filePathLabel;
-        private System.Windows.Forms.Button fileButton;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox nameTextBox;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button backButton;
     }
 }

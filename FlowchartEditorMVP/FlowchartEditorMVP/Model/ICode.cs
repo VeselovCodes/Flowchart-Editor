@@ -15,7 +15,13 @@ namespace FlowchartEditorMVP.Model
 
     class CppCode : ICode
     {
+<<<<<<< HEAD
         public Flowchart ToFlowchart(string filePath) 
+=======
+        private string[] code;
+
+        public Flowchart ToFlowchart() 
+>>>>>>> 723512b7e7e62caa86dea53a07175f6354214b4a
         {
             Flowchart fc = new Flowchart(100);
             FileInfo f = new FileInfo(filePath);
@@ -32,7 +38,6 @@ namespace FlowchartEditorMVP.Model
                 do
                 {
                     line = sr.ReadLine();
-
                     if (line.Contains("int main("))
                     {
                         b = new StartBlock();
@@ -188,6 +193,8 @@ namespace FlowchartEditorMVP.Model
             }
             return fc;
         }
+
+
 
         public void WriteFile(/*PATH*/) { }
 

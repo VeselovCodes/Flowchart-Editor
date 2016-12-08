@@ -1,5 +1,5 @@
-﻿using System;
-using System.IO;
+﻿using FlowchartEditorMVP.Presenter;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,67 +11,64 @@ using System.Windows.Forms;
 
 namespace FlowchartEditorMVP.View
 {
-    public partial class NewFlowchartView : Form
+    public partial class NewFlowchartView : Form , IView
     {
         public NewFlowchartView()
         {
             InitializeComponent();
-            langComboBox.SelectedIndex = 0;
-            openFileDialog1.FileName = "";
+        }
+<<<<<<< HEAD
+        string pathVar;
+=======
+>>>>>>> 723512b7e7e62caa86dea53a07175f6354214b4a
+
+        private INewFlowchartPresenter flowchartPresenter;
+
+        private void NewFlowchartView_Load(object sender, EventArgs e)
+        {
+            flowchartPresenter = new NewFlowchartPresenter();
         }
 
-        private void button11_Click(object sender, EventArgs e)
+        private void browseFileButton_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Filter = "(*.cpp)|*.cpp|(*.pas)|*.pas";
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            if (browseFileOpenFileDialog.ShowDialog() == DialogResult.OK)
             {
-                FileInfo file = new FileInfo(openFileDialog1.FileName);
-                filePathLabel.Text = openFileDialog1.FileName;
+<<<<<<< HEAD
+                pathVar = pathTextbox.Text = browseFileOpenFileDialog.FileName;
+
+=======
+                pathTextbox.Text = browseFileOpenFileDialog.FileName;
+>>>>>>> 723512b7e7e62caa86dea53a07175f6354214b4a
             }
         }
 
-        int Check(string fcName, string fileName, int lang)
+        private void createButton_Click(object sender, EventArgs e)
         {
-            if (fcName == "")
-            {
-                return 1;
-            }
-            else
-                if (fileName == "")
-                {
-                    return 2;
-                }
-                else
-                {
-                    return 0;
-                }
+<<<<<<< HEAD
+
+            MasterView masterView = new MasterView(flowchartNameInputTextbox.Text, 
+                flowchartPresenter.GetLogin(), pathVar);
+=======
+            MasterView masterView = new MasterView();
+>>>>>>> 723512b7e7e62caa86dea53a07175f6354214b4a
+            this.Hide();
+            masterView.Show();
         }
 
-        private void button12_Click(object sender, EventArgs e)
+        private void backButton_Click(object sender, EventArgs e)
         {
-            int errID = Check(nameTextBox.Text, openFileDialog1.FileName, langComboBox.SelectedIndex); ;
-            if (errID == 1)
-            {
-                errorLabel.Text = "Некорректное имя блок-схемы";
-                errorLabel.Visible = true;
-            }
-            else
-                if (errID == 2)
-                {
-                    errorLabel.Text = "Не выбран файл с кодом";
-                    errorLabel.Visible = true;
-                }
-            if (errID == 0)
-            {
-                errorLabel.Visible = false;
-                Model.CppCode code = new Model.CppCode();
-                code.ToFlowchart(openFileDialog1.FileName);
+<<<<<<< HEAD
+            ChooseFlowchartView chooseFlowchartView = new ChooseFlowchartView(flowchartPresenter.GetLogin());
+=======
+            ChooseFlowchartView chooseFlowchartView = new ChooseFlowchartView();
+>>>>>>> 723512b7e7e62caa86dea53a07175f6354214b4a
+            this.Hide();
+            chooseFlowchartView.Show();
+        }
 
-                openFileDialog1.FileName = "";
-                filePathLabel.Text = "...";
-                nameTextBox.Text = "";
-            }
-
+        private void languageComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }
