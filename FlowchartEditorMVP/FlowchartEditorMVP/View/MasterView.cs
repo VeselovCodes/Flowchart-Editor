@@ -1,4 +1,5 @@
-﻿using FlowchartEditorMVP.Presenter;
+﻿using FlowchartEditorMVP.Model;
+using FlowchartEditorMVP.Presenter;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,15 +18,15 @@ namespace FlowchartEditorMVP.View
         private int yCoordsClick;
         private IFlowchartPresenter flowchartPresenter;
 
-        public MasterView(string name, string owner, string path)
+        internal MasterView(DataManagement data, string path)
         {            
             InitializeComponent();
-            flowchartPresenter = new MasterPresenter(name, owner, path);
+            flowchartPresenter = new MasterPresenter(data, path, this);
         }
-        public MasterView(string name, string owner)
+        internal MasterView(DataManagement data)
         {
             InitializeComponent();
-            flowchartPresenter = new MasterPresenter(name, owner);
+            flowchartPresenter = new MasterPresenter(data, this);
         }
 
         private void MasterView_Load(object sender, EventArgs e)
@@ -91,9 +92,7 @@ namespace FlowchartEditorMVP.View
 
         private void backButton_Click(object sender, EventArgs e)
         {
-            ChooseFlowchartView chooseFlowchartView = new ChooseFlowchartView(flowchartPresenter.GetLogin());
-            this.Hide();
-            chooseFlowchartView.Show();
+            flowchartPresenter.ToChooseFlowchart();
         }
 
         private void reviewsDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

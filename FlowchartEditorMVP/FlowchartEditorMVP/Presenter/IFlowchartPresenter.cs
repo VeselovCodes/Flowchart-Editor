@@ -1,4 +1,5 @@
 ﻿using FlowchartEditorMVP.Model;
+using FlowchartEditorMVP.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace FlowchartEditorMVP.Presenter
         void LoadReviewedFlowchart(string reviewer, string name);
         void ToDataBase();
         string GetLogin();
+        void ToChooseFlowchart();       
     }
 
     class MasterPresenter : IFlowchartPresenter
@@ -28,22 +30,32 @@ namespace FlowchartEditorMVP.Presenter
         private IFlowchart flowchart;
         private DataManagement data;
         private CodeFactory code;
-
-        public MasterPresenter(string name, string owner, string path)
+        private MasterView view;
+        
+        public MasterPresenter(DataManagement data, string path, MasterView view)
         {
             code = new CppFactory();
             flowchart = new CppCode().ToFlowchart(path);
-            data = new DataManagement();
+            this.data = data;
+            this.view = view;
         }
 
-        public MasterPresenter(string name, string owner)
+        public void ToChooseFlowchart()
+        {
+            ChooseFlowchartView chooseFlowchartView = new ChooseFlowchartView(data);
+            view.Hide();
+            chooseFlowchartView.Show();
+        }
+
+        public MasterPresenter(DataManagement data, MasterView view)
         {
             code = new CppFactory();
             
             data = new DataManagement();
-
-            flowchart =data.LoadFlowchart(name, owner);
+            
         }
+        
+
         public string GetLogin()
         {
             return data.GetLogin();
@@ -76,15 +88,27 @@ namespace FlowchartEditorMVP.Presenter
         private IFlowchart flowchart;
         private DataManagement data;
         private CodeFactory codeF;
-        
+        private ReviewerView view;
+
         public string GetLogin()
         {
             return data.GetLogin();
         }
-        public ReviewerPresenter(string name, string owner) { }
+
+        public void ToChooseFlowchart()
+        {
+            ChooseFlowchartView chooseFlowchartView = new ChooseFlowchartView(data);
+            view.Hide();
+            chooseFlowchartView.Show();
+        }
+
+        public ReviewerPresenter(DataManagement data, ReviewerView view)
+        {
+        }
         public void Apply(string name, string owner)
         {
             flowchart = data.LoadFlowchart(owner, name);
+            this.data = data;
         }
         public void Decline()
         { }

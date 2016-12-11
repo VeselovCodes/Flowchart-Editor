@@ -10,37 +10,64 @@ namespace FlowchartEditorMVP.Presenter
 {
     interface IAccountPresenter : IPresenter
     {
-        bool Login(string text1, string text2);
-        bool Register(string login, string password);
+        void Login(string text1, string text2);
+        void Register(string login, string password, string repeatedPassword);
     }
 
     class AccountPresenter : IAccountPresenter
     {
-        private IView view;
+        private IAccountView view;
         private DataManagement data;
         
-        public AccountPresenter(IView view)
+        public AccountPresenter(IAccountView view)
         {
             this.view = view;
             data = new DataManagement();
         }
 
-        public bool Login(string login, string password)
+        public void Login(string login, string password)
         {
-            if (data.IsUserExist(login, password))
-            {              
-                return true;
+            if (login == ""
+                || password == "")
+            {
+                throw new Exception("Enter login and password");
             }
-            data.SetLogin(login);
-            return false;            
+            if (data.IsUserExist(login, password))
+            {
+                data.SetLogin(login);
+                
+                ChooseFlowchartView chooseFlowchartView = new ChooseFlowchartView(data);
+                ((EnterView)view).Hide();
+                chooseFlowchartView.Show();                
+            }
+            else
+            {
+                throw new Exception("Incorrect login or password");
+            } 
+            
+                      
         }
 
-        public bool Register(string login, string password)
+        public void Register(string login,
+            string password,
+            string repeatedPassword)
         {
-            if (data.IsLoginExist(login, password))
-                return false;
-            data.CreateNewUser(login, password);
-            return true;
+            if (password != repeatedPassword
+                || password == "")
+            {
+                throw new Exception("Incorrect password setting");                
+            }
+            if (!data.IsLoginExist(login))
+            {
+                data.CreateNewUser(login, password);
+                EnterView enterView = new EnterView();
+                ((RegisterView)view).Hide();
+                enterView.Show();
+            }
+            else
+            {
+                throw new Exception("User with entered name exists.");
+            }
         }
         public void Run() { }
     }

@@ -1,4 +1,5 @@
-﻿using FlowchartEditorMVP.Presenter;
+﻿using FlowchartEditorMVP.Model;
+using FlowchartEditorMVP.Presenter;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,23 +17,27 @@ namespace FlowchartEditorMVP.View
         private IChooseFlowchartPresenter presenter;
         private string owner;
         private string name;
-                
-        public ChooseFlowchartView(string login)
+        
+        internal ChooseFlowchartView(DataManagement data)
         {
             InitializeComponent();
-            presenter = new ChooseFlowchartPresenter(login);
+            presenter = new ChooseFlowchartPresenter(data, this);
         }
 
         private void ChooseFlowchartView_Load(object sender, EventArgs e)
-        {
-            //List<Tuple<string, string>> flowchartNamesLogins = presenter.GetNamesAndLogins();
+        {          
 
-            /*for (int i = 0; i < 10; i++)
+            
+        }
+
+        internal void SetFlowchartsTable(List<Tuple<string, string>> table)
+        {
+            for (int i = 0; i < table.Count; i++)
             {
                 flowchartDataGridView.Rows.Add();
-                flowchartDataGridView.Rows[i].Cells[0].Value = flowchartNamesLogins[i].Item1;
-                flowchartDataGridView.Rows[i].Cells[1].Value = flowchartNamesLogins[i].Item2;
-            }*/
+                flowchartDataGridView.Rows[i].Cells[0].Value = table[i].Item1;
+                flowchartDataGridView.Rows[i].Cells[1].Value = table[i].Item2;
+            }
         }
 
         private void changeUserButton_Click(object sender, EventArgs e)
@@ -43,27 +48,13 @@ namespace FlowchartEditorMVP.View
         }
 
         private void openButton_Click(object sender, EventArgs e)
-        {           
-
-            if (owner == presenter.GetLogin())
-            {
-                MasterView masterView = new MasterView(name, owner);
-                this.Hide();
-                masterView.Show();
-            }
-            else 
-            {
-                ReviewerView reviewerView = new ReviewerView(name, owner);
-                this.Hide();
-                reviewerView.Show();
-            }
+        {
+            presenter.openClick(name, owner);            
         }
 
         private void createNewButton_Click(object sender, EventArgs e)
         {
-            NewFlowchartView newFlowchartView = new NewFlowchartView();
-            this.Hide();
-            newFlowchartView.Show();
+            presenter.ToCreateNew();
         }
 
         private void flowchartDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)

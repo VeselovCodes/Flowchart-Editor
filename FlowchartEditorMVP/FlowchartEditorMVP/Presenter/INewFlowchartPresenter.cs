@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FlowchartEditorMVP.Model;
+using FlowchartEditorMVP.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,17 +8,42 @@ using System.Threading.Tasks;
 
 namespace FlowchartEditorMVP.Presenter
 {
+
     interface INewFlowchartPresenter : IPresenter
     {
         string GetLogin();
+        void ToChooseFlowchart();
+        void CreateNew(string text1, string text2);
     }
 
     class NewFlowchartPresenter : INewFlowchartPresenter
     {
-        private string login;
+        private DataManagement data;
+        private NewFlowchartView view;
+
+        public NewFlowchartPresenter(DataManagement data, NewFlowchartView view)
+        {
+            this.data = data;
+            this.view = view;
+        }
+
+        public void ToChooseFlowchart()
+        {
+            ChooseFlowchartView chooseFlowchartView = new ChooseFlowchartView(data);
+            view.Hide();
+            chooseFlowchartView.Show();
+        }
+
         public string GetLogin()
         {
-            return login;
+            return data.GetLogin();
+        }
+
+        public void CreateNew(string name, string path)
+        {
+            MasterView masterView = new MasterView(data, path);
+            view.Hide();
+            masterView.Show();
         }
         public void Run() { }
     }    

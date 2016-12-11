@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace FlowchartEditorMVP.View
 {
-    public partial class RegisterView : Form , IView
+    public partial class RegisterView : Form , IAccountView
     {
         private IAccountPresenter presenter;
 
@@ -27,15 +27,15 @@ namespace FlowchartEditorMVP.View
 
         private void registerButton_Click(object sender, EventArgs e)
         {
-            if (passwordInputTextbox.Text == passwordRepeatInputTextbox.Text 
-                && presenter.Register(loginInputTextbox.Text, passwordInputTextbox.Text))
-            {                
-                EnterView enterView = new EnterView();
-                this.Hide();
-                enterView.Show();
+            try
+            {
+                presenter.Register(loginInputTextbox.Text, passwordInputTextbox.Text, passwordRepeatInputTextbox.Text);
+                
             }
-            else exceptionLabel.Text = "Registration error";
-            
+            catch (Exception exc)
+            {
+                exceptionLabel.Text = exc.Message;
+            }                   
         }
 
         private void backButton_Click(object sender, EventArgs e)

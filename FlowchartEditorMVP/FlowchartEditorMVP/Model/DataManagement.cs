@@ -13,7 +13,7 @@ namespace FlowchartEditorMVP.Model
             return true;
         }
 
-        internal bool IsLoginExist(string login, string password)
+        internal bool IsLoginExist(string login)
         {
             return false;
         }
@@ -32,6 +32,7 @@ namespace FlowchartEditorMVP.Model
         {
             //throw new NotImplementedException();
         }
+       
 
         internal void AddToDB(IFlowchart flowchart)
         {

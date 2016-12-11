@@ -1,4 +1,5 @@
-﻿using FlowchartEditorMVP.Presenter;
+﻿using FlowchartEditorMVP.Model;
+using FlowchartEditorMVP.Presenter;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,9 +14,10 @@ namespace FlowchartEditorMVP.View
 {
     public partial class NewFlowchartView : Form , IView
     {
-        public NewFlowchartView()
+        internal NewFlowchartView(DataManagement data)
         {
             InitializeComponent();
+            flowchartPresenter = new NewFlowchartPresenter(data, this);
         }
         string pathVar;
 
@@ -23,7 +25,6 @@ namespace FlowchartEditorMVP.View
 
         private void NewFlowchartView_Load(object sender, EventArgs e)
         {
-            flowchartPresenter = new NewFlowchartPresenter();
         }
 
         private void browseFileButton_Click(object sender, EventArgs e)
@@ -37,18 +38,14 @@ namespace FlowchartEditorMVP.View
 
         private void createButton_Click(object sender, EventArgs e)
         {
-
-            MasterView masterView = new MasterView(flowchartNameInputTextbox.Text, 
-                flowchartPresenter.GetLogin(), pathVar);
-            this.Hide();
-            masterView.Show();
+            flowchartPresenter.CreateNew(flowchartNameInputTextbox.Text,
+                pathTextbox.Text);
+         //Do collection for choosing lenguage    
         }
 
         private void backButton_Click(object sender, EventArgs e)
         {
-            ChooseFlowchartView chooseFlowchartView = new ChooseFlowchartView(flowchartPresenter.GetLogin());
-            this.Hide();
-            chooseFlowchartView.Show();
+            flowchartPresenter.ToChooseFlowchart();
         }
 
         private void languageComboBox_SelectedIndexChanged(object sender, EventArgs e)
