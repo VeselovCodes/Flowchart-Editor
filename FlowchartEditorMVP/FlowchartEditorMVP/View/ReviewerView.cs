@@ -1,4 +1,5 @@
-﻿using FlowchartEditorMVP.Presenter;
+﻿using FlowchartEditorMVP.Model;
+using FlowchartEditorMVP.Presenter;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,14 +19,15 @@ namespace FlowchartEditorMVP.View
 
         private IFlowchartPresenter flowchartPresenter;
 
-        public ReviewerView()
+        internal ReviewerView(DataManagement data)
         {
             InitializeComponent();
+            flowchartPresenter = new ReviewerPresenter(data, this);
         }
 
         private void ReviewerView_Load(object sender, EventArgs e)
         {
-            flowchartPresenter = new ReviewerPresenter();
+            
         }
 
         private void addBlockButton_Click(object sender, EventArgs e)
@@ -50,9 +52,7 @@ namespace FlowchartEditorMVP.View
 
         private void changeModeButton_Click(object sender, EventArgs e)
         {
-            ModeView modeView = new ModeView();
-            this.Hide();
-            modeView.Show();     
+            flowchartPresenter.ToChooseFlowchart();                
         }
 
         private void flowchartPictureBox_MouseClick(object sender, MouseEventArgs e)
@@ -71,14 +71,12 @@ namespace FlowchartEditorMVP.View
 
         private void toDatabaseButton_Click(object sender, EventArgs e)
         {
-
+            flowchartPresenter.ToDataBase();
         }
 
         private void backButton_Click(object sender, EventArgs e)
         {
-            ChooseFlowchartView chooseFlowchartView = new ChooseFlowchartView();
-            this.Hide();
-            chooseFlowchartView.Show();
+            flowchartPresenter.ToChooseFlowchart();
         }
     }
 }

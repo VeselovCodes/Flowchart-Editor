@@ -1,4 +1,5 @@
-﻿using FlowchartEditorMVP.Presenter;
+﻿using FlowchartEditorMVP.Model;
+using FlowchartEditorMVP.Presenter;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,17 +15,29 @@ namespace FlowchartEditorMVP.View
     public partial class ChooseFlowchartView : Form , IView
     {
         private IChooseFlowchartPresenter presenter;
-        private IEnterPresenter enterPresenter;
-
-        public ChooseFlowchartView()
+        
+        internal ChooseFlowchartView(DataManagement data)
         {
             InitializeComponent();
+            presenter = new ChooseFlowchartPresenter(data, this);
         }
 
         private void ChooseFlowchartView_Load(object sender, EventArgs e)
+        {          
+
+            
+        }
+
+        internal void SetFlowchartsTable(List<Tuple<string, string>> table)
         {
-            presenter = new ChooseFlowchartPresenter();
-            enterPresenter = new EnterPresenter(this);
+            flowchartDataGridView.DataSource = presenter.tableFilling();
+
+            //for (int i = 0; i < table.Count; i++)
+            //{
+            //    flowchartDataGridView.Rows.Add();
+            //    flowchartDataGridView.Rows[i].Cells[0].Value = table[i].Item1;
+            //    flowchartDataGridView.Rows[i].Cells[1].Value = table[i].Item2;
+            //}
         }
 
         private void changeUserButton_Click(object sender, EventArgs e)
@@ -36,29 +49,28 @@ namespace FlowchartEditorMVP.View
 
         private void openButton_Click(object sender, EventArgs e)
         {
-            string str1 = "reviewer"; // Заменить на первый textbox
-
-            string str2 = "reviewer"; // Заменить на второй textbox
-
-            if (enterPresenter.loginType(str1, str2) == "master")
-            {
-                MasterView masterView = new MasterView();
-                this.Hide();
-                masterView.Show();
-            }
-            else if (enterPresenter.loginType(str1, str2) == "reviewer")
-            {
-                ReviewerView reviewerView = new ReviewerView();
-                this.Hide();
-                reviewerView.Show();
-            }
+            presenter.openClick();            
         }
 
         private void createNewButton_Click(object sender, EventArgs e)
         {
-            NewFlowchartView newFlowchartView = new NewFlowchartView();
-            this.Hide();
-            newFlowchartView.Show();
+            presenter.ToCreateNew();
+        }
+
+        private void flowchartDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                var owner = flowchartDataGridView.Rows[e.RowIndex].Cells[1].Value.ToString();
+                var name = flowchartDataGridView.Rows[e.RowIndex].Cells[0].Value.ToString();
+                presenter.SelectFlowchart(owner, name);
+                openButton.Enabled = true;
+            }
+            catch (Exception exc)
+            {
+                excLabel.Text = "Select one of the current flowcharts or create new.";
+            }
+            
         }
     }
 }

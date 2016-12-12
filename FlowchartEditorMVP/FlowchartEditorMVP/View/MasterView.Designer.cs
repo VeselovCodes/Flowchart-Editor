@@ -163,6 +163,9 @@
             // 
             // reviewsDataGridView
             // 
+            this.reviewsDataGridView.AllowUserToAddRows = false;
+            this.reviewsDataGridView.AllowUserToResizeColumns = false;
+            this.reviewsDataGridView.AllowUserToResizeRows = false;
             this.reviewsDataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.reviewsDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.reviewsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -173,6 +176,7 @@
             this.reviewsDataGridView.Name = "reviewsDataGridView";
             this.reviewsDataGridView.Size = new System.Drawing.Size(297, 476);
             this.reviewsDataGridView.TabIndex = 0;
+            this.reviewsDataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.reviewsDataGridView_CellDoubleClick);
             // 
             // loginColumn
             // 

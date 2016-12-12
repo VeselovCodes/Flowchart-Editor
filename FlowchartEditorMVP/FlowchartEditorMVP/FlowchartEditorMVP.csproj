@@ -54,12 +54,10 @@
     <Compile Include="Model\ICode.cs" />
     <Compile Include="Model\OrientedGraph.cs" />
     <Compile Include="Presenter\IChooseFlowchartPresenter.cs" />
-    <Compile Include="Presenter\IEnterPresenter.cs" />
+    <Compile Include="Presenter\IAccountPresenter.cs" />
     <Compile Include="Presenter\IFlowchartPresenter.cs" />
-    <Compile Include="Presenter\IModePresenter.cs" />
     <Compile Include="Presenter\INewFlowchartPresenter.cs" />
     <Compile Include="Presenter\IPresenter.cs" />
-    <Compile Include="Presenter\IRegisterPresenter.cs" />
     <Compile Include="View\ChooseFlowchartView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,12 +84,6 @@
     </Compile>
     <Compile Include="View\MasterView.Designer.cs">
       <DependentUpon>MasterView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\ModeView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\ModeView.Designer.cs">
-      <DependentUpon>ModeView.cs</DependentUpon>
     </Compile>
     <Compile Include="View\NewFlowchartView.cs">
       <SubType>Form</SubType>
@@ -131,9 +123,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\MasterView.resx">
       <DependentUpon>MasterView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\ModeView.resx">
-      <DependentUpon>ModeView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\NewFlowchartView.resx">
       <DependentUpon>NewFlowchartView.cs</DependentUpon>

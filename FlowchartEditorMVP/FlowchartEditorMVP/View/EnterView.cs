@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace FlowchartEditorMVP
 {
-    public partial class EnterView : Form , IView
+    public partial class EnterView : Form , IAccountView
     {
-        private IEnterPresenter presenter;
+        private IAccountPresenter presenter;
 
         public EnterView()
         {
@@ -22,16 +22,19 @@ namespace FlowchartEditorMVP
         }
 
         private void enterButton_Click(object sender, EventArgs e)
-        {
-            presenter.Login(loginInputTextbox.Text, passwordInputTextbox.Text);
-            ChooseFlowchartView chooseFlowchartView = new ChooseFlowchartView();
-            this.Hide();
-            chooseFlowchartView.Show();
+        {            
+            try
+            {
+                presenter.Login(loginInputTextbox.Text, passwordInputTextbox.Text);                
+            } catch(Exception exc)
+            {
+                exceptionLabel.Text = exc.Message;
+            }            
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            presenter = new EnterPresenter(this);
+            presenter = new AccountPresenter(this);
         }       
 
 
