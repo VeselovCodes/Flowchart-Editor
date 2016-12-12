@@ -34,6 +34,7 @@
             this.openButton = new System.Windows.Forms.Button();
             this.createNewButton = new System.Windows.Forms.Button();
             this.changeUserButton = new System.Windows.Forms.Button();
+            this.excLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.flowchartDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,6 +69,7 @@
             // 
             // openButton
             // 
+            this.openButton.Enabled = false;
             this.openButton.Location = new System.Drawing.Point(715, 50);
             this.openButton.Name = "openButton";
             this.openButton.Size = new System.Drawing.Size(122, 43);
@@ -96,11 +98,20 @@
             this.changeUserButton.UseVisualStyleBackColor = true;
             this.changeUserButton.Click += new System.EventHandler(this.changeUserButton_Click);
             // 
+            // excLabel
+            // 
+            this.excLabel.AutoSize = true;
+            this.excLabel.Location = new System.Drawing.Point(712, 96);
+            this.excLabel.Name = "excLabel";
+            this.excLabel.Size = new System.Drawing.Size(0, 13);
+            this.excLabel.TabIndex = 2;
+            // 
             // ChooseFlowchartView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 733);
+            this.ClientSize = new System.Drawing.Size(984, 335);
+            this.Controls.Add(this.excLabel);
             this.Controls.Add(this.createNewButton);
             this.Controls.Add(this.changeUserButton);
             this.Controls.Add(this.openButton);
@@ -110,6 +121,7 @@
             this.Load += new System.EventHandler(this.ChooseFlowchartView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.flowchartDataGridView)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -121,5 +133,6 @@
         private System.Windows.Forms.Button openButton;
         private System.Windows.Forms.Button createNewButton;
         private System.Windows.Forms.Button changeUserButton;
+        private System.Windows.Forms.Label excLabel;
     }
 }

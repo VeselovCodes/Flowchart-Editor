@@ -11,8 +11,9 @@ namespace FlowchartEditorMVP.Presenter
     interface IChooseFlowchartPresenter : IPresenter
     {        
         string GetLogin();
-        void openClick(string name, string owner);
+        void openClick();
         void ToCreateNew();
+        void SelectFlowchart(string owner, string name);
     }
 
     class ChooseFlowchartPresenter : IChooseFlowchartPresenter
@@ -22,6 +23,9 @@ namespace FlowchartEditorMVP.Presenter
         private DataManagement data;
         private ChooseFlowchartView view;
 
+        private string owner;
+        private string flowchartName;
+
         public ChooseFlowchartPresenter(DataManagement data, ChooseFlowchartView view)
         {
             this.view = view;
@@ -30,11 +34,11 @@ namespace FlowchartEditorMVP.Presenter
             view.SetFlowchartsTable(table);
         }
 
-        public void openClick(string name, string owner)
+        public void openClick()
         {
             if (data.GetLogin().Equals(owner))
             {
-                data.LoadFlowchart(owner, name);
+                data.LoadFlowchart(owner, flowchartName);
                 view.Hide();
                 MasterView mView = new MasterView(data);
             }
@@ -54,6 +58,12 @@ namespace FlowchartEditorMVP.Presenter
         public string GetLogin()
         {
             return data.GetLogin();
-        }                
+        }
+
+        public void SelectFlowchart(string owner, string name)
+        {
+            this.owner = owner;
+            this.flowchartName = name; 
+        }
     }
 }

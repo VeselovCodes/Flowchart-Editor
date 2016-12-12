@@ -15,8 +15,6 @@ namespace FlowchartEditorMVP.View
     public partial class ChooseFlowchartView : Form , IView
     {
         private IChooseFlowchartPresenter presenter;
-        private string owner;
-        private string name;
         
         internal ChooseFlowchartView(DataManagement data)
         {
@@ -49,7 +47,7 @@ namespace FlowchartEditorMVP.View
 
         private void openButton_Click(object sender, EventArgs e)
         {
-            presenter.openClick(name, owner);            
+            presenter.openClick();            
         }
 
         private void createNewButton_Click(object sender, EventArgs e)
@@ -59,8 +57,18 @@ namespace FlowchartEditorMVP.View
 
         private void flowchartDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            owner = flowchartDataGridView.Rows[e.RowIndex].Cells[1].Value.ToString();
-            name = flowchartDataGridView.Rows[e.RowIndex].Cells[0].Value.ToString();
+            try
+            {
+                var owner = flowchartDataGridView.Rows[e.RowIndex].Cells[1].Value.ToString();
+                var name = flowchartDataGridView.Rows[e.RowIndex].Cells[0].Value.ToString();
+                presenter.SelectFlowchart(owner, name);
+                openButton.Enabled = true;
+            }
+            catch (Exception exc)
+            {
+                excLabel.Text = "Select one of the current flowcharts or create new.";
+            }
+            
         }
     }
 }
