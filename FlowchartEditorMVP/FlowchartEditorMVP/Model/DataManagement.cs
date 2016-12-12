@@ -175,13 +175,49 @@ namespace FlowchartEditorMVP.Model
 
         internal IFlowchart LoadFlowchart(string reviewer, string name)
         {
-            //string queryString = @"SELECT * FROM data WHERE flowchart_name = 'name'";
+            string queryString = @"SELECT * FROM data WHERE flowchart_name = '" + name + "' AND reviewer_name = '" + reviewer + "'";
+
+            MySqlConnection connection = new MySqlConnection();
+
+            MySqlCommand com = new MySqlCommand(queryString, connection);
+
+            try
+            {
+                connection.Open();
+
+
+
+                connection.Close();
+            }
+            catch (Exception e)
+            {
+                connection.Close();
+            }
 
             return new Flowchart(100);
         }
 
         internal string GetLogin()
         {
+            string queryString = @"SELECT login FROM users WHERE ...";
+
+            MySqlConnection connection = new MySqlConnection();
+
+            MySqlCommand com = new MySqlCommand(queryString, connection);
+
+            try
+            {
+                connection.Open();
+
+
+
+                connection.Close();
+            }
+            catch(Exception e)
+            {
+                connection.Close();
+            }
+
             return "master";
         }
     }
