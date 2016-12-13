@@ -38,8 +38,16 @@ namespace FlowchartEditorMVP.View
 
         private void createButton_Click(object sender, EventArgs e)
         {
-            flowchartPresenter.CreateNew(flowchartNameInputTextbox.Text,
+            try
+            {
+                flowchartPresenter.CreateNew(flowchartNameInputTextbox.Text,
                 pathTextbox.Text);
+            }
+            catch (Exception exc)
+            {
+                excaptionLabel.Text = exc.Message;
+            }
+            
          //Do collection for choosing lenguage    
         }
 

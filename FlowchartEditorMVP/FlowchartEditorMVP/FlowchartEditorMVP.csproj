@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\FlowchartDraw.cs" />
     <Compile Include="Model\IBlock.cs" />
     <Compile Include="Model\CodeFactory.cs" />
     <Compile Include="Model\DataManagement.cs" />
