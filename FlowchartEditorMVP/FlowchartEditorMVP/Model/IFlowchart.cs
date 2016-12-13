@@ -21,7 +21,7 @@ namespace FlowchartEditorMVP.Model
 
         public Flowchart(int maxN)
         {
-            graph = new OrientedGraph(100);
+            graph = new OrientedGraph();
             blocks = new List<IBlock>();
         }
 
