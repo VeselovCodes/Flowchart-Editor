@@ -39,6 +39,13 @@ namespace FlowchartEditorMVP.View
                 reviewsDataGridView.Rows[i].Cells[0].Value = flowchartReviewsLogins[i].Item1;
                 reviewsDataGridView.Rows[i].Cells[1].Value = flowchartReviewsLogins[i].Item2;
             }*/
+
+            Model.IFlowchart fc = flowchartPresenter.getFlowchart();
+            vScrollBar1.Maximum = Math.Max(0, (fc.getGraph().countNodes()*125 - 675)/10);
+            Model.FlowchartDraw fcd = new Model.FlowchartDraw();
+            flowchartPictureBox.BackgroundImage = fcd.Draw(fc.getGraph(), vScrollBar1.Value, -1);
+
+            flowchartPictureBox.Refresh();
         }
 
         private void addBlockButton_Click(object sender, EventArgs e)
@@ -100,6 +107,15 @@ namespace FlowchartEditorMVP.View
             
             flowchartPresenter.LoadReviewedFlowchart(reviewsDataGridView.Rows[e.RowIndex].Cells[1].Value.ToString()
                 , reviewsDataGridView.Rows[e.RowIndex].Cells[0].Value.ToString());
+        }
+
+        private void vScrollBar1_ValueChanged(object sender, EventArgs e)
+        {
+            Model.IFlowchart fc = flowchartPresenter.getFlowchart();
+            Model.FlowchartDraw fcd = new Model.FlowchartDraw();
+            flowchartPictureBox.BackgroundImage = fcd.Draw(fc.getGraph(), vScrollBar1.Value, -1);
+
+            flowchartPictureBox.Refresh();
         }
     }
 }

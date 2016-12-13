@@ -45,6 +45,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.applyButton = new System.Windows.Forms.Button();
             this.declineButton = new System.Windows.Forms.Button();
+            this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
             this.actionsGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.flowchartPictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -130,6 +131,8 @@
             // 
             // flowchartPictureBox
             // 
+            this.flowchartPictureBox.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.flowchartPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.flowchartPictureBox.Location = new System.Drawing.Point(172, 12);
             this.flowchartPictureBox.Name = "flowchartPictureBox";
             this.flowchartPictureBox.Size = new System.Drawing.Size(500, 600);
@@ -228,11 +231,22 @@
             this.declineButton.UseVisualStyleBackColor = true;
             this.declineButton.Click += new System.EventHandler(this.declineButton_Click);
             // 
+            // vScrollBar1
+            // 
+            this.vScrollBar1.Location = new System.Drawing.Point(658, 12);
+            this.vScrollBar1.Maximum = 1000;
+            this.vScrollBar1.Name = "vScrollBar1";
+            this.vScrollBar1.Size = new System.Drawing.Size(17, 600);
+            this.vScrollBar1.SmallChange = 2;
+            this.vScrollBar1.TabIndex = 9;
+            this.vScrollBar1.ValueChanged += new System.EventHandler(this.vScrollBar1_ValueChanged);
+            // 
             // MasterView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 691);
+            this.Controls.Add(this.vScrollBar1);
             this.Controls.Add(this.reviewsHeaderPanel);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.declineButton);
@@ -273,5 +287,6 @@
         private System.Windows.Forms.Button applyButton;
         private System.Windows.Forms.Button declineButton;
         private System.Windows.Forms.Button toDatabaseButton;
+        private System.Windows.Forms.VScrollBar vScrollBar1;
     }
 }

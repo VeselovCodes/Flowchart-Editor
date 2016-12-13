@@ -22,7 +22,8 @@ namespace FlowchartEditorMVP.Presenter
         void LoadReviewedFlowchart(string reviewer, string name);
         void ToDataBase();
         string GetLogin();
-        void ToChooseFlowchart();       
+        void ToChooseFlowchart();
+        IFlowchart getFlowchart();
     }
 
     class MasterPresenter : IFlowchartPresenter
@@ -80,6 +81,10 @@ namespace FlowchartEditorMVP.Presenter
         public void ToDataBase()
         {
             data.AddToDB(flowchart);
+        }
+        public IFlowchart getFlowchart()
+        {
+            return flowchart;
         }
     }
 
@@ -145,6 +150,10 @@ namespace FlowchartEditorMVP.Presenter
         public void ToDataBase()
         {
             data.AddToDB(flowchart);
+        }
+        public IFlowchart getFlowchart()
+        {
+            return flowchart;
         }
     }
 }
