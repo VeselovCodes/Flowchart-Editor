@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FlowchartEditorMVP.Model;
+using FlowchartEditorMVP.Presenter;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,11 +12,63 @@ using System.Windows.Forms;
 
 namespace FlowchartEditorMVP.View
 {
-    public partial class ChooseFlowchartView : Form
+    public partial class ChooseFlowchartView : Form , IView
     {
-        public ChooseFlowchartView()
+        private IChooseFlowchartPresenter presenter;
+        
+        internal ChooseFlowchartView(DataManagement data)
         {
             InitializeComponent();
+            presenter = new ChooseFlowchartPresenter(data, this);
+        }
+
+        private void ChooseFlowchartView_Load(object sender, EventArgs e)
+        {          
+
+            
+        }
+
+        internal void SetFlowchartsTable(List<Tuple<string, string>> table)
+        {
+            for (int i = 0; i < table.Count; i++)
+            {
+                flowchartDataGridView.Rows.Add();
+                flowchartDataGridView.Rows[i].Cells[0].Value = table[i].Item1;
+                flowchartDataGridView.Rows[i].Cells[1].Value = table[i].Item2;
+            }
+        }
+
+        private void changeUserButton_Click(object sender, EventArgs e)
+        {
+            EnterView enterView = new EnterView();
+            this.Hide();
+            enterView.Show();
+        }
+
+        private void openButton_Click(object sender, EventArgs e)
+        {
+            presenter.openClick();            
+        }
+
+        private void createNewButton_Click(object sender, EventArgs e)
+        {
+            presenter.ToCreateNew();
+        }
+
+        private void flowchartDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                var owner = flowchartDataGridView.Rows[e.RowIndex].Cells[1].Value.ToString();
+                var name = flowchartDataGridView.Rows[e.RowIndex].Cells[0].Value.ToString();
+                presenter.SelectFlowchart(owner, name);
+                openButton.Enabled = true;
+            }
+            catch (Exception exc)
+            {
+                excLabel.Text = "Select one of the current flowcharts or create new.";
+            }
+            
         }
     }
 }

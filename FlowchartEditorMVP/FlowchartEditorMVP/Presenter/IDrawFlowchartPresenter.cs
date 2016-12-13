@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace FlowchartEditorMVP.Presenter
 {
-    class IProjectPresenter
+    interface IDrawFlowchartPresenter
     {
     }
 
-    class ProjectPresenter : IProjectPresenter
+    class DrowFlowchartPresenter
     {
+
     }
-        
+
 }
