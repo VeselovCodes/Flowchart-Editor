@@ -33,10 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Messaging" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,18 +46,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\FlowchartDraw.cs" />
     <Compile Include="Model\IBlock.cs" />
     <Compile Include="Model\CodeFactory.cs" />
     <Compile Include="Model\DataManagement.cs" />
     <Compile Include="Model\IFlowchart.cs" />
     <Compile Include="Model\ICode.cs" />
     <Compile Include="Model\OrientedGraph.cs" />
-    <Compile Include="Presenter\IChooseFlowchartPresenter.cs" />
     <Compile Include="Presenter\IAccountPresenter.cs" />
     <Compile Include="Presenter\IFlowchartPresenter.cs" />
-    <Compile Include="Presenter\INewFlowchartPresenter.cs" />
-    <Compile Include="Presenter\IPresenter.cs" />
+    <Compile Include="Presenter\IProjectPresenter.cs" />
     <Compile Include="View\ChooseFlowchartView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,12 +75,17 @@
     <Compile Include="View\FlowchartDrower.Designer.cs">
       <DependentUpon>FlowchartDrower.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\IView.cs" />
     <Compile Include="View\MasterView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\MasterView.Designer.cs">
       <DependentUpon>MasterView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ModeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ModeView.Designer.cs">
+      <DependentUpon>ModeView.cs</DependentUpon>
     </Compile>
     <Compile Include="View\NewFlowchartView.cs">
       <SubType>Form</SubType>
@@ -114,26 +114,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="View\ChooseFlowchartView.resx">
-      <DependentUpon>ChooseFlowchartView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\EnterView.resx">
-      <DependentUpon>EnterView.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\FlowchartDrower.resx">
       <DependentUpon>FlowchartDrower.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\MasterView.resx">
-      <DependentUpon>MasterView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\NewFlowchartView.resx">
-      <DependentUpon>NewFlowchartView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\RegisterView.resx">
-      <DependentUpon>RegisterView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\ReviewerView.resx">
-      <DependentUpon>ReviewerView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

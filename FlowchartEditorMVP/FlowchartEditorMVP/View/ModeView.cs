@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FlowchartEditorMVP
+namespace FlowchartEditorMVP.View
 {
-    public partial class Form1 : Form
+    public partial class ModeView : Form
     {
-        public Form1()
+        public ModeView()
         {
             InitializeComponent();
         }
