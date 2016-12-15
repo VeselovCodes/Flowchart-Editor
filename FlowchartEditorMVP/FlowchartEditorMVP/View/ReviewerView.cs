@@ -16,6 +16,7 @@ namespace FlowchartEditorMVP.View
     {
         private int xCoordsClick;
         private int yCoordsClick;
+
         private IFlowchartPresenter flowchartPresenter;
 
         internal ReviewerView(DataManagement data)

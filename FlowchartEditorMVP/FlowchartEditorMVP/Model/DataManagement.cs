@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using MySql.Data.MySqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data;
-using MySql.Data.MySqlClient;
 
 namespace FlowchartEditorMVP.Model
 {
     class DataManagement
     {
-        private string login;
-        private string flowchartName;
-
         private MySqlConnection initializeDatabaseConnection(string server_name, string database_name, string user_id, string database_password)
         {
             MySqlConnectionStringBuilder mysqlCSB = new MySqlConnectionStringBuilder();
@@ -46,7 +43,7 @@ namespace FlowchartEditorMVP.Model
                 connection.Open();
 
                 MySqlDataReader dr = com.ExecuteReader();
-
+                   
                 if (dr.HasRows)// есть записи?
                 {
                     connection.Close();
@@ -105,6 +102,8 @@ namespace FlowchartEditorMVP.Model
 
             string queryString = @"INSERT INTO users (login, password) VALUES ('" + login + "', '" + password + "')";
 
+            // Нужно написать запрос создания строки во второй таблице для данного user'а
+
             MySqlConnection connection = initializeDatabaseConnection("localhost", "flowchart", "root", "");
 
             MySqlCommand com = new MySqlCommand(queryString, connection);
@@ -123,49 +122,38 @@ namespace FlowchartEditorMVP.Model
             }
         }
 
-        internal DataTable GetNamesAndLogins()
+        internal List<Tuple<string, string>> GetNamesAndLogins()
         {
-            DataTable table = new DataTable();
-
-            string queryString = @"SELECT owner, flowchart_name, flowchart_data FROM data";
-
-            MySqlConnection connection = initializeDatabaseConnection("localhost", "flowchart", "root", "");
-
-            MySqlCommand com = new MySqlCommand(queryString, connection);
-
-            try
-            {
-                connection.Open();
-
-                MySqlDataReader dr = com.ExecuteReader();
-
-                if (dr.HasRows)
-                {
-                    table.Load(dr);
-                }
-
-                connection.Close();
-            }
-            catch (Exception e)
-            {
-                connection.Close();
-            }
-
-            return table;
+            return new List<Tuple<string, string>>();
         }
 
         internal void SetLogin(string login)
         {
-            this.login = login;
+            string queryString = @"INSERT INTO users (login) VALUES ('" + login + "')";
+
+            MySqlConnection connection = initializeDatabaseConnection("localhost", "flowchart", "root", "");
+
+            MySqlCommand com = new MySqlCommand(queryString, connection);
+
+            try
+            {
+                connection.Open();
+
+                MySqlDataReader dr = com.ExecuteReader();
+
+                connection.Close();
+            }
+            catch
+            {
+                connection.Clone();
+            }
         }
+       
 
-        internal void AddToDB(IFlowchart flowchart, string flowchartName)
+        internal void AddToDB(IFlowchart flowchart)
         {
-            this.flowchartName = flowchartName;
 
-            string dt = DateTime.Now.ToString("u");
-
-            string queryString = @"INSERT INTO data (owner, flowchart_name, flowchart_data, date) VALUES ('" + this.login + "', '" + this.flowchartName + "', '" + flowchart.Get + "','" + dt + "')";
+            string queryString = @"INSERT INTO data (login, flowcharts_data, comments) VALUES ('', '', '')";
 
             MySqlConnection connection = initializeDatabaseConnection("localhost", "flowchart", "root", "");
 
@@ -185,14 +173,9 @@ namespace FlowchartEditorMVP.Model
             }
         }
 
-        internal string GetFlowchartName()
-        {
-            return this.flowchartName;
-        }
-
         internal IFlowchart LoadFlowchart(string reviewer, string name)
         {
-            string queryString = @"SELECT owner, flowchart_name, flowchart_data FROM data WHERE flowchart_name = '" + name + "' AND reviewer_name = '" + reviewer + "'";
+            string queryString = @"SELECT * FROM data WHERE flowchart_name = '" + name + "' AND reviewer_name = '" + reviewer + "'";
 
             MySqlConnection connection = new MySqlConnection();
 
@@ -230,7 +213,7 @@ namespace FlowchartEditorMVP.Model
 
                 connection.Close();
             }
-            catch (Exception e)
+            catch(Exception e)
             {
                 connection.Close();
             }

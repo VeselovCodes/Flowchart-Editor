@@ -16,7 +16,6 @@ namespace FlowchartEditorMVP.View
     {
         private int xCoordsClick;
         private int yCoordsClick;
-        private string flowchartName;
         private IFlowchartPresenter flowchartPresenter;
 
         internal MasterView(DataManagement data, string path)
@@ -40,13 +39,6 @@ namespace FlowchartEditorMVP.View
                 reviewsDataGridView.Rows[i].Cells[0].Value = flowchartReviewsLogins[i].Item1;
                 reviewsDataGridView.Rows[i].Cells[1].Value = flowchartReviewsLogins[i].Item2;
             }*/
-
-            Model.IFlowchart fc = flowchartPresenter.getFlowchart();
-            vScrollBar1.Maximum = Math.Max(0, (fc.getGraph().countNodes()*125 - 675)/10);
-            Model.FlowchartDraw fcd = new Model.FlowchartDraw();
-            flowchartPictureBox.BackgroundImage = fcd.Draw(fc.getGraph(), vScrollBar1.Value, -1);
-
-            flowchartPictureBox.Refresh();
         }
 
         private void addBlockButton_Click(object sender, EventArgs e)
@@ -66,7 +58,7 @@ namespace FlowchartEditorMVP.View
 
         private void toDatabaseButton_Click(object sender, EventArgs e)
         {
-            flowchartPresenter.ToDataBase(flowchartName);
+            flowchartPresenter.ToDataBase();
         }
 
         private void toCodeButton_Click(object sender, EventArgs e)
@@ -88,8 +80,6 @@ namespace FlowchartEditorMVP.View
         {
             xCoordsClick = e.X;
             yCoordsClick = e.Y;
-            flowchartPresenter.FlowchartMouseClick(xCoordsClick - flowchartPictureBox.Location.X, yCoordsClick - -flowchartPictureBox.Location.Y, vScrollBar1.Value);
-            flowchartPictureBox.Refresh();
             if (flowchartPresenter.IsEdge(xCoordsClick, yCoordsClick))
                 addBlockButton.Enabled = true;
 
@@ -110,27 +100,6 @@ namespace FlowchartEditorMVP.View
             
             flowchartPresenter.LoadReviewedFlowchart(reviewsDataGridView.Rows[e.RowIndex].Cells[1].Value.ToString()
                 , reviewsDataGridView.Rows[e.RowIndex].Cells[0].Value.ToString());
-        }
-
-        private void vScrollBar1_ValueChanged(object sender, EventArgs e)
-        {
-            Model.IFlowchart fc = flowchartPresenter.getFlowchart();
-            Model.FlowchartDraw fcd = new Model.FlowchartDraw();
-            flowchartPictureBox.BackgroundImage = fcd.Draw(fc.getGraph(), vScrollBar1.Value, -1);
-
-            flowchartPictureBox.Refresh();
-        }
-
-        internal void ShowBlockContent(IBlock block)
-        {
-            blockContainsTextBox.Text = "";
-            List<string> blockContent = block.GetListOfStrings();
-            foreach (var str in blockContent)
-            {
-                blockContainsTextBox.Text += str + '\n';
-            }
-            
-
         }
     }
 }

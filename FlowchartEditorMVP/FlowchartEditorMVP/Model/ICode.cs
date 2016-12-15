@@ -17,7 +17,7 @@ namespace FlowchartEditorMVP.Model
     {
         public Flowchart ToFlowchart(string filePath) 
         {
-            Flowchart fc = new Flowchart(100);                        
+            Flowchart fc = new Flowchart(100);
             FileInfo f = new FileInfo(filePath);
             // открытие файла
             using (StreamReader sr = f.OpenText())
@@ -44,7 +44,6 @@ namespace FlowchartEditorMVP.Model
                         e.inNode = new Node(1);
                         fc.AddBlock(b, e);
                         fc.AddStrToBlock(b, line);
-                        line = sr.ReadLine();
                     }
                     else
                     if (line.Contains("if ("))
@@ -59,19 +58,15 @@ namespace FlowchartEditorMVP.Model
                         e.inNode = new Node(nodeNum);
                         fc.AddBlock(b, e);
                         fc.AddStrToBlock(b, line);
-                        line = sr.ReadLine();
                     }
                     else
-                    if (line.Contains("} else {")) //ifNodeNum2: -1 нет else; -2 в ифе есть ретёрн, нет else; -3 в ифе ретёрн, есть else; >=0 нет ретёрна, есть else
+                    if (line.Contains("else"))
                     {
-                        b = new IfBlock();
-                        if (ifNodeNum2 == -1) ifNodeNum2 = nodeNum;
-                        if (ifNodeNum2 == -2) ifNodeNum2 = -3;
-                        if (ifNodeNum2 == -3) nodeNum++;
+                        ifNodeNum2 = nodeNum;
+                        nodeNum++;
                         Edge e = new Edge();
                         e.outNode = new Node(ifNodeNum);
                         e.inNode = new Node(nodeNum);
-                        fc.getGraph().addEdge(e);
                     }
                     else
                     if (line.Contains("//endofif"))
@@ -84,21 +79,9 @@ namespace FlowchartEditorMVP.Model
                             fc.getGraph().addEdge(e);
                         }
                         else
-                        if (ifNodeNum2 == -2)
                         {
-                            nodeNum++;
-                            e = new Edge();
-                            e.outNode = new Node(ifNodeNum);
-                            e.inNode = new Node(nodeNum);
-                            fc.getGraph().addEdge(e);
+                            fc.getGraph().getAdj()[nodeNum - 1][fc.getGraph().getAdj()[nodeNum - 1].Count - 1] = ifNodeNum2;
                         }
-                        else
-                        if (ifNodeNum2 != -3)
-                        {
-                            fc.getGraph().getAdj()[ifNodeNum2 - 1][fc.getGraph().getAdj()[ifNodeNum2 - 1].Count - 1] = nodeNum;
-                        }
-                        ifNodeNum = -1;
-                        ifNodeNum2 = -1;
                     }
                     else
                     if (line.Contains("for (") || (line.Contains("while (") && !line.Contains("}")))
@@ -106,14 +89,13 @@ namespace FlowchartEditorMVP.Model
                         forNodeNum = nodeNum;
                         b = new IfBlock();
                         //fc.getGraph().addNode();
-                        fc.getGraph().setNodeType(nodeNum, 5);
+                        fc.getGraph().setNodeType(nodeNum, 2);
                         nodeNum++;
                         Edge e = new Edge();
                         e.outNode = new Node(nodeNum - 1);
                         e.inNode = new Node(nodeNum);
                         fc.AddBlock(b, e);
                         fc.AddStrToBlock(b, line);
-                        line = sr.ReadLine();
                     }
                     else
                     if (line.Contains("//endoffor"))
@@ -123,9 +105,6 @@ namespace FlowchartEditorMVP.Model
                         e.outNode = new Node(forNodeNum);
                         e.inNode = new Node(nodeNum);
                         fc.getGraph().addEdge(e);
-
-                        b = new IfBlock();
-                        forNodeNum = -1;
                     }
                     else
                     if (line.Contains("do {"))
@@ -138,7 +117,7 @@ namespace FlowchartEditorMVP.Model
                     {
                         b = new IfBlock();
                         //fc.getGraph().addNode();
-                        fc.getGraph().setNodeType(nodeNum, 5);
+                        fc.getGraph().setNodeType(nodeNum, 2);
                         nodeNum++;
                         Edge e = new Edge();
                         e.outNode = new Node(nodeNum - 1);
@@ -153,8 +132,6 @@ namespace FlowchartEditorMVP.Model
                     else
                     if (line.Contains("return "))
                     {
-                        if (ifNodeNum != -1) fc.getGraph().setNodeShift(nodeNum, 1);
-                        if (ifNodeNum2 != -1) fc.getGraph().setNodeShift(nodeNum, -1);
                         b = new StartBlock();
                         //fc.getGraph().addNode();
                         fc.getGraph().setNodeType(nodeNum, 3);
@@ -163,7 +140,6 @@ namespace FlowchartEditorMVP.Model
                         e.inNode = new Node(0);
                         fc.AddBlock(b, e);
                         fc.AddStrToBlock(b, line);
-                        if (ifNodeNum != -1) ifNodeNum2 = -2;
                     }
                     else
                     if (line.Contains("//endoffunc"))
@@ -185,19 +161,16 @@ namespace FlowchartEditorMVP.Model
                         e.inNode = new Node(nodeNum);
                         fc.AddBlock(b, e);
                         fc.AddStrToBlock(b, line);
-                        line = sr.ReadLine();
                     }
                     else
                     {
-                        if (b != null && line != "")
+                        if (b != null)
                             if (b.isSquare())
                             {
                                 fc.AddStrToBlock(b, line);
                             }
                             else
                             {
-                                if (ifNodeNum != -1) fc.getGraph().setNodeShift(nodeNum, 1);
-                                if (ifNodeNum2 != -1) fc.getGraph().setNodeShift(nodeNum, -1);
                                 b = new SquareBlock();
                                 //fc.getGraph().addNode();
                                 fc.getGraph().setNodeType(nodeNum, 1);
@@ -211,7 +184,6 @@ namespace FlowchartEditorMVP.Model
                     }
 
                 } while (!sr.EndOfStream);
-                fc.getGraph().setNodesNumber(nodeNum+1);
             }
             return fc;
         }

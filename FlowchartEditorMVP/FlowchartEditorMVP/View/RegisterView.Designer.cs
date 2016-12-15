@@ -113,8 +113,9 @@
             this.exceptionLabel.AutoSize = true;
             this.exceptionLabel.Location = new System.Drawing.Point(384, 300);
             this.exceptionLabel.Name = "exceptionLabel";
-            this.exceptionLabel.Size = new System.Drawing.Size(0, 13);
+            this.exceptionLabel.Size = new System.Drawing.Size(152, 13);
             this.exceptionLabel.TabIndex = 8;
+            this.exceptionLabel.Text = "Register successfull/exception";
             // 
             // registrationHeaderLabel
             // 

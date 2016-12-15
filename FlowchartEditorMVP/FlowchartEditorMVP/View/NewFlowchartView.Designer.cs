@@ -37,7 +37,6 @@
             this.languageComboBox = new System.Windows.Forms.ComboBox();
             this.createButton = new System.Windows.Forms.Button();
             this.backButton = new System.Windows.Forms.Button();
-            this.excaptionLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // flowchartNameLabel
@@ -93,7 +92,8 @@
             // 
             // createButton
             // 
-            this.createButton.Location = new System.Drawing.Point(453, 275);
+            this.createButton.Enabled = false;
+            this.createButton.Location = new System.Drawing.Point(453, 233);
             this.createButton.Name = "createButton";
             this.createButton.Size = new System.Drawing.Size(75, 23);
             this.createButton.TabIndex = 2;
@@ -111,20 +111,11 @@
             this.backButton.UseVisualStyleBackColor = true;
             this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
-            // excaptionLabel
-            // 
-            this.excaptionLabel.AutoSize = true;
-            this.excaptionLabel.Location = new System.Drawing.Point(248, 218);
-            this.excaptionLabel.Name = "excaptionLabel";
-            this.excaptionLabel.Size = new System.Drawing.Size(0, 13);
-            this.excaptionLabel.TabIndex = 5;
-            // 
             // NewFlowchartView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 361);
-            this.Controls.Add(this.excaptionLabel);
             this.Controls.Add(this.languageComboBox);
             this.Controls.Add(this.languageLabel);
             this.Controls.Add(this.backButton);
@@ -152,6 +143,5 @@
         private System.Windows.Forms.ComboBox languageComboBox;
         private System.Windows.Forms.Button createButton;
         private System.Windows.Forms.Button backButton;
-        private System.Windows.Forms.Label excaptionLabel;
     }
 }

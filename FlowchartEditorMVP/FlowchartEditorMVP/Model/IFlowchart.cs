@@ -12,44 +12,17 @@ namespace FlowchartEditorMVP.Model
         void AddStrToBlock(IBlock block, string str);
         void DeleteSquareBlock(SquareBlock block);
         OrientedGraph getGraph();
-        IBlock GetBlock(int x, int y, int scroll);
     }
 
     class Flowchart : IFlowchart
     {
         private OrientedGraph graph;
         private List<IBlock> blocks;
-        int DIST_BETWEEN_BLOCKS = 125;
-        int SCROLL_SCALE = 10;
 
         public Flowchart(int maxN)
         {
-            graph = new OrientedGraph();
+            graph = new OrientedGraph(100);
             blocks = new List<IBlock>();
-        }
-
-        public IBlock GetBlock(int x, int y, int scroll)
-        {
-            int index = 0;
-            for (; index < blocks.Count; ++index)
-            {
-                int shift = 25;
-
-                if (blocks[index] is SquareBlock)
-                {
-                    shift = 50;
-                    if (y < shift*2 + DIST_BETWEEN_BLOCKS * index - SCROLL_SCALE * scroll - 25 &&
-                    y > DIST_BETWEEN_BLOCKS * index - SCROLL_SCALE * scroll)
-                        return blocks[index];
-                } else 
-                {
-                    if (y < shift*2 + DIST_BETWEEN_BLOCKS * index - SCROLL_SCALE * scroll &&
-                    y > DIST_BETWEEN_BLOCKS * index - SCROLL_SCALE * scroll)
-                        return blocks[index];
-                }               
-            }
-            
-            return blocks[0];
         }
 
         public void AddBlock(IBlock block, Edge edge)

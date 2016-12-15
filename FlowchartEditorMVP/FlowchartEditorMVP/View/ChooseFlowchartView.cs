@@ -28,17 +28,16 @@ namespace FlowchartEditorMVP.View
             
         }
 
-        internal void SetFlowchartsTable(DataTable table)//List<Tuple<string, string>> table)
+        internal void SetFlowchartsTable(List<Tuple<string, string>> table)
         {
+            flowchartDataGridView.DataSource = presenter.tableFilling();
+
             //for (int i = 0; i < table.Count; i++)
             //{
             //    flowchartDataGridView.Rows.Add();
             //    flowchartDataGridView.Rows[i].Cells[0].Value = table[i].Item1;
             //    flowchartDataGridView.Rows[i].Cells[1].Value = table[i].Item2;
             //}
-
-            flowchartDataGridView.DataSource = table;
-
         }
 
         private void changeUserButton_Click(object sender, EventArgs e)
