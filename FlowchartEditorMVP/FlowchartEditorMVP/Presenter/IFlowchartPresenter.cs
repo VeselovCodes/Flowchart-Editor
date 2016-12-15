@@ -31,14 +31,14 @@ namespace FlowchartEditorMVP.Presenter
     {
         private IFlowchart flowchart;
         private DataManagement data;
-        private CodeFactory code;
+        //private CodeFactory code;
         private MasterView view;
         
 
         public MasterPresenter(DataManagement data, string path, MasterView view)
         {
-            code = new CppFactory();
-            flowchart = new CppCode().ToFlowchart(path);
+            //code = new CppFactory();
+            flowchart = new FlowchartCppFactory().CreateFlowchart(path);
             this.data = data;
             this.view = view;
         }
@@ -52,7 +52,7 @@ namespace FlowchartEditorMVP.Presenter
 
         public MasterPresenter(DataManagement data, MasterView view)
         {
-            code = new CppFactory();
+            //code = new CppFactory();
             
             data = new DataManagement();
         }
@@ -64,7 +64,12 @@ namespace FlowchartEditorMVP.Presenter
 
         public void Apply(string name, string owner) { }
         public void Decline() { }
-        public void ToCode() { }
+        public void ToCode()
+        {
+            ICode code = new CppFactory().
+                CreateCode(flowchart);
+            code.WriteFile(@"MyTest.cpp");
+        }
         public bool IsEdge(int xCoordsClick, int yCoordsClick) { return true; }
         public bool IsSquareBlock(int xCoordsClick, int yCoordsClick) { return true; }
         public void Run() { }

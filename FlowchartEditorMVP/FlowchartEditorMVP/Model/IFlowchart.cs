@@ -13,6 +13,7 @@ namespace FlowchartEditorMVP.Model
         void DeleteSquareBlock(SquareBlock block);
         OrientedGraph getGraph();
         IBlock GetBlock(int x, int y, int scroll);
+        List<IBlock> GetListOfBlocks();
     }
 
     class Flowchart : IFlowchart
@@ -26,6 +27,11 @@ namespace FlowchartEditorMVP.Model
         {
             graph = new OrientedGraph();
             blocks = new List<IBlock>();
+        }
+
+        public List<IBlock> GetListOfBlocks()
+        {
+            return blocks;
         }
 
         public IBlock GetBlock(int x, int y, int scroll)
