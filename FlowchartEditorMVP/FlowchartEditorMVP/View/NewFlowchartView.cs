@@ -21,6 +21,8 @@ namespace FlowchartEditorMVP.View
         }
         string pathVar;
 
+        string flowchartName;
+
         private INewFlowchartPresenter flowchartPresenter;
 
         private void NewFlowchartView_Load(object sender, EventArgs e)
@@ -40,15 +42,14 @@ namespace FlowchartEditorMVP.View
         {
             try
             {
-                flowchartPresenter.CreateNew(flowchartNameInputTextbox.Text,
-                pathTextbox.Text);
+                flowchartPresenter.CreateNew(flowchartNameInputTextbox.Text, pathTextbox.Text);
             }
             catch (Exception exc)
             {
                 excaptionLabel.Text = exc.Message;
             }
             
-         //Do collection for choosing lenguage    
+         //Do collection for choosing language    
         }
 
         private void backButton_Click(object sender, EventArgs e)

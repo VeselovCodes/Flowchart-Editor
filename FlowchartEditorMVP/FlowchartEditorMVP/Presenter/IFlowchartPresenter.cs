@@ -20,10 +20,11 @@ namespace FlowchartEditorMVP.Presenter
         void Decline();
         List<Tuple<string, string>> GetReviewsAndLogins();
         void LoadReviewedFlowchart(string reviewer, string name);
-        void ToDataBase();
+        void ToDataBase(string name);
         string GetLogin();
         void ToChooseFlowchart();
         IFlowchart getFlowchart();
+        void FlowchartMouseClick(int x, int y, int scroll);
     }
 
     class MasterPresenter : IFlowchartPresenter
@@ -33,6 +34,7 @@ namespace FlowchartEditorMVP.Presenter
         private CodeFactory code;
         private MasterView view;
         
+
         public MasterPresenter(DataManagement data, string path, MasterView view)
         {
             code = new CppFactory();
@@ -53,14 +55,13 @@ namespace FlowchartEditorMVP.Presenter
             code = new CppFactory();
             
             data = new DataManagement();
-            
         }
-        
 
         public string GetLogin()
         {
             return data.GetLogin();
         }
+
         public void Apply(string name, string owner) { }
         public void Decline() { }
         public void ToCode() { }
@@ -78,13 +79,20 @@ namespace FlowchartEditorMVP.Presenter
         {
             flowchart = data.LoadFlowchart(reviewer, name);
         }
-        public void ToDataBase()
+        public void ToDataBase(string name)
         {
-            data.AddToDB(flowchart);
+            //data.AddToDB(flowchart);
+            data.AddToDB(flowchart, name);
         }
         public IFlowchart getFlowchart()
         {
             return flowchart;
+        }
+
+        public void FlowchartMouseClick(int x, int y, int scroll)
+        {
+            IBlock block = flowchart.GetBlock(x, y, scroll);
+            view.ShowBlockContent(block);
         }
     }
 
@@ -94,6 +102,12 @@ namespace FlowchartEditorMVP.Presenter
         private DataManagement data;
         private CodeFactory codeF;
         private ReviewerView view;
+
+        public void FlowchartMouseClick(int x, int y, int scroll)
+        {
+            //IBlock block = flowchart.GetBlock(x, y);
+            //view.ShowBlockContent(block);
+        }
 
         public string GetLogin()
         {
@@ -147,13 +161,19 @@ namespace FlowchartEditorMVP.Presenter
         {
             flowchart = data.LoadFlowchart(reviewer, name);
         }
-        public void ToDataBase()
+        public void ToDataBase(string name)
         {
-            data.AddToDB(flowchart);
+            //data.AddToDB(flowchart);
+            data.AddToDB(flowchart, name);
         }
         public IFlowchart getFlowchart()
         {
             return flowchart;
         }
+        public string getFlowchartName()
+        {
+            return data.GetFlowchartName();
+        }
+
     }
 }
