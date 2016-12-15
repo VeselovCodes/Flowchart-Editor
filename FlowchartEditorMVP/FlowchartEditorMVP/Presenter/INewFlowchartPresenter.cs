@@ -47,10 +47,9 @@ namespace FlowchartEditorMVP.Presenter
             }
             MasterView masterView = new MasterView(data, path);
             view.Hide();
-            masterView.Show();
-            
-            
+            masterView.Show();   
         }
+
         public void Run() { }
     }    
 }

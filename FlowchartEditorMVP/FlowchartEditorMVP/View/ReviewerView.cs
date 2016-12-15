@@ -16,7 +16,7 @@ namespace FlowchartEditorMVP.View
     {
         private int xCoordsClick;
         private int yCoordsClick;
-
+        private string flowchartName;
         private IFlowchartPresenter flowchartPresenter;
 
         internal ReviewerView(DataManagement data)
@@ -71,7 +71,7 @@ namespace FlowchartEditorMVP.View
 
         private void toDatabaseButton_Click(object sender, EventArgs e)
         {
-            flowchartPresenter.ToDataBase();
+            flowchartPresenter.ToDataBase(flowchartName);
         }
 
         private void backButton_Click(object sender, EventArgs e)

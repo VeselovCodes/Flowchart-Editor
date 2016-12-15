@@ -16,6 +16,7 @@ namespace FlowchartEditorMVP.View
     {
         private int xCoordsClick;
         private int yCoordsClick;
+        private string flowchartName;
         private IFlowchartPresenter flowchartPresenter;
 
         internal MasterView(DataManagement data, string path)
@@ -65,7 +66,7 @@ namespace FlowchartEditorMVP.View
 
         private void toDatabaseButton_Click(object sender, EventArgs e)
         {
-            flowchartPresenter.ToDataBase();
+            flowchartPresenter.ToDataBase(flowchartName);
         }
 
         private void toCodeButton_Click(object sender, EventArgs e)
@@ -87,6 +88,8 @@ namespace FlowchartEditorMVP.View
         {
             xCoordsClick = e.X;
             yCoordsClick = e.Y;
+            flowchartPresenter.FlowchartMouseClick(xCoordsClick - flowchartPictureBox.Location.X, yCoordsClick - -flowchartPictureBox.Location.Y, vScrollBar1.Value);
+            flowchartPictureBox.Refresh();
             if (flowchartPresenter.IsEdge(xCoordsClick, yCoordsClick))
                 addBlockButton.Enabled = true;
 
@@ -116,6 +119,18 @@ namespace FlowchartEditorMVP.View
             flowchartPictureBox.BackgroundImage = fcd.Draw(fc.getGraph(), vScrollBar1.Value, -1);
 
             flowchartPictureBox.Refresh();
+        }
+
+        internal void ShowBlockContent(IBlock block)
+        {
+            blockContainsTextBox.Text = "";
+            List<string> blockContent = block.GetListOfStrings();
+            foreach (var str in blockContent)
+            {
+                blockContainsTextBox.Text += str + '\n';
+            }
+            
+
         }
     }
 }

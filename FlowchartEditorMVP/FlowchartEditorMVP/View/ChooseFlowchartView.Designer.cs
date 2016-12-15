@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.flowchartDataGridView = new System.Windows.Forms.DataGridView();
-            this.flowchartColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.loginColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.openButton = new System.Windows.Forms.Button();
             this.createNewButton = new System.Windows.Forms.Button();
             this.changeUserButton = new System.Windows.Forms.Button();
@@ -46,26 +44,12 @@
             this.flowchartDataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.flowchartDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.flowchartDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.flowchartDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.flowchartColumn,
-            this.loginColumn});
+            this.flowchartDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.flowchartDataGridView.Location = new System.Drawing.Point(300, 50);
             this.flowchartDataGridView.Name = "flowchartDataGridView";
             this.flowchartDataGridView.Size = new System.Drawing.Size(400, 600);
             this.flowchartDataGridView.TabIndex = 0;
             this.flowchartDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.flowchartDataGridView_CellClick);
-            // 
-            // flowchartColumn
-            // 
-            this.flowchartColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.flowchartColumn.HeaderText = "Flowchart";
-            this.flowchartColumn.Name = "flowchartColumn";
-            // 
-            // loginColumn
-            // 
-            this.loginColumn.HeaderText = "Login";
-            this.loginColumn.Name = "loginColumn";
-            this.loginColumn.Width = 150;
             // 
             // openButton
             // 
@@ -110,6 +94,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(984, 335);
             this.Controls.Add(this.excLabel);
             this.Controls.Add(this.createNewButton);
@@ -128,8 +113,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView flowchartDataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn flowchartColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn loginColumn;
         private System.Windows.Forms.Button openButton;
         private System.Windows.Forms.Button createNewButton;
         private System.Windows.Forms.Button changeUserButton;

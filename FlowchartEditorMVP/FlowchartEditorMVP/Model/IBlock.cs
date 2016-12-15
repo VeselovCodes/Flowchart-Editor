@@ -11,6 +11,7 @@ namespace FlowchartEditorMVP.Model
         void Draw();
         bool isSquare();
         void AddStr(string str);
+        List<string> GetListOfStrings();
     }
 
     class StartBlock : IBlock
@@ -20,6 +21,12 @@ namespace FlowchartEditorMVP.Model
         public void Draw() { }
         public bool isSquare() { return false; }
         public void AddStr(string str) { text = str; }
+        public List<string> GetListOfStrings()
+        {
+            List <string> str = new List<string>(1);
+            str.Add(text);
+            return str;
+        }
     }
 
     class SquareBlock : IBlock
@@ -29,6 +36,10 @@ namespace FlowchartEditorMVP.Model
         public void Draw() { }
         public bool isSquare() { return true; }
         public void AddStr(string str) { text.Add(str); }
+        public List<string> GetListOfStrings()
+        {           
+            return text;
+        }
     }
 
     class IfBlock : IBlock
@@ -38,6 +49,12 @@ namespace FlowchartEditorMVP.Model
         public void Draw() { }
         public bool isSquare() { return false; }
         public void AddStr(string str) { text = str; }
+        public List<string> GetListOfStrings()
+        {
+            List<string> str = new List<string>(1);
+            str.Add(text);
+            return str;
+        }
     }
 
     class ConnecterBlock : IBlock
@@ -45,5 +62,11 @@ namespace FlowchartEditorMVP.Model
         public void Draw() { }
         public bool isSquare() { return false; }
         public void AddStr(string str) { }
+        public List<string> GetListOfStrings()
+        {
+            List<string> str = new List<string>(1);
+            str.Add("");
+            return str;
+        }
     }
 }

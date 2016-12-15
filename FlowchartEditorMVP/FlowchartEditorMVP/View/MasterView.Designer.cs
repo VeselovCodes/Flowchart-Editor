@@ -1,4 +1,7 @@
-﻿namespace FlowchartEditorMVP.View
+﻿using System;
+using FlowchartEditorMVP.Model;
+
+namespace FlowchartEditorMVP.View
 {
     partial class MasterView
     {
@@ -46,6 +49,7 @@
             this.applyButton = new System.Windows.Forms.Button();
             this.declineButton = new System.Windows.Forms.Button();
             this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
+            this.blockContainsTextBox = new System.Windows.Forms.RichTextBox();
             this.actionsGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.flowchartPictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -55,6 +59,7 @@
             // 
             // actionsGroupBox
             // 
+            this.actionsGroupBox.Controls.Add(this.blockContainsTextBox);
             this.actionsGroupBox.Controls.Add(this.toDatabaseButton);
             this.actionsGroupBox.Controls.Add(this.codeTextbox);
             this.actionsGroupBox.Controls.Add(this.toCodeButton);
@@ -241,6 +246,15 @@
             this.vScrollBar1.TabIndex = 9;
             this.vScrollBar1.ValueChanged += new System.EventHandler(this.vScrollBar1_ValueChanged);
             // 
+            // blockContainsTextBox
+            // 
+            this.blockContainsTextBox.Location = new System.Drawing.Point(6, 236);
+            this.blockContainsTextBox.Name = "blockContainsTextBox";
+            this.blockContainsTextBox.ReadOnly = true;
+            this.blockContainsTextBox.Size = new System.Drawing.Size(152, 233);
+            this.blockContainsTextBox.TabIndex = 10;
+            this.blockContainsTextBox.Text = "";
+            // 
             // MasterView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -268,6 +282,8 @@
 
         }
 
+        
+
         #endregion
 
         private System.Windows.Forms.GroupBox actionsGroupBox;
@@ -288,5 +304,6 @@
         private System.Windows.Forms.Button declineButton;
         private System.Windows.Forms.Button toDatabaseButton;
         private System.Windows.Forms.VScrollBar vScrollBar1;
+        private System.Windows.Forms.RichTextBox blockContainsTextBox;
     }
 }
