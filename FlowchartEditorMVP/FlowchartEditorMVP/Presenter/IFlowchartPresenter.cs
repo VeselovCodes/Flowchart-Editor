@@ -20,7 +20,7 @@ namespace FlowchartEditorMVP.Presenter
         void Decline();
         List<Tuple<string, string>> GetReviewsAndLogins();
         void LoadReviewedFlowchart(string reviewer, string name);
-        void ToDataBase(string name);
+        void ToDataBase();
         string GetLogin();
         void ToChooseFlowchart();
         IFlowchart getFlowchart();
@@ -35,10 +35,9 @@ namespace FlowchartEditorMVP.Presenter
         private MasterView view;
         
 
-        public MasterPresenter(DataManagement data, string path, MasterView view)
-        {
-            //code = new CppFactory();
-            flowchart = new FlowchartCppFactory().CreateFlowchart(path);
+        public MasterPresenter(DataManagement data, string path, MasterView view, string name)
+        {            
+            flowchart = new FlowchartCppFactory().CreateFlowchart(path, name);
             this.data = data;
             this.view = view;
         }
@@ -52,8 +51,7 @@ namespace FlowchartEditorMVP.Presenter
 
         public MasterPresenter(DataManagement data, MasterView view)
         {
-            //code = new CppFactory();
-            
+                        
             data = new DataManagement();
         }
 
@@ -84,10 +82,10 @@ namespace FlowchartEditorMVP.Presenter
         {
             flowchart = data.LoadFlowchart(reviewer, name);
         }
-        public void ToDataBase(string name)
+        public void ToDataBase()
         {
             //data.AddToDB(flowchart);
-            data.AddToDB(flowchart, name);
+            data.AddToDB(flowchart);
         }
         public IFlowchart getFlowchart()
         {
@@ -166,10 +164,10 @@ namespace FlowchartEditorMVP.Presenter
         {
             flowchart = data.LoadFlowchart(reviewer, name);
         }
-        public void ToDataBase(string name)
+        public void ToDataBase()
         {
             //data.AddToDB(flowchart);
-            data.AddToDB(flowchart, name);
+            data.AddToDB(flowchart);
         }
         public IFlowchart getFlowchart()
         {

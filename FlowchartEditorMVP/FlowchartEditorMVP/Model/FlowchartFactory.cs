@@ -9,14 +9,14 @@ namespace FlowchartEditorMVP.Model
 {
     interface FlowchartFactory
     {
-        IFlowchart CreateFlowchart(string path);
+        IFlowchart CreateFlowchart(string path, string name);
     }
 
     class FlowchartCppFactory : FlowchartFactory
     {
-        public IFlowchart CreateFlowchart(string filePath)
+        public IFlowchart CreateFlowchart(string filePath, string name)
         {
-            Flowchart fc = new Flowchart(100);
+            Flowchart fc = new Flowchart(name);
             FileInfo f = new FileInfo(filePath);
             // открытие файла
             using (StreamReader sr = f.OpenText())
