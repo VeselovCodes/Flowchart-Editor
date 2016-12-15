@@ -11,35 +11,21 @@ namespace FlowchartEditorMVP.Model
         void AddBlock(IBlock block, Edge edge);
         void AddStrToBlock(IBlock block, string str);
         void DeleteSquareBlock(SquareBlock block);
-        string GetName(); 
         OrientedGraph getGraph();
         IBlock GetBlock(int x, int y, int scroll);
-        List<IBlock> GetListOfBlocks();
     }
 
     class Flowchart : IFlowchart
     {
         private OrientedGraph graph;
         private List<IBlock> blocks;
-        private string name;
         int DIST_BETWEEN_BLOCKS = 125;
         int SCROLL_SCALE = 10;
 
-        public Flowchart(string name)
+        public Flowchart(int maxN)
         {
-            this.name = name;
             graph = new OrientedGraph();
             blocks = new List<IBlock>();
-        }
-
-        public string GetName()
-        {
-            return name;
-        }
-
-        public List<IBlock> GetListOfBlocks()
-        {
-            return blocks;
         }
 
         public IBlock GetBlock(int x, int y, int scroll)

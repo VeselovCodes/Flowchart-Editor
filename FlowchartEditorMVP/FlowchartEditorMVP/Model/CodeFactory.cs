@@ -15,7 +15,7 @@ namespace FlowchartEditorMVP.Model
     {
         public ICode CreateCode(IFlowchart flowchart)
         {
-            return new CppCode(flowchart);
+            return new CppCode();
         }
     }
 }

@@ -20,7 +20,7 @@ namespace FlowchartEditorMVP.Presenter
         void Decline();
         List<Tuple<string, string>> GetReviewsAndLogins();
         void LoadReviewedFlowchart(string reviewer, string name);
-        void ToDataBase();
+        void ToDataBase(string name);
         string GetLogin();
         void ToChooseFlowchart();
         IFlowchart getFlowchart();
@@ -31,13 +31,14 @@ namespace FlowchartEditorMVP.Presenter
     {
         private IFlowchart flowchart;
         private DataManagement data;
-        //private CodeFactory code;
+        private CodeFactory code;
         private MasterView view;
         
 
-        public MasterPresenter(DataManagement data, string path, MasterView view, string name)
-        {            
-            flowchart = new FlowchartCppFactory().CreateFlowchart(path, name);
+        public MasterPresenter(DataManagement data, string path, MasterView view)
+        {
+            code = new CppFactory();
+            flowchart = new CppCode().ToFlowchart(path);
             this.data = data;
             this.view = view;
         }
@@ -51,7 +52,8 @@ namespace FlowchartEditorMVP.Presenter
 
         public MasterPresenter(DataManagement data, MasterView view)
         {
-                        
+            code = new CppFactory();
+            
             data = new DataManagement();
         }
 
@@ -62,12 +64,7 @@ namespace FlowchartEditorMVP.Presenter
 
         public void Apply(string name, string owner) { }
         public void Decline() { }
-        public void ToCode()
-        {
-            ICode code = new CppFactory().
-                CreateCode(flowchart);
-            code.WriteFile(@"MyTest.cpp");
-        }
+        public void ToCode() { }
         public bool IsEdge(int xCoordsClick, int yCoordsClick) { return true; }
         public bool IsSquareBlock(int xCoordsClick, int yCoordsClick) { return true; }
         public void Run() { }
@@ -82,10 +79,10 @@ namespace FlowchartEditorMVP.Presenter
         {
             flowchart = data.LoadFlowchart(reviewer, name);
         }
-        public void ToDataBase()
+        public void ToDataBase(string name)
         {
             //data.AddToDB(flowchart);
-            data.AddToDB(flowchart);
+            data.AddToDB(flowchart, name);
         }
         public IFlowchart getFlowchart()
         {
@@ -164,10 +161,10 @@ namespace FlowchartEditorMVP.Presenter
         {
             flowchart = data.LoadFlowchart(reviewer, name);
         }
-        public void ToDataBase()
+        public void ToDataBase(string name)
         {
             //data.AddToDB(flowchart);
-            data.AddToDB(flowchart);
+            data.AddToDB(flowchart, name);
         }
         public IFlowchart getFlowchart()
         {

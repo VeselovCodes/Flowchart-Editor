@@ -10,7 +10,8 @@ namespace FlowchartEditorMVP.Model
 {
     class DataManagement
     {
-        private string login;        
+        private string login;
+        private string flowchartName;
 
         private MySqlConnection initializeDatabaseConnection(string server_name, string database_name, string user_id, string database_password)
         {
@@ -158,12 +159,13 @@ namespace FlowchartEditorMVP.Model
             this.login = login;
         }
 
-        internal void AddToDB(IFlowchart flowchart)
-        {            
+        internal void AddToDB(IFlowchart flowchart, string flowchartName)
+        {
+            this.flowchartName = flowchartName;
 
             string dt = DateTime.Now.ToString("u");
 
-            string queryString = @"INSERT INTO data (owner, flowchart_name, flowchart_data, date) VALUES ('" + this.login + "', '" + flowchart.GetName() + "', '" + flowchart.getGraph().getAdj() + "','" + dt + "')";
+            string queryString = @"INSERT INTO data (owner, flowchart_name, flowchart_data, date) VALUES ('" + this.login + "', '" + this.flowchartName + "', '" + flowchart.Get + "','" + dt + "')";
 
             MySqlConnection connection = initializeDatabaseConnection("localhost", "flowchart", "root", "");
 
@@ -183,6 +185,11 @@ namespace FlowchartEditorMVP.Model
             }
         }
 
+        internal string GetFlowchartName()
+        {
+            return this.flowchartName;
+        }
+
         internal IFlowchart LoadFlowchart(string reviewer, string name)
         {
             string queryString = @"SELECT owner, flowchart_name, flowchart_data FROM data WHERE flowchart_name = '" + name + "' AND reviewer_name = '" + reviewer + "'";
@@ -196,6 +203,7 @@ namespace FlowchartEditorMVP.Model
                 connection.Open();
 
 
+
                 connection.Close();
             }
             catch (Exception e)
@@ -203,7 +211,7 @@ namespace FlowchartEditorMVP.Model
                 connection.Close();
             }
 
-            return new Flowchart(name);
+            return new Flowchart(100);
         }
 
         internal string GetLogin()

@@ -15,13 +15,14 @@ namespace FlowchartEditorMVP.View
     public partial class MasterView : Form , IView
     {
         private int xCoordsClick;
-        private int yCoordsClick;        
+        private int yCoordsClick;
+        private string flowchartName;
         private IFlowchartPresenter flowchartPresenter;
 
-        internal MasterView(DataManagement data, string path, string name)
+        internal MasterView(DataManagement data, string path)
         {            
             InitializeComponent();
-            flowchartPresenter = new MasterPresenter(data, path, this, name);
+            flowchartPresenter = new MasterPresenter(data, path, this);
         }
         internal MasterView(DataManagement data)
         {
@@ -65,7 +66,7 @@ namespace FlowchartEditorMVP.View
 
         private void toDatabaseButton_Click(object sender, EventArgs e)
         {
-            flowchartPresenter.ToDataBase();
+            flowchartPresenter.ToDataBase(flowchartName);
         }
 
         private void toCodeButton_Click(object sender, EventArgs e)
