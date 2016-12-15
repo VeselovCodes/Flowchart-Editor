@@ -14,9 +14,6 @@ int fib(int n)
 {
 	int prev1 = 1;
 	int prev2 = 1;
-
-
-
 	int tmp;
 	if (n == 0) 
 	{

@@ -2,6 +2,7 @@
 using FlowchartEditorMVP.View;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,7 +31,8 @@ namespace FlowchartEditorMVP.Presenter
         {
             this.view = view;
             this.data = data;
-            List<Tuple<string, string>> table = data.GetNamesAndLogins();
+            //List<Tuple<string, string>> table = data.GetNamesAndLogins();
+            DataTable table = data.GetNamesAndLogins();
             view.SetFlowchartsTable(table);
         }
 

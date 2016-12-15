@@ -17,7 +17,7 @@ namespace FlowchartEditorMVP.Model
     {
         public Flowchart ToFlowchart(string filePath) 
         {
-            Flowchart fc = new Flowchart(100);
+            Flowchart fc = new Flowchart(100);                        
             FileInfo f = new FileInfo(filePath);
             // открытие файла
             using (StreamReader sr = f.OpenText())
