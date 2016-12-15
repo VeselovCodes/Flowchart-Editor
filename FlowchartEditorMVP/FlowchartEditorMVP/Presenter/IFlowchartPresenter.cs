@@ -102,8 +102,7 @@ namespace FlowchartEditorMVP.Presenter
     class ReviewerPresenter : IFlowchartPresenter
     {
         private IFlowchart flowchart;
-        private DataManagement data;
-        private CodeFactory codeF;
+        private DataManagement data;        
         private ReviewerView view;
 
         public void FlowchartMouseClick(int x, int y, int scroll)
@@ -136,7 +135,9 @@ namespace FlowchartEditorMVP.Presenter
         { }
         public void ToCode()
         {
-            codeF.CreateCode(flowchart);
+            ICode code = new CppFactory().
+                CreateCode(flowchart);
+            code.WriteFile(@"MyTest.cpp");
         }
         public bool IsEdge(int xCoordsClick, int yCoordsClick)
         {
@@ -173,10 +174,7 @@ namespace FlowchartEditorMVP.Presenter
         {
             return flowchart;
         }
-        public string getFlowchartName()
-        {
-            return data.GetFlowchartName();
-        }
+        
 
     }
 }
