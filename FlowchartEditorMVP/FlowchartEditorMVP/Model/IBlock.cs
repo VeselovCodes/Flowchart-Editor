@@ -9,7 +9,7 @@ namespace FlowchartEditorMVP.Model
     interface IBlock
     {
         void Draw();
-        bool isSquare();
+        bool IsSquare();
         void AddStr(string str);
         List<string> GetListOfStrings();
     }
@@ -19,7 +19,7 @@ namespace FlowchartEditorMVP.Model
         private string text;
 
         public void Draw() { }
-        public bool isSquare() { return false; }
+        public bool IsSquare() { return false; }
         public void AddStr(string str) { text = str; }
         public List<string> GetListOfStrings()
         {
@@ -34,7 +34,7 @@ namespace FlowchartEditorMVP.Model
         private List<string> text = new List<string>();
 
         public void Draw() { }
-        public bool isSquare() { return true; }
+        public bool IsSquare() { return true; }
         public void AddStr(string str) { text.Add(str); }
         public List<string> GetListOfStrings()
         {           
@@ -47,7 +47,7 @@ namespace FlowchartEditorMVP.Model
         private string text;
 
         public void Draw() { }
-        public bool isSquare() { return false; }
+        public bool IsSquare() { return false; }
         public void AddStr(string str) { text = str; }
         public List<string> GetListOfStrings()
         {
@@ -60,7 +60,7 @@ namespace FlowchartEditorMVP.Model
     class ConnecterBlock : IBlock
     {
         public void Draw() { }
-        public bool isSquare() { return false; }
+        public bool IsSquare() { return false; }
         public void AddStr(string str) { }
         public List<string> GetListOfStrings()
         {

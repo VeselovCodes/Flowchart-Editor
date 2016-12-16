@@ -41,26 +41,26 @@ namespace FlowchartEditorMVP.View
             }*/
 
             Model.IFlowchart fc = flowchartPresenter.getFlowchart();
-            vScrollBar1.Maximum = Math.Max(0, (fc.getGraph().countNodes()*125 - 675)/10);
+            vScrollBar1.Maximum = Math.Max(0, (fc.GetGraph().CountNodes()*125 - 675)/10);
             Model.FlowchartDraw fcd = new Model.FlowchartDraw();
-            flowchartPictureBox.BackgroundImage = fcd.Draw(fc.getGraph(), vScrollBar1.Value, -1);
+            flowchartPictureBox.BackgroundImage = fcd.Draw(fc.GetGraph(), vScrollBar1.Value, -1);
 
             flowchartPictureBox.Refresh();
         }
 
         private void addBlockButton_Click(object sender, EventArgs e)
         {
-            flowchartPresenter.AddBlock(codeTextbox.Text, xCoordsClick, yCoordsClick);
+            flowchartPresenter.AddBlock(codeTextbox.Text, xCoordsClick, yCoordsClick, vScrollBar1.Value);
         }
 
         private void editBlockButton_Click(object sender, EventArgs e)
         {
-            flowchartPresenter.EditBlock(codeTextbox.Text, xCoordsClick, yCoordsClick);
+            flowchartPresenter.EditBlock(codeTextbox.Text, xCoordsClick, yCoordsClick, vScrollBar1.Value);
         }
 
         private void removeButton_Click(object sender, EventArgs e)
         {
-            flowchartPresenter.RemoveBlock(xCoordsClick, yCoordsClick);
+            flowchartPresenter.RemoveBlock(xCoordsClick, yCoordsClick, vScrollBar1.Value);
         }
 
         private void toDatabaseButton_Click(object sender, EventArgs e)
@@ -89,10 +89,10 @@ namespace FlowchartEditorMVP.View
             yCoordsClick = e.Y;
             flowchartPresenter.FlowchartMouseClick(xCoordsClick - flowchartPictureBox.Location.X, yCoordsClick - -flowchartPictureBox.Location.Y, vScrollBar1.Value);
             flowchartPictureBox.Refresh();
-            if (flowchartPresenter.IsEdge(xCoordsClick, yCoordsClick))
+            if (flowchartPresenter.IsEdge(xCoordsClick, yCoordsClick, vScrollBar1.Value))
                 addBlockButton.Enabled = true;
 
-            if (flowchartPresenter.IsSquareBlock(xCoordsClick, yCoordsClick))
+            if (flowchartPresenter.IsSquareBlock(xCoordsClick, yCoordsClick, vScrollBar1.Value))
             {
                 editBlockButton.Enabled = true;
                 removeButton.Enabled = true;
@@ -115,7 +115,7 @@ namespace FlowchartEditorMVP.View
         {
             Model.IFlowchart fc = flowchartPresenter.getFlowchart();
             Model.FlowchartDraw fcd = new Model.FlowchartDraw();
-            flowchartPictureBox.BackgroundImage = fcd.Draw(fc.getGraph(), vScrollBar1.Value, -1);
+            flowchartPictureBox.BackgroundImage = fcd.Draw(fc.GetGraph(), vScrollBar1.Value, -1);
 
             flowchartPictureBox.Refresh();
         }

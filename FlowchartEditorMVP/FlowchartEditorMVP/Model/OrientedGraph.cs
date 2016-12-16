@@ -32,7 +32,12 @@ namespace FlowchartEditorMVP.Model
             }
         }
 
-        public void addEdge(Edge edge)
+        public void RemoveAdge(Edge edge)
+        {
+            
+        }
+
+        public void AddEdge(Edge edge)
         {
             if (edge.outNode.nodeNum != edge.inNode.nodeNum)
             {
@@ -45,27 +50,27 @@ namespace FlowchartEditorMVP.Model
             }
         }
 
-        public List<int>[] getAdj()
+        public List<int>[] GetAdj()
         {
             return adj;
         }
 
-        public void setNodeType(int i, int type)
+        public void SetNodeType(int i, int type)
         {
             nodeTypes[i] = type;
         }
 
-        public void setNodeShift(int i, int shift)
+        public void SetNodeShift(int i, int shift)
         {
             nodeShift[i] = shift;
         }
 
-        public int getNodeType(int i)
+        public int GetNodeType(int i)
         {
             return nodeTypes[i];
         }
 
-        public int getNodeShift(int i)
+        public int GetNodeShift(int i)
         {
             return nodeShift[i];
         }
@@ -76,12 +81,12 @@ namespace FlowchartEditorMVP.Model
             adj[node.nodeNum] = new List<int>();
         }*/
 
-        public void setNodesNumber(int n)
+        public void SetNodesNumber(int n)
         {
             nodesNumber = n;
         }
 
-        public int countNodes()
+        public int CountNodes()
         {
             return nodesNumber;
         }
