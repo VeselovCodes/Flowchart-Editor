@@ -31,7 +31,6 @@ namespace FlowchartEditorMVP.Presenter
         {
             this.view = view;
             this.data = data;
-            //List<Tuple<string, string>> table = data.GetNamesAndLogins();
             DataTable table = data.GetNamesAndLogins();
             view.SetFlowchartsTable(table);
         }
@@ -40,13 +39,17 @@ namespace FlowchartEditorMVP.Presenter
         {
             if (data.GetLogin().Equals(owner))
             {
-                data.LoadFlowchart(owner, flowchartName);
+                data.SetOwner(owner);
                 view.Hide();
-                MasterView mView = new MasterView(data);
+                MasterView mView = new MasterView(data, flowchartName);
+                mView.Show();
             }
             else
             {
-                ReviewerView rView = new ReviewerView(data);
+                data.SetOwner(owner);
+                view.Hide();
+                ReviewerView rView = new ReviewerView(data, flowchartName);
+                rView.Show();
             }
         }
 
@@ -65,7 +68,7 @@ namespace FlowchartEditorMVP.Presenter
         public void SelectFlowchart(string owner, string name)
         {
             this.owner = owner;
-            this.flowchartName = name; 
+            flowchartName = name; 
         }
     }
 }

@@ -50,6 +50,22 @@ namespace FlowchartEditorMVP.Model
             return adj;
         }
 
+        public string getEveryAdjAsString()
+        {
+            string str = "";
+
+            foreach (var item in adj)
+            {
+                foreach (var element in item)
+                {
+                    str += element.ToString() + " ";
+                }
+                str += "\n";
+            }
+
+            return str;
+        }
+
         public void setNodeType(int i, int type)
         {
             nodeTypes[i] = type;

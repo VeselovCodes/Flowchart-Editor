@@ -8,26 +8,90 @@ using System.Threading.Tasks;
 namespace FlowchartEditorMVP.Model
 {
     interface ICode
-    {
-        
+    { 
         void WriteFile(string path);
+        void Add(string str);
+        string GetCodeLikeString();
     }
 
     class CppCode : ICode
     {
         private List<string> code;
 
+        public void Add(string str)
+        {
+            code.Add(str);
+        }
+
+        public string GetCodeLikeString()
+        {
+            string str = "";
+            foreach (var row in code)
+            {
+                str += row + "\n";
+            }
+            return str;
+        }
+
         public CppCode(IFlowchart flowchart)
         {
+            int currentNumOfTabbs = 0;
 
             code = new List<string>(1);
             foreach (var block in flowchart.GetListOfBlocks())
             {
                 foreach (var str in block.GetListOfStrings())
                 {
+                    currentNumOfTabbs = 0;
+                    if (code.Count() != 0)
+                    {
+                        foreach (var c in code[code.Count() - 1].ToCharArray())
+                        {
+                            if (c != 9)
+                            {
+                                break;
+                            }
+                            currentNumOfTabbs++;
+                        }
+                        string tabbs = "";
+                        if (str[currentNumOfTabbs] == 9)
+                        {
+                            for (int i = 0; i < currentNumOfTabbs; i++)
+                            {
+                                tabbs += '\t';
+                            }
+                            code.Add(tabbs + '{');
+                        }
+                    }
+                    if (currentNumOfTabbs != 0 && str[currentNumOfTabbs - 1] != 9)
+                    {
+                        string tabbs = "";
+                        for (int i = 0; i < currentNumOfTabbs - 1; ++i)
+                        {
+                            tabbs += '\t';
+                        }
+                        code.Add(tabbs + '}');
+                    }
                     code.Add(str);
                 }
             }
+
+            currentNumOfTabbs = 0;
+            foreach (var c in code[code.Count() - 1].ToCharArray())
+            {
+                if (c != 9)
+                {
+                    break;
+                }
+                currentNumOfTabbs++;
+            }
+            string scobes = "";
+            for (int j = 0; j < currentNumOfTabbs; ++j)
+            {
+                scobes += '}';
+            }
+            code.Add(scobes);
+
         }
 
         public void WriteFile(string path)

@@ -15,6 +15,7 @@ namespace FlowchartEditorMVP.Model
         OrientedGraph getGraph();
         IBlock GetBlock(int x, int y, int scroll);
         List<IBlock> GetListOfBlocks();
+        string GetCodeLikeStringList();
     }
 
     class Flowchart : IFlowchart
@@ -84,6 +85,12 @@ namespace FlowchartEditorMVP.Model
         public OrientedGraph getGraph()
         {
             return graph;
+        }
+
+        public string GetCodeLikeStringList()
+        {
+            ICode code = new CppCode(this);
+            return code.GetCodeLikeString();
         }
     }
 }

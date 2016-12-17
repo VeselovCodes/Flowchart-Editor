@@ -13,7 +13,7 @@ namespace FlowchartEditorMVP.Presenter
     {
         string GetLogin();
         void ToChooseFlowchart();
-        void CreateNew(string text1, string text2);
+        void CreateNew(string text1, string text2, string code_type);
     }
 
     class NewFlowchartPresenter : INewFlowchartPresenter
@@ -39,13 +39,13 @@ namespace FlowchartEditorMVP.Presenter
             return data.GetLogin();
         }
 
-        public void CreateNew(string name, string path)
+        public void CreateNew(string name, string path, string code_type)
         {
             if (name == "" || path == "")
             {
                 throw new Exception("Enter name and path of code file for creating flowchart.");
             }
-            MasterView masterView = new MasterView(data, path, name);
+            MasterView masterView = new MasterView(data, path, name, code_type);
             view.Hide();
             masterView.Show();   
         }
