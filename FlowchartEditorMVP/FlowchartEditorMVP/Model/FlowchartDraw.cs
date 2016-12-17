@@ -19,49 +19,49 @@ namespace FlowchartEditorMVP.Model
             btm = new Bitmap(500, 800);
             gr = Graphics.FromImage(btm);
 
-            for (int i = 0; i < graph.countNodes(); i++)
+            for (int i = 0; i < graph.CountNodes(); i++)
             {
                 Pen pen;
                 if (i == selectedID) pen = new Pen(Color.Red, 3); else pen = new Pen(Color.Black, 3);
 
-                switch (graph.getNodeType(i))
+                switch (graph.GetNodeType(i))
                 {
                     case 1:
                         {
-                            gr.DrawRectangle(pen, 200 + graph.getNodeShift(i) * 100, 25 + DIST_BETWEEN_BLOCKS * i - SCROLL_SCALE * scroll, 100, 100);
+                            gr.DrawRectangle(pen, 200 + graph.GetNodeShift(i) * 100, 25 + DIST_BETWEEN_BLOCKS * i - SCROLL_SCALE * scroll, 100, 100);
                             break;
                         }
                     case 2:
                         {
                             Point[] p = new Point[4];
-                            p[0] = new Point(200 + graph.getNodeShift(i) * 100, 75 + DIST_BETWEEN_BLOCKS * i - SCROLL_SCALE * scroll);
-                            p[1] = new Point(250 + graph.getNodeShift(i) * 100, 50 + DIST_BETWEEN_BLOCKS * i - SCROLL_SCALE * scroll);
-                            p[2] = new Point(300 + graph.getNodeShift(i) * 100, 75 + DIST_BETWEEN_BLOCKS * i - SCROLL_SCALE * scroll);
-                            p[3] = new Point(250 + graph.getNodeShift(i) * 100, 100 + DIST_BETWEEN_BLOCKS * i - SCROLL_SCALE * scroll);
+                            p[0] = new Point(200 + graph.GetNodeShift(i) * 100, 75 + DIST_BETWEEN_BLOCKS * i - SCROLL_SCALE * scroll);
+                            p[1] = new Point(250 + graph.GetNodeShift(i) * 100, 50 + DIST_BETWEEN_BLOCKS * i - SCROLL_SCALE * scroll);
+                            p[2] = new Point(300 + graph.GetNodeShift(i) * 100, 75 + DIST_BETWEEN_BLOCKS * i - SCROLL_SCALE * scroll);
+                            p[3] = new Point(250 + graph.GetNodeShift(i) * 100, 100 + DIST_BETWEEN_BLOCKS * i - SCROLL_SCALE * scroll);
                             gr.DrawPolygon(pen, p);
                             break;
                         }
                     case 3:
                         {
-                            gr.DrawEllipse(pen, 200 + graph.getNodeShift(i) * 100, 50 + DIST_BETWEEN_BLOCKS * i - SCROLL_SCALE * scroll, 100, 50);
+                            gr.DrawEllipse(pen, 200 + graph.GetNodeShift(i) * 100, 50 + DIST_BETWEEN_BLOCKS * i - SCROLL_SCALE * scroll, 100, 50);
                             break;
                         }
                     case 5:
                         {
                             Point[] p = new Point[4];
-                            p[0] = new Point(200 + graph.getNodeShift(i) * 100, 75 + DIST_BETWEEN_BLOCKS * i - SCROLL_SCALE * scroll);
-                            p[1] = new Point(250 + graph.getNodeShift(i) * 100, 50 + DIST_BETWEEN_BLOCKS * i - SCROLL_SCALE * scroll);
-                            p[2] = new Point(300 + graph.getNodeShift(i) * 100, 75 + DIST_BETWEEN_BLOCKS * i - SCROLL_SCALE * scroll);
-                            p[3] = new Point(250 + graph.getNodeShift(i) * 100, 100 + DIST_BETWEEN_BLOCKS * i - SCROLL_SCALE * scroll);
+                            p[0] = new Point(200 + graph.GetNodeShift(i) * 100, 75 + DIST_BETWEEN_BLOCKS * i - SCROLL_SCALE * scroll);
+                            p[1] = new Point(250 + graph.GetNodeShift(i) * 100, 50 + DIST_BETWEEN_BLOCKS * i - SCROLL_SCALE * scroll);
+                            p[2] = new Point(300 + graph.GetNodeShift(i) * 100, 75 + DIST_BETWEEN_BLOCKS * i - SCROLL_SCALE * scroll);
+                            p[3] = new Point(250 + graph.GetNodeShift(i) * 100, 100 + DIST_BETWEEN_BLOCKS * i - SCROLL_SCALE * scroll);
                             gr.DrawPolygon(pen, p);
                             break;
                         }
                 }
-                for (int j = 0; j < graph.getAdj()[i].Count; j++)
+                for (int j = 0; j < graph.GetAdj()[i].Count; j++)
                 {
-                    Point p1 = new Point(250 + graph.getNodeShift(i) * 100, 75 + DIST_BETWEEN_BLOCKS * i - SCROLL_SCALE * scroll);
-                    Point p2 = new Point(250 + graph.getNodeShift(graph.getAdj()[i][j]) * 100, 75 + DIST_BETWEEN_BLOCKS * graph.getAdj()[i][j] - SCROLL_SCALE * scroll);
-                    Drawline(graph.getNodeType(i), graph.getNodeType(graph.getAdj()[i][j]), p1, p2);
+                    Point p1 = new Point(250 + graph.GetNodeShift(i) * 100, 75 + DIST_BETWEEN_BLOCKS * i - SCROLL_SCALE * scroll);
+                    Point p2 = new Point(250 + graph.GetNodeShift(graph.GetAdj()[i][j]) * 100, 75 + DIST_BETWEEN_BLOCKS * graph.GetAdj()[i][j] - SCROLL_SCALE * scroll);
+                    Drawline(graph.GetNodeType(i), graph.GetNodeType(graph.GetAdj()[i][j]), p1, p2);
                 }
             }
 

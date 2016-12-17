@@ -10,11 +10,11 @@ namespace FlowchartEditorMVP.Presenter
 {
     interface IFlowchartPresenter : IPresenter
     {
-        void AddBlock(string str, int x, int y);
-        void EditBlock(string str, int x, int y);
-        void RemoveBlock(int x, int y);
-        bool IsEdge(int xCoordsClick, int yCoordsClick);
-        bool IsSquareBlock(int xCoordsClick, int yCoordsClick);
+        void AddBlock(string str, int x, int y, int scroll);
+        void EditBlock(string str, int x, int y, int scroll);
+        void RemoveBlock(int x, int y, int scroll);
+        bool IsEdge(int xCoordsClick, int yCoordsClick, int scroll);
+        bool IsSquareBlock(int xCoordsClick, int yCoordsClick, int scroll);
         void ToCode();
         void Apply(string name, string owner);
         void Decline();
@@ -74,19 +74,44 @@ namespace FlowchartEditorMVP.Presenter
         }
 
         public void Apply(string name, string owner) { }
-        public void Decline() { }
+        public void Decline()
+        {
+        }
         public void ToCode()
         {
             ICode code = new CppFactory().
                 CreateCode(flowchart);
             code.WriteFile(@"MyTest.cpp");
         }
-        public bool IsEdge(int xCoordsClick, int yCoordsClick) { return true; }
-        public bool IsSquareBlock(int xCoordsClick, int yCoordsClick) { return true; }
+        public bool IsEdge(int xCoordsClick, int yCoordsClick, int scroll)
+        {
+            return true;
+        }
+        public bool IsSquareBlock(int xCoordsClick, int yCoordsClick, int scroll)
+        {
+            return flowchart.GetBlock(xCoordsClick, yCoordsClick, scroll).IsSquare();
+        }
         public void Run() { }
-        public void AddBlock(string str, int x, int y) { }
-        public void EditBlock(string str, int x, int y) { }
-        public void RemoveBlock(int x, int y) { }
+        public void AddBlock(string str, int x, int y, int scroll)
+        {
+            
+        }
+        public void EditBlock(string str, int x, int y, int scroll)
+        {
+            if (IsSquareBlock(x, y, scroll))
+            {
+                IBlock block = flowchart.GetBlock(x, y, scroll);
+                flowchart.AddStrToBlock(block, str);
+            }
+        }
+        public void RemoveBlock(int x, int y, int scroll)
+        {
+            if (IsSquareBlock(x, y, scroll))
+            {
+                IBlock block = flowchart.GetBlock(x, y, scroll);
+                flowchart.DeleteSquareBlock((SquareBlock)block);
+            }                
+        }
         public List<Tuple<string, string>> GetReviewsAndLogins()
         {
             return new List<Tuple<string, string>>();
@@ -151,21 +176,24 @@ namespace FlowchartEditorMVP.Presenter
                 CreateCode(flowchart);
             code.WriteFile(@"MyTest.cpp");
         }
-        public bool IsEdge(int xCoordsClick, int yCoordsClick)
+        public bool IsEdge(int xCoordsClick, int yCoordsClick, int scroll)
         {
             return true;
         }
-        public bool IsSquareBlock(int xCoordsClick, int yCoordsClick) { return true; }
+        public bool IsSquareBlock(int xCoordsClick, int yCoordsClick, int scroll)
+        {
+            return true;
+        }
         public void Run() { }
-        public void AddBlock(string str, int x, int y)
+        public void AddBlock(string str, int x, int y, int scroll)
         {
             flowchart.AddBlock(new SquareBlock(), new Edge());
         }
-        public void EditBlock(string str, int x, int y)
+        public void EditBlock(string str, int x, int y, int scroll)
         {
             flowchart.AddStrToBlock(new SquareBlock(), str);
         }
-        public void RemoveBlock(int x, int y)
+        public void RemoveBlock(int x, int y, int scroll)
         {
             flowchart.DeleteSquareBlock(new SquareBlock());
         }
@@ -186,7 +214,5 @@ namespace FlowchartEditorMVP.Presenter
         {
             return flowchart;
         }
-        
-
     }
 }

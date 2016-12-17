@@ -165,8 +165,9 @@ namespace FlowchartEditorMVP.Model
         {            
 
             string dt = DateTime.Now.ToString("u");
-
+           
             string queryString = @"INSERT INTO data (owner, flowchart_name, flowchart_data, date) VALUES ('" + this.login + "', '" + flowchart.GetName() + "', '" + flowchart.GetCodeLikeStringList() + "','" + dt + "')";
+
 
             MySqlConnection connection = initializeDatabaseConnection("localhost", "flowchart", "root", "");
 

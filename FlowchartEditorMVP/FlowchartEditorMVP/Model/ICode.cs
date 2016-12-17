@@ -39,7 +39,7 @@ namespace FlowchartEditorMVP.Model
 
             code = new List<string>(1);
             foreach (var block in flowchart.GetListOfBlocks())
-            {
+            {                
                 foreach (var str in block.GetListOfStrings())
                 {
                     currentNumOfTabbs = 0;
@@ -90,7 +90,9 @@ namespace FlowchartEditorMVP.Model
             {
                 scobes += '}';
             }
+
             code.Add(scobes);
+
 
         }
 

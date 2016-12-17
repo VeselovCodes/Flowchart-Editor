@@ -12,10 +12,14 @@ namespace FlowchartEditorMVP.Model
         void AddStrToBlock(IBlock block, string str);
         void DeleteSquareBlock(SquareBlock block);
         string GetName(); 
-        OrientedGraph getGraph();
+        OrientedGraph GetGraph();
         IBlock GetBlock(int x, int y, int scroll);
         List<IBlock> GetListOfBlocks();
+
         string GetCodeLikeStringList();
+
+        void AddBlockOnEdge(IBlock block, Edge edge);
+
     }
 
     class Flowchart : IFlowchart
@@ -67,10 +71,16 @@ namespace FlowchartEditorMVP.Model
             return blocks[0];
         }
 
+        public void AddBlockOnEdge(IBlock block, Edge edge)
+        {
+            blocks.Add(block);
+            
+        }
+
         public void AddBlock(IBlock block, Edge edge)
         {
             blocks.Add(block);
-            graph.addEdge(edge);
+            graph.AddEdge(edge);
         }
 
         public void AddStrToBlock(IBlock block, string str)
@@ -82,7 +92,7 @@ namespace FlowchartEditorMVP.Model
         {
         }
 
-        public OrientedGraph getGraph()
+        public OrientedGraph GetGraph()
         {
             return graph;
         }
