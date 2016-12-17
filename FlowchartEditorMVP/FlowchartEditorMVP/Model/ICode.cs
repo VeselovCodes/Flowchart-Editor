@@ -8,14 +8,30 @@ using System.Threading.Tasks;
 namespace FlowchartEditorMVP.Model
 {
     interface ICode
-    {
-        
+    { 
         void WriteFile(string path);
+        void Add(string str);
+        string GetCodeLikeString();
     }
 
     class CppCode : ICode
     {
         private List<string> code;
+
+        public void Add(string str)
+        {
+            code.Add(str);
+        }
+
+        public string GetCodeLikeString()
+        {
+            string str = "";
+            foreach (var row in code)
+            {
+                str += row + "\n";
+            }
+            return str;
+        }
 
         public CppCode(IFlowchart flowchart)
         {
@@ -74,7 +90,9 @@ namespace FlowchartEditorMVP.Model
             {
                 scobes += '}';
             }
-            code.Add(scobes);        
+
+            code.Add(scobes);
+
 
         }
 

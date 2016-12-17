@@ -42,7 +42,7 @@ namespace FlowchartEditorMVP.View
         {
             try
             {
-                flowchartPresenter.CreateNew(flowchartNameInputTextbox.Text, pathTextbox.Text);
+                flowchartPresenter.CreateNew(flowchartNameInputTextbox.Text, pathTextbox.Text, languageComboBox.Text);
             }
             catch (Exception exc)
             {

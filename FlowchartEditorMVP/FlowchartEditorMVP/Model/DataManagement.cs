@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,9 @@ namespace FlowchartEditorMVP.Model
 {
     class DataManagement
     {
-        private string login;        
+        private string login;
+
+        private string owner;
 
         private MySqlConnection initializeDatabaseConnection(string server_name, string database_name, string user_id, string database_password)
         {
@@ -126,7 +129,7 @@ namespace FlowchartEditorMVP.Model
         {
             DataTable table = new DataTable();
 
-            string queryString = @"SELECT owner, flowchart_name, flowchart_data FROM data";
+            string queryString = @"SELECT owner, flowchart_name, reviewer, date FROM data";
 
             MySqlConnection connection = initializeDatabaseConnection("localhost", "flowchart", "root", "");
 
@@ -162,8 +165,9 @@ namespace FlowchartEditorMVP.Model
         {            
 
             string dt = DateTime.Now.ToString("u");
+           
+            string queryString = @"INSERT INTO data (owner, flowchart_name, flowchart_data, date) VALUES ('" + this.login + "', '" + flowchart.GetName() + "', '" + flowchart.GetCodeLikeStringList() + "','" + dt + "')";
 
-            string queryString = @"INSERT INTO data (owner, flowchart_name, flowchart_data, date) VALUES ('" + this.login + "', '" + flowchart.GetName() + "', '" + flowchart.GetGraph().GetAdj() + "','" + dt + "')";
 
             MySqlConnection connection = initializeDatabaseConnection("localhost", "flowchart", "root", "");
 
@@ -183,51 +187,55 @@ namespace FlowchartEditorMVP.Model
             }
         }
 
-        internal IFlowchart LoadFlowchart(string reviewer, string name)
-        {
-            string queryString = @"SELECT owner, flowchart_name, flowchart_data FROM data WHERE flowchart_name = '" + name + "' AND reviewer_name = '" + reviewer + "'";
+        internal IFlowchart LoadFlowchart(string flowchart_name)
+        {        
+            string queryString = @"SELECT flowchart_data FROM data WHERE flowchart_name = '" + flowchart_name + "' AND owner = '" + owner + "' AND reviewer = IS NULL";
 
-            MySqlConnection connection = new MySqlConnection();
+            MySqlConnection connection = initializeDatabaseConnection("localhost", "flowchart", "root", "");
 
             MySqlCommand com = new MySqlCommand(queryString, connection);
 
             try
             {
+                string code = "";
+
                 connection.Open();
 
+                MySqlDataReader dr = com.ExecuteReader();
+
+                if (dr.HasRows)
+                {
+                    code = dr.GetString("flowchart_data");
+                }
 
                 connection.Close();
+
+                FlowchartFactory factory = new FlowchartCppFactory();
+
+                return factory.CreateFlowchartFromDB(code, flowchart_name);
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 connection.Close();
             }
 
-            return new Flowchart(name);
+            return new Flowchart(flowchart_name);
+        }
+
+        internal string GetOwner()
+        {
+            return owner;
+        }
+
+        internal void SetOwner(string owner)
+        {
+            this.owner = owner;
         }
 
         internal string GetLogin()
         {
-            string queryString = @"SELECT login FROM users WHERE ...";
-
-            MySqlConnection connection = new MySqlConnection();
-
-            MySqlCommand com = new MySqlCommand(queryString, connection);
-
-            try
-            {
-                connection.Open();
-
-
-
-                connection.Close();
-            }
-            catch (Exception e)
-            {
-                connection.Close();
-            }
-
-            return "master";
+            return login;
         }
     }
 }

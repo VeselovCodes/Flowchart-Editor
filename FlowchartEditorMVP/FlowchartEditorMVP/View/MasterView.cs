@@ -18,15 +18,15 @@ namespace FlowchartEditorMVP.View
         private int yCoordsClick;        
         private IFlowchartPresenter flowchartPresenter;
 
-        internal MasterView(DataManagement data, string path, string name)
+        internal MasterView(DataManagement data, string path, string name, string type_code)
         {            
             InitializeComponent();
-            flowchartPresenter = new MasterPresenter(data, path, this, name);
+            flowchartPresenter = new MasterPresenter(data, path, this, name, type_code);
         }
-        internal MasterView(DataManagement data)
+        internal MasterView(DataManagement data, string name)
         {
             InitializeComponent();
-            flowchartPresenter = new MasterPresenter(data, this);
+            flowchartPresenter = new MasterPresenter(data, this, name);
         }
 
         private void MasterView_Load(object sender, EventArgs e)

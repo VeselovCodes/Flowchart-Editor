@@ -85,6 +85,9 @@
             // languageComboBox
             // 
             this.languageComboBox.FormattingEnabled = true;
+            this.languageComboBox.Items.AddRange(new object[] {
+            "C++",
+            "Pascal"});
             this.languageComboBox.Location = new System.Drawing.Point(368, 178);
             this.languageComboBox.Name = "languageComboBox";
             this.languageComboBox.Size = new System.Drawing.Size(250, 21);
