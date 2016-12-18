@@ -15,7 +15,11 @@ namespace FlowchartEditorMVP.Model
         OrientedGraph GetGraph();
         int GetBlock(int x, int y, int scroll);
         List<IBlock> GetListOfBlocks();
+
+        string GetCodeLikeStringList();
+
         void AddBlockOnEdge(IBlock block, Edge edge);
+
     }
 
     class Flowchart : IFlowchart
@@ -94,7 +98,7 @@ namespace FlowchartEditorMVP.Model
             for (int i = id; i < graph.CountNodes() - 1; i++)
             {
                 graph.SetNodeShift(i, graph.GetNodeShift(i + 1));
-                graph.SetNodeType(i, graph.GetNodeType(i + 1));
+                graph.setNodeType(i, graph.GetNodeType(i + 1));
                 for (int j = 0; j < graph.GetAdj()[i + 1].Count; j++)
                 {
                     if (graph.GetAdj()[i + 1][j] >= id) graph.GetAdj()[i + 1][j]--;
@@ -107,6 +111,12 @@ namespace FlowchartEditorMVP.Model
         public OrientedGraph GetGraph()
         {
             return graph;
+        }
+
+        public string GetCodeLikeStringList()
+        {
+            ICode code = new CppCode(this);
+            return code.GetCodeLikeString();
         }
     }
 }

@@ -45,9 +45,9 @@
             this.flowchartDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.flowchartDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.flowchartDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.flowchartDataGridView.Location = new System.Drawing.Point(300, 50);
+            this.flowchartDataGridView.Location = new System.Drawing.Point(225, 50);
             this.flowchartDataGridView.Name = "flowchartDataGridView";
-            this.flowchartDataGridView.Size = new System.Drawing.Size(400, 600);
+            this.flowchartDataGridView.Size = new System.Drawing.Size(472, 600);
             this.flowchartDataGridView.TabIndex = 0;
             this.flowchartDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.flowchartDataGridView_CellClick);
             // 

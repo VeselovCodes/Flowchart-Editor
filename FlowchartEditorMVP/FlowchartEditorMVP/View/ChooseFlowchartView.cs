@@ -62,8 +62,8 @@ namespace FlowchartEditorMVP.View
         {
             try
             {
-                var owner = flowchartDataGridView.Rows[e.RowIndex].Cells[1].Value.ToString();
-                var name = flowchartDataGridView.Rows[e.RowIndex].Cells[0].Value.ToString();
+                var owner = flowchartDataGridView.Rows[e.RowIndex].Cells[0].Value.ToString();
+                var name = flowchartDataGridView.Rows[e.RowIndex].Cells[1].Value.ToString();
                 presenter.SelectFlowchart(owner, name);
                 openButton.Enabled = true;
             }

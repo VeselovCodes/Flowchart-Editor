@@ -18,10 +18,10 @@ namespace FlowchartEditorMVP.View
         private int yCoordsClick;        
         private IFlowchartPresenter flowchartPresenter;
 
-        internal ReviewerView(DataManagement data)
+        internal ReviewerView(DataManagement data, string name)
         {
             InitializeComponent();
-            flowchartPresenter = new ReviewerPresenter(data, this);
+            flowchartPresenter = new ReviewerPresenter(data, this, name);
         }
 
         private void ReviewerView_Load(object sender, EventArgs e)

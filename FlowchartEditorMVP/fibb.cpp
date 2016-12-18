@@ -1,6 +1,3 @@
-#include <stdio.h>
-
-int fib(int n);
 
 int main(char** argc, int argv)
 {

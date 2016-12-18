@@ -37,9 +37,21 @@ namespace FlowchartEditorMVP.Presenter
         private MasterView view;
         private int selectedBlock;
 
-        public MasterPresenter(DataManagement data, string path, MasterView view, string name)
-        {            
-            flowchart = new FlowchartCppFactory().CreateFlowchart(path, name);
+        public MasterPresenter(DataManagement data, string path, MasterView view, string name, string type_code)
+        {
+            switch (type_code)
+            {
+                case "C++":
+                {
+                    flowchart = new FlowchartCppFactory().CreateFlowchart(path, name);
+                    break;
+                }
+                default:
+                {
+                        flowchart = new Flowchart(name);
+                        break;
+                } 
+            }
             this.data = data;
             this.view = view;
             selectedBlock = -1;
@@ -62,10 +74,11 @@ namespace FlowchartEditorMVP.Presenter
             chooseFlowchartView.Show();
         }
 
-        public MasterPresenter(DataManagement data, MasterView view)
-        {
-                        
-            data = new DataManagement();
+        public MasterPresenter(DataManagement data, MasterView view, string name)
+        {                   
+            this.data = data;
+            this.view = view;
+            flowchart = data.LoadFlowchart(name);
         }
 
         public string GetLogin()
@@ -115,11 +128,10 @@ namespace FlowchartEditorMVP.Presenter
         }
         public void LoadReviewedFlowchart(string reviewer,string name)
         {
-            flowchart = data.LoadFlowchart(reviewer, name);
+            flowchart = data.LoadFlowchart(name);
         }
         public void ToDataBase()
         {
-            //data.AddToDB(flowchart);
             data.AddToDB(flowchart);
         }
         public IFlowchart getFlowchart()
@@ -173,12 +185,12 @@ namespace FlowchartEditorMVP.Presenter
             chooseFlowchartView.Show();
         }
 
-        public ReviewerPresenter(DataManagement data, ReviewerView view)
+        public ReviewerPresenter(DataManagement data, ReviewerView view, string name)
         {
         }
         public void Apply(string name, string owner)
         {
-            flowchart = data.LoadFlowchart(owner, name);
+            flowchart = data.LoadFlowchart(name);
             this.data = data;
         }
         public void Decline()
@@ -221,7 +233,7 @@ namespace FlowchartEditorMVP.Presenter
         }
         public void LoadReviewedFlowchart(string reviewer, string name)
         {
-            flowchart = data.LoadFlowchart(reviewer, name);
+            flowchart = data.LoadFlowchart(name);
         }
         public void ToDataBase()
         {
@@ -232,7 +244,5 @@ namespace FlowchartEditorMVP.Presenter
         {
             return flowchart;
         }
-        
-
     }
 }
