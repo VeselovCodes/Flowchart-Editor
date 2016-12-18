@@ -38,7 +38,7 @@ namespace FlowchartEditorMVP.Model
                         b = new StartBlock();
                         //fc.getGraph().addNode();
                         //fc.getGraph().addNode();
-                        fc.GetGraph().SetNodeType(nodeNum, 3);
+                        fc.GetGraph().setNodeType(nodeNum, 3);
                         nodeNum = 1;
                         Edge e = new Edge();
                         e.outNode = new Node(0);
@@ -53,7 +53,7 @@ namespace FlowchartEditorMVP.Model
                         ifNodeNum = nodeNum;
                         b = new IfBlock();
                         //fc.getGraph().addNode();
-                        fc.GetGraph().SetNodeType(nodeNum, 2);
+                        fc.GetGraph().setNodeType(nodeNum, 2);
                         nodeNum++;
                         Edge e = new Edge();
                         e.outNode = new Node(nodeNum - 1);
@@ -107,7 +107,7 @@ namespace FlowchartEditorMVP.Model
                         forNodeNum = nodeNum;
                         b = new IfBlock();
                         //fc.getGraph().addNode();
-                        fc.GetGraph().SetNodeType(nodeNum, 5);
+                        fc.GetGraph().setNodeType(nodeNum, 5);
                         nodeNum++;
                         Edge e = new Edge();
                         e.outNode = new Node(nodeNum - 1);
@@ -140,7 +140,7 @@ namespace FlowchartEditorMVP.Model
                     {
                         b = new IfBlock();
                         //fc.getGraph().addNode();
-                        fc.GetGraph().SetNodeType(nodeNum, 5);
+                        fc.GetGraph().setNodeType(nodeNum, 5);
                         nodeNum++;
                         Edge e = new Edge();
                         e.outNode = new Node(nodeNum - 1);
@@ -159,7 +159,7 @@ namespace FlowchartEditorMVP.Model
                         if (ifNodeNum2 != -1) fc.GetGraph().SetNodeShift(nodeNum, -1);
                         b = new StartBlock();
                         //fc.getGraph().addNode();
-                        fc.GetGraph().SetNodeType(nodeNum, 3);
+                        fc.GetGraph().setNodeType(nodeNum, 3);
                         Edge e = new Edge();
                         e.outNode = new Node(0);
                         e.inNode = new Node(0);
@@ -180,7 +180,7 @@ namespace FlowchartEditorMVP.Model
                         b = new StartBlock();
                         //fc.getGraph().addNode();
                         //fc.getGraph().addNode();
-                        fc.GetGraph().SetNodeType(nodeNum + 1, 3);
+                        fc.GetGraph().setNodeType(nodeNum + 1, 3);
                         nodeNum += 2;
                         Edge e = new Edge();
                         e.outNode = new Node(nodeNum - 1);
@@ -202,7 +202,7 @@ namespace FlowchartEditorMVP.Model
                                 if (ifNodeNum2 != -1) fc.GetGraph().SetNodeShift(nodeNum, -1);
                                 b = new SquareBlock();
                                 //fc.getGraph().addNode();
-                                fc.GetGraph().SetNodeType(nodeNum, 1);
+                                fc.GetGraph().setNodeType(nodeNum, 1);
                                 nodeNum++;
                                 Edge e = new Edge();
                                 e.outNode = new Node(nodeNum - 1);
@@ -233,7 +233,7 @@ namespace FlowchartEditorMVP.Model
                     if (arrCode[i].Contains("int main("))
                     {
                         b = new StartBlock();
-                        fc.getGraph().setNodeType(nodeNum, 3);
+                        fc.GetGraph().setNodeType(nodeNum, 3);
                         nodeNum = 1;
                         Edge e = new Edge();
                         e.outNode = new Node(0);
@@ -247,7 +247,7 @@ namespace FlowchartEditorMVP.Model
                     {
                         ifNodeNum = nodeNum;
                         b = new IfBlock();
-                        fc.getGraph().setNodeType(nodeNum, 2);
+                        fc.GetGraph().setNodeType(nodeNum, 2);
                         nodeNum++;
                         Edge e = new Edge();
                         e.outNode = new Node(nodeNum - 1);
@@ -266,7 +266,7 @@ namespace FlowchartEditorMVP.Model
                         Edge e = new Edge();
                         e.outNode = new Node(ifNodeNum);
                         e.inNode = new Node(nodeNum);
-                        fc.getGraph().addEdge(e);
+                        fc.GetGraph().AddEdge(e);
                     }
                     else
                     if (arrCode[i].Contains("//endofif"))
@@ -276,7 +276,7 @@ namespace FlowchartEditorMVP.Model
                         {
                             e.outNode = new Node(ifNodeNum);
                             e.inNode = new Node(nodeNum);
-                            fc.getGraph().addEdge(e);
+                            fc.GetGraph().AddEdge(e);
                         }
                         else
                         if (ifNodeNum2 == -2)
@@ -285,12 +285,12 @@ namespace FlowchartEditorMVP.Model
                             e = new Edge();
                             e.outNode = new Node(ifNodeNum);
                             e.inNode = new Node(nodeNum);
-                            fc.getGraph().addEdge(e);
+                            fc.GetGraph().AddEdge(e);
                         }
                         else
                         if (ifNodeNum2 != -3)
                         {
-                            fc.getGraph().getAdj()[ifNodeNum2 - 1][fc.getGraph().getAdj()[ifNodeNum2 - 1].Count - 1] = nodeNum;
+                            fc.GetGraph().GetAdj()[ifNodeNum2 - 1][fc.GetGraph().GetAdj()[ifNodeNum2 - 1].Count - 1] = nodeNum;
                         }
                         ifNodeNum = -1;
                         ifNodeNum2 = -1;
@@ -300,7 +300,7 @@ namespace FlowchartEditorMVP.Model
                     {
                         forNodeNum = nodeNum;
                         b = new IfBlock();
-                        fc.getGraph().setNodeType(nodeNum, 5);
+                        fc.GetGraph().setNodeType(nodeNum, 5);
                         nodeNum++;
                         Edge e = new Edge();
                         e.outNode = new Node(nodeNum - 1);
@@ -312,11 +312,11 @@ namespace FlowchartEditorMVP.Model
                     else
                     if (arrCode[i].Contains("//endoffor"))
                     {
-                        fc.getGraph().getAdj()[nodeNum - 1][fc.getGraph().getAdj()[nodeNum - 1].Count - 1] = forNodeNum;
+                        fc.GetGraph().GetAdj()[nodeNum - 1][fc.GetGraph().GetAdj()[nodeNum - 1].Count - 1] = forNodeNum;
                         Edge e = new Edge();
                         e.outNode = new Node(forNodeNum);
                         e.inNode = new Node(nodeNum);
-                        fc.getGraph().addEdge(e);
+                        fc.GetGraph().AddEdge(e);
 
                         b = new IfBlock();
                         forNodeNum = -1;
@@ -331,7 +331,7 @@ namespace FlowchartEditorMVP.Model
                     if (arrCode[i].Contains("} while ("))
                     {
                         b = new IfBlock();
-                        fc.getGraph().setNodeType(nodeNum, 5);
+                        fc.GetGraph().setNodeType(nodeNum, 5);
                         nodeNum++;
                         Edge e = new Edge();
                         e.outNode = new Node(nodeNum - 1);
@@ -341,15 +341,15 @@ namespace FlowchartEditorMVP.Model
 
                         e.outNode = new Node(nodeNum - 1);
                         e.inNode = new Node(forNodeNum);
-                        fc.getGraph().addEdge(e);
+                        fc.GetGraph().AddEdge(e);
                     }
                     else
                     if (arrCode[i].Contains("return "))
                     {
-                        if (ifNodeNum != -1) fc.getGraph().setNodeShift(nodeNum, 1);
-                        if (ifNodeNum2 != -1) fc.getGraph().setNodeShift(nodeNum, -1);
+                        if (ifNodeNum != -1) fc.GetGraph().SetNodeShift(nodeNum, 1);
+                        if (ifNodeNum2 != -1) fc.GetGraph().SetNodeShift(nodeNum, -1);
                         b = new StartBlock();
-                        fc.getGraph().setNodeType(nodeNum, 3);
+                        fc.GetGraph().setNodeType(nodeNum, 3);
                         Edge e = new Edge();
                         e.outNode = new Node(0);
                         e.inNode = new Node(0);
@@ -368,7 +368,7 @@ namespace FlowchartEditorMVP.Model
                     {
                         tmp = 0;
                         b = new StartBlock();
-                        fc.getGraph().setNodeType(nodeNum + 1, 3);
+                        fc.GetGraph().setNodeType(nodeNum + 1, 3);
                         nodeNum += 2;
                         Edge e = new Edge();
                         e.outNode = new Node(nodeNum - 1);
@@ -380,16 +380,16 @@ namespace FlowchartEditorMVP.Model
                     else
                     {
                         if (b != null && arrCode[i] != "")
-                            if (b.isSquare())
+                            if (b.IsSquare())
                             {
                                 fc.AddStrToBlock(b, arrCode[i]);
                             }
                             else
                             {
-                                if (ifNodeNum != -1) fc.getGraph().setNodeShift(nodeNum, 1);
-                                if (ifNodeNum2 != -1) fc.getGraph().setNodeShift(nodeNum, -1);
+                                if (ifNodeNum != -1) fc.GetGraph().SetNodeShift(nodeNum, 1);
+                                if (ifNodeNum2 != -1) fc.GetGraph().SetNodeShift(nodeNum, -1);
                                 b = new SquareBlock();
-                                fc.getGraph().setNodeType(nodeNum, 1);
+                                fc.GetGraph().setNodeType(nodeNum, 1);
                                 nodeNum++;
                                 Edge e = new Edge();
                                 e.outNode = new Node(nodeNum - 1);
@@ -400,7 +400,7 @@ namespace FlowchartEditorMVP.Model
                     }
 
                 }
-                fc.getGraph().setNodesNumber(nodeNum + 1);
+                fc.GetGraph().SetNodesNumber(nodeNum + 1);
             return fc;
         }
     }

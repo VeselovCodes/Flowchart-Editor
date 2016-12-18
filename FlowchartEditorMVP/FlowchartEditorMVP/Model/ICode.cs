@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace FlowchartEditorMVP.Model
@@ -36,6 +37,7 @@ namespace FlowchartEditorMVP.Model
         public CppCode(IFlowchart flowchart)
         {
             int currentNumOfTabbs = 0;
+            Stack<int> stack = new Stack<int>(flowchart.GetListOfBlocks().Count);//1 - start, 2 - if, 3 - for, 4 - square
 
             code = new List<string>(1);
             foreach (var block in flowchart.GetListOfBlocks())
@@ -60,7 +62,22 @@ namespace FlowchartEditorMVP.Model
                             {
                                 tabbs += '\t';
                             }
-                            code.Add(tabbs + '{');
+
+                            if (flowchart.GetListOfBlocks()[flowchart.GetListOfBlocks().IndexOf(block) - 1] is StartBlock)
+                            {
+                                stack.Push(1);
+                            }
+
+                            if (code.Last().Contains("if ("))
+                            {
+                                stack.Push(2);
+                            }
+
+                            if (code.Last().Contains("for ("))
+                            {
+                                stack.Push(3);
+                            }
+                            code.Add(tabbs + '{');                                     
                         }
                     }
                     if (currentNumOfTabbs != 0 && str[currentNumOfTabbs - 1] != 9)
@@ -70,7 +87,35 @@ namespace FlowchartEditorMVP.Model
                         {
                             tabbs += '\t';
                         }
-                        code.Add(tabbs + '}');
+
+                        int endOfBlock = stack.Pop();
+                        string endingSomething;
+                        switch (endOfBlock)
+                        {
+                            case 1:
+                                {
+                                    endingSomething = "//endoffunc";
+                                    break;
+                                }
+                            case 2:
+                                {
+                                    endingSomething = "//endofif";
+                                    break;
+                                }
+                            case 3:
+                                {
+                                    endingSomething = "//endoffor";
+                                    break;
+                                }
+                            default:
+                                {
+                                    endingSomething = "";
+                                    break;
+                                }
+                        }
+
+
+                        code.Add(tabbs + '}' + endingSomething);
                     }
                     code.Add(str);
                 }
@@ -88,7 +133,32 @@ namespace FlowchartEditorMVP.Model
             string scobes = "";
             for (int j = 0; j < currentNumOfTabbs; ++j)
             {
-                scobes += '}';
+                int endOfBlock = stack.Pop();
+                string endingSomething;
+                switch (endOfBlock)
+                {
+                    case 1:
+                        {
+                            endingSomething = "//endoffunc";
+                            break;
+                        }
+                    case 2:
+                        {
+                            endingSomething = "//endofif";
+                            break;
+                        }
+                    case 3:
+                        {
+                            endingSomething = "//endoffor";
+                            break;
+                        }
+                    default:
+                        {
+                            endingSomething = "";
+                            break;
+                        }
+                }
+                scobes += '}' + endingSomething;
             }
 
             code.Add(scobes);
