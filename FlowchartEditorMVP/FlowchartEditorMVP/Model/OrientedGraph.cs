@@ -27,6 +27,7 @@ namespace FlowchartEditorMVP.Model
             adj = new List<int>[MAX_NODES_NUMBER];
             for (int i = 0; i < MAX_NODES_NUMBER; i++)
             {
+                nodeShift[i] = 0;
                 adj[i] = new List<int>();
                 //nodes[i].nodeNum = i;
             }

@@ -18,6 +18,7 @@ namespace FlowchartEditorMVP.View
         {
             InitializeComponent();
             flowchartPresenter = new NewFlowchartPresenter(data, this);
+            languageComboBox.SelectedIndex = 0;
         }
         string pathVar;
 

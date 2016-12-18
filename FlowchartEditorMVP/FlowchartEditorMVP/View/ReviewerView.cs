@@ -31,17 +31,17 @@ namespace FlowchartEditorMVP.View
 
         private void addBlockButton_Click(object sender, EventArgs e)
         {
-            flowchartPresenter.AddBlock(codeTextbox.Text, xCoordsClick, yCoordsClick, 0); //vScrollBar1.Value
+            flowchartPresenter.AddBlock(codeTextbox.Text); //vScrollBar1.Value
         }
 
         private void editBlockButton_Click(object sender, EventArgs e)
         {
-            flowchartPresenter.EditBlock(codeTextbox.Text, xCoordsClick, yCoordsClick, 0); //vScrollBar1.Value
+            //flowchartPresenter.EditBlock(); //vScrollBar1.Value
         }
 
         private void removeButton_Click(object sender, EventArgs e)
         {
-            flowchartPresenter.RemoveBlock(xCoordsClick, yCoordsClick, 0);//vScrollBar1.Value
+            flowchartPresenter.RemoveBlock();//vScrollBar1.Value
         }
 
         private void toCodeButton_Click(object sender, EventArgs e)
@@ -61,7 +61,7 @@ namespace FlowchartEditorMVP.View
             if (flowchartPresenter.IsEdge(xCoordsClick, yCoordsClick, 0)) //vScrollBar1.Value
                 addBlockButton.Enabled = true;
 
-            if (flowchartPresenter.IsSquareBlock(xCoordsClick, yCoordsClick, 0))//vScrollBar1.Value
+            if (flowchartPresenter.IsSquareBlock(-1))//vScrollBar1.Value
             {
                 editBlockButton.Enabled = true;
                 removeButton.Enabled = true;

@@ -11,6 +11,7 @@ namespace FlowchartEditorMVP.Model
         void Draw();
         bool IsSquare();
         void AddStr(string str);
+        void clearText();
         List<string> GetListOfStrings();
     }
 
@@ -21,6 +22,7 @@ namespace FlowchartEditorMVP.Model
         public void Draw() { }
         public bool IsSquare() { return false; }
         public void AddStr(string str) { text = str; }
+        public void clearText() { text = ""; }
         public List<string> GetListOfStrings()
         {
             List <string> str = new List<string>(1);
@@ -36,6 +38,7 @@ namespace FlowchartEditorMVP.Model
         public void Draw() { }
         public bool IsSquare() { return true; }
         public void AddStr(string str) { text.Add(str); }
+        public void clearText() { text = new List<string>(); }
         public List<string> GetListOfStrings()
         {           
             return text;
@@ -49,6 +52,7 @@ namespace FlowchartEditorMVP.Model
         public void Draw() { }
         public bool IsSquare() { return false; }
         public void AddStr(string str) { text = str; }
+        public void clearText() { text = ""; }
         public List<string> GetListOfStrings()
         {
             List<string> str = new List<string>(1);
@@ -62,6 +66,7 @@ namespace FlowchartEditorMVP.Model
         public void Draw() { }
         public bool IsSquare() { return false; }
         public void AddStr(string str) { }
+        public void clearText() { }
         public List<string> GetListOfStrings()
         {
             List<string> str = new List<string>(1);

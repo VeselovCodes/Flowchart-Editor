@@ -15,7 +15,7 @@ namespace FlowchartEditorMVP.View
     public partial class MasterView : Form , IView
     {
         private int xCoordsClick;
-        private int yCoordsClick;        
+        private int yCoordsClick;
         private IFlowchartPresenter flowchartPresenter;
 
         internal MasterView(DataManagement data, string path, string name, string type_code)
@@ -42,25 +42,42 @@ namespace FlowchartEditorMVP.View
 
             Model.IFlowchart fc = flowchartPresenter.getFlowchart();
             vScrollBar1.Maximum = Math.Max(0, (fc.GetGraph().CountNodes()*125 - 675)/10);
-            Model.FlowchartDraw fcd = new Model.FlowchartDraw();
-            flowchartPictureBox.BackgroundImage = fcd.Draw(fc.GetGraph(), vScrollBar1.Value, -1);
-
-            flowchartPictureBox.Refresh();
+            DrawFlowchart();
         }
 
         private void addBlockButton_Click(object sender, EventArgs e)
         {
-            flowchartPresenter.AddBlock(codeTextbox.Text, xCoordsClick, yCoordsClick, vScrollBar1.Value);
+            flowchartPresenter.AddBlock(codeTextbox.Text);
         }
 
         private void editBlockButton_Click(object sender, EventArgs e)
         {
-            flowchartPresenter.EditBlock(codeTextbox.Text, xCoordsClick, yCoordsClick, vScrollBar1.Value);
+            if (editBlockButton.Text == "Edit block")
+            {
+                blockContainsTextBox.BackColor = Color.White;
+                editBlockButton.Text = "Save changes";
+                //flowchartPresenter.EditBlock(codeTextbox.Text, id);
+                blockContainsTextBox.ReadOnly = false;
+            }
+            else
+            {
+                blockContainsTextBox.BackColor = SystemColors.Control;
+                editBlockButton.Text = "Edit block";
+                List<string> str = new List<string>();
+                for (int i = 0; i < blockContainsTextBox.Lines.Length; i++)
+                {
+                    str.Add(blockContainsTextBox.Lines[i]);
+                }
+                flowchartPresenter.EditBlock(str);
+                blockContainsTextBox.ReadOnly = true;
+            }
         }
 
         private void removeButton_Click(object sender, EventArgs e)
         {
-            flowchartPresenter.RemoveBlock(xCoordsClick, yCoordsClick, vScrollBar1.Value);
+            flowchartPresenter.RemoveBlock();
+
+            DrawFlowchart();
         }
 
         private void toDatabaseButton_Click(object sender, EventArgs e)
@@ -87,15 +104,25 @@ namespace FlowchartEditorMVP.View
         {
             xCoordsClick = e.X;
             yCoordsClick = e.Y;
+
             flowchartPresenter.FlowchartMouseClick(xCoordsClick - flowchartPictureBox.Location.X, yCoordsClick - -flowchartPictureBox.Location.Y, vScrollBar1.Value);
-            flowchartPictureBox.Refresh();
+            
+            DrawFlowchart();
+
             if (flowchartPresenter.IsEdge(xCoordsClick, yCoordsClick, vScrollBar1.Value))
                 addBlockButton.Enabled = true;
+            else
+                addBlockButton.Enabled = false;
 
-            if (flowchartPresenter.IsSquareBlock(xCoordsClick, yCoordsClick, vScrollBar1.Value))
+            if (flowchartPresenter.GetSelectedBlock() != -1 && flowchartPresenter.IsSquareBlock(flowchartPresenter.GetSelectedBlock()))
             {
                 editBlockButton.Enabled = true;
                 removeButton.Enabled = true;
+            }
+            else
+            {
+                editBlockButton.Enabled = false;
+                removeButton.Enabled = false;
             }
         }
 
@@ -113,20 +140,30 @@ namespace FlowchartEditorMVP.View
 
         private void vScrollBar1_ValueChanged(object sender, EventArgs e)
         {
+            DrawFlowchart();
+        }
+
+        void DrawFlowchart()
+        {
             Model.IFlowchart fc = flowchartPresenter.getFlowchart();
             Model.FlowchartDraw fcd = new Model.FlowchartDraw();
-            flowchartPictureBox.BackgroundImage = fcd.Draw(fc.GetGraph(), vScrollBar1.Value, -1);
-
+            flowchartPictureBox.BackgroundImage = fcd.Draw(fc.GetGraph(), vScrollBar1.Value, flowchartPresenter.GetSelectedBlock());
             flowchartPictureBox.Refresh();
         }
 
         internal void ShowBlockContent(IBlock block)
         {
             blockContainsTextBox.Text = "";
-            List<string> blockContent = block.GetListOfStrings();
-            foreach (var str in blockContent)
+            if (block != null)
             {
-                blockContainsTextBox.Text += str + '\n';
+                List<string> blockContent = block.GetListOfStrings();
+                foreach (var str in blockContent)
+                {
+                    if (str.Contains("\t"))
+                        blockContainsTextBox.Text += str.Substring(str.LastIndexOf("\t") + 1, str.Length - str.LastIndexOf("\t") - 1) + '\n';
+                    else
+                        blockContainsTextBox.Text += str + '\n';
+                }
             }
             
 
