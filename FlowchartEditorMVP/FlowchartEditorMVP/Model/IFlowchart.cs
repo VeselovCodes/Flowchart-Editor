@@ -10,10 +10,10 @@ namespace FlowchartEditorMVP.Model
     {
         void AddBlock(IBlock block, Edge edge);
         void AddStrToBlock(IBlock block, string str);
-        void DeleteSquareBlock(SquareBlock block);
+        void DeleteSquareBlock(int id);
         string GetName(); 
         OrientedGraph GetGraph();
-        IBlock GetBlock(int x, int y, int scroll);
+        int GetBlock(int x, int y, int scroll);
         List<IBlock> GetListOfBlocks();
         void AddBlockOnEdge(IBlock block, Edge edge);
     }
@@ -43,7 +43,7 @@ namespace FlowchartEditorMVP.Model
             return blocks;
         }
 
-        public IBlock GetBlock(int x, int y, int scroll)
+        public int GetBlock(int x, int y, int scroll)
         {
             int index = 0;
             for (; index < blocks.Count; ++index)
@@ -53,18 +53,22 @@ namespace FlowchartEditorMVP.Model
                 if (blocks[index] is SquareBlock)
                 {
                     shift = 50;
-                    if (y < shift*2 + DIST_BETWEEN_BLOCKS * index - SCROLL_SCALE * scroll - 25 &&
-                    y > DIST_BETWEEN_BLOCKS * index - SCROLL_SCALE * scroll)
-                        return blocks[index];
+                    if (y < (shift*2 + DIST_BETWEEN_BLOCKS * index - SCROLL_SCALE * scroll + 25)*3/4+12  &&
+                    y > (DIST_BETWEEN_BLOCKS * index - SCROLL_SCALE * scroll + 25)*3/4+12 &&
+                    x < (shift + graph.GetNodeShift(index) * 100) * 3 / 4 + 250 - 172 &&
+                    x > (-shift + graph.GetNodeShift(index) * 100) * 3 / 4 + 250 - 172)
+                        return index;
                 } else 
                 {
-                    if (y < shift*2 + DIST_BETWEEN_BLOCKS * index - SCROLL_SCALE * scroll &&
-                    y > DIST_BETWEEN_BLOCKS * index - SCROLL_SCALE * scroll)
-                        return blocks[index];
+                    if (y < (shift*2 + DIST_BETWEEN_BLOCKS * index - SCROLL_SCALE * scroll+50)*3/4+12 &&
+                    y > (DIST_BETWEEN_BLOCKS * index - SCROLL_SCALE * scroll + 50) * 3 / 4 + 12 &&
+                    x < (shift * 2 + graph.GetNodeShift(index) * 100) * 3 / 4 + 250 - 172 &&
+                    x > (-shift * 2 + graph.GetNodeShift(index) * 100) * 3 / 4 + 250 - 172)
+                        return index;
                 }               
             }
             
-            return blocks[0];
+            return -1;
         }
 
         public void AddBlockOnEdge(IBlock block, Edge edge)
@@ -84,8 +88,20 @@ namespace FlowchartEditorMVP.Model
             block.AddStr(str);
         }
 
-        public void DeleteSquareBlock(SquareBlock block)
+        public void DeleteSquareBlock(int id)
         {
+            blocks.RemoveAt(id);
+            for (int i = id; i < graph.CountNodes() - 1; i++)
+            {
+                graph.SetNodeShift(i, graph.GetNodeShift(i + 1));
+                graph.SetNodeType(i, graph.GetNodeType(i + 1));
+                for (int j = 0; j < graph.GetAdj()[i + 1].Count; j++)
+                {
+                    if (graph.GetAdj()[i + 1][j] >= id) graph.GetAdj()[i + 1][j]--;
+                }
+                graph.GetAdj()[i] = graph.GetAdj()[i + 1];
+            }
+            graph.SetNodesNumber(graph.CountNodes() - 1);
         }
 
         public OrientedGraph GetGraph()

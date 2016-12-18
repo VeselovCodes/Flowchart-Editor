@@ -32,6 +32,7 @@ namespace FlowchartEditorMVP.View
         private void InitializeComponent()
         {
             this.actionsGroupBox = new System.Windows.Forms.GroupBox();
+            this.blockContainsTextBox = new System.Windows.Forms.RichTextBox();
             this.toDatabaseButton = new System.Windows.Forms.Button();
             this.codeTextbox = new System.Windows.Forms.TextBox();
             this.toCodeButton = new System.Windows.Forms.Button();
@@ -49,7 +50,6 @@ namespace FlowchartEditorMVP.View
             this.applyButton = new System.Windows.Forms.Button();
             this.declineButton = new System.Windows.Forms.Button();
             this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
-            this.blockContainsTextBox = new System.Windows.Forms.RichTextBox();
             this.actionsGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.flowchartPictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -72,6 +72,16 @@ namespace FlowchartEditorMVP.View
             this.actionsGroupBox.TabIndex = 3;
             this.actionsGroupBox.TabStop = false;
             this.actionsGroupBox.Text = "Actions";
+            // 
+            // blockContainsTextBox
+            // 
+            this.blockContainsTextBox.BackColor = System.Drawing.SystemColors.Control;
+            this.blockContainsTextBox.Location = new System.Drawing.Point(6, 236);
+            this.blockContainsTextBox.Name = "blockContainsTextBox";
+            this.blockContainsTextBox.ReadOnly = true;
+            this.blockContainsTextBox.Size = new System.Drawing.Size(152, 233);
+            this.blockContainsTextBox.TabIndex = 10;
+            this.blockContainsTextBox.Text = "";
             // 
             // toDatabaseButton
             // 
@@ -245,15 +255,6 @@ namespace FlowchartEditorMVP.View
             this.vScrollBar1.SmallChange = 2;
             this.vScrollBar1.TabIndex = 9;
             this.vScrollBar1.ValueChanged += new System.EventHandler(this.vScrollBar1_ValueChanged);
-            // 
-            // blockContainsTextBox
-            // 
-            this.blockContainsTextBox.Location = new System.Drawing.Point(6, 236);
-            this.blockContainsTextBox.Name = "blockContainsTextBox";
-            this.blockContainsTextBox.ReadOnly = true;
-            this.blockContainsTextBox.Size = new System.Drawing.Size(152, 233);
-            this.blockContainsTextBox.TabIndex = 10;
-            this.blockContainsTextBox.Text = "";
             // 
             // MasterView
             // 

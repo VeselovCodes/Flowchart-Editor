@@ -27,7 +27,7 @@ int fib(int n)
 	{
 		tmp = prev2;
 		prev2 = prev1 + prev2;
-		prev1 = tmp;		
+		prev1 = tmp;
 	}//endoffor
 	int k = 0;
 	return prev2;
