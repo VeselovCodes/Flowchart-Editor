@@ -189,7 +189,7 @@ namespace FlowchartEditorMVP.Model
 
         internal IFlowchart LoadFlowchart(string flowchart_name)
         {        
-            string queryString = @"SELECT flowchart_data FROM data WHERE flowchart_name = '" + flowchart_name + "' AND owner = '" + owner + "' AND reviewer = IS NULL";
+            string queryString = @"SELECT flowchart_data FROM data WHERE flowchart_name = '" + flowchart_name + "' AND owner = '" + owner + "' AND reviewer = ''";
 
             MySqlConnection connection = initializeDatabaseConnection("localhost", "flowchart", "root", "");
 
@@ -203,10 +203,14 @@ namespace FlowchartEditorMVP.Model
 
                 MySqlDataReader dr = com.ExecuteReader();
 
+                dr.Read();
+
                 if (dr.HasRows)
                 {
                     code = dr.GetString("flowchart_data");
                 }
+
+                dr.Close();
 
                 connection.Close();
 
@@ -216,7 +220,6 @@ namespace FlowchartEditorMVP.Model
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
                 connection.Close();
             }
 
