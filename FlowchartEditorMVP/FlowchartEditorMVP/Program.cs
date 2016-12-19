@@ -16,7 +16,7 @@ namespace FlowchartEditorMVP
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new View.NewFlowchartView(null));
+            Application.Run(new EnterView());
         }
     }
 }

@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 namespace FlowchartEditorMVP.Presenter
 {
     interface IPresenter
-    {
-        void Run();
+    {        
     }
 }

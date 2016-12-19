@@ -82,11 +82,11 @@
       <DependentUpon>FlowchartDrower.cs</DependentUpon>
     </Compile>
     <Compile Include="View\IView.cs" />
-    <Compile Include="View\MasterView.cs">
+    <Compile Include="View\FlowchartView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\MasterView.Designer.cs">
-      <DependentUpon>MasterView.cs</DependentUpon>
+    <Compile Include="View\FlowchartView.Designer.cs">
+      <DependentUpon>FlowchartView.cs</DependentUpon>
     </Compile>
     <Compile Include="View\NewFlowchartView.cs">
       <SubType>Form</SubType>
@@ -99,12 +99,6 @@
     </Compile>
     <Compile Include="View\RegisterView.Designer.cs">
       <DependentUpon>RegisterView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\ReviewerView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\ReviewerView.Designer.cs">
-      <DependentUpon>ReviewerView.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -124,8 +118,8 @@
     <EmbeddedResource Include="View\FlowchartDrower.resx">
       <DependentUpon>FlowchartDrower.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\MasterView.resx">
-      <DependentUpon>MasterView.cs</DependentUpon>
+    <EmbeddedResource Include="View\FlowchartView.resx">
+      <DependentUpon>FlowchartView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\NewFlowchartView.resx">
       <DependentUpon>NewFlowchartView.cs</DependentUpon>
@@ -133,10 +127,8 @@
     <EmbeddedResource Include="View\RegisterView.resx">
       <DependentUpon>RegisterView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\ReviewerView.resx">
-      <DependentUpon>ReviewerView.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

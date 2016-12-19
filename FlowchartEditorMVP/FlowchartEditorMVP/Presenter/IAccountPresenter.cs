@@ -69,6 +69,5 @@ namespace FlowchartEditorMVP.Presenter
                 throw new Exception("User with entered name exists.");
             }
         }
-        public void Run() { }
     }
 }

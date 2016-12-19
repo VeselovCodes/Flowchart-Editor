@@ -14,17 +14,16 @@ namespace FlowchartEditorMVP.Presenter
         string GetLogin();
         void openClick();
         void ToCreateNew();
-        void SelectFlowchart(string owner, string name);
+        void SelectFlowchart(string owner, string name, string reviewer);
     }
 
     class ChooseFlowchartPresenter : IChooseFlowchartPresenter
-    {        
-        public void Run() { }
-                
+    {                  
         private DataManagement data;
         private ChooseFlowchartView view;
 
         private string owner;
+        private string reviewer;
         private string flowchartName;
 
         public ChooseFlowchartPresenter(DataManagement data, ChooseFlowchartView view)
@@ -41,15 +40,15 @@ namespace FlowchartEditorMVP.Presenter
             {
                 data.SetOwner(owner);
                 view.Hide();
-                MasterView mView = new MasterView(data, flowchartName);
+                FlowchartView mView = new FlowchartView(data, flowchartName, true, reviewer);
                 mView.Show();
-            }
+            }  
             else
             {
                 data.SetOwner(owner);
                 view.Hide();
-                ReviewerView rView = new ReviewerView(data, flowchartName);
-                rView.Show();
+                FlowchartView mView = new FlowchartView(data, flowchartName, false, reviewer);
+                mView.Show();
             }
         }
 
@@ -65,9 +64,10 @@ namespace FlowchartEditorMVP.Presenter
             return data.GetLogin();
         }
 
-        public void SelectFlowchart(string owner, string name)
+        public void SelectFlowchart(string owner, string name, string reviewer)
         {
             this.owner = owner;
+            this.reviewer = reviewer;
             flowchartName = name; 
         }
     }

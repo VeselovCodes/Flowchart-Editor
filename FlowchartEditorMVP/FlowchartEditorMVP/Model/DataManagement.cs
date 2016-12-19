@@ -164,10 +164,33 @@ namespace FlowchartEditorMVP.Model
         internal void AddToDB(IFlowchart flowchart)
         {            
 
-            string dt = DateTime.Now.ToString("u");
-           
+            string dt = DateTime.Now.ToString("u");            
+
             string queryString = @"INSERT INTO data (owner, flowchart_name, flowchart_data, date) VALUES ('" + this.login + "', '" + flowchart.GetName() + "', '" + flowchart.GetCodeLikeStringList() + "','" + dt + "')";
 
+            MySqlConnection connection = initializeDatabaseConnection("localhost", "flowchart", "root", "");
+
+            MySqlCommand com = new MySqlCommand(queryString, connection);
+
+            try
+            {
+                connection.Open();
+
+                MySqlDataReader dr = com.ExecuteReader();
+
+                connection.Close();
+            }
+            catch (Exception e)
+            {
+                connection.Close();
+            }
+        }
+
+        internal void MasterAddToDB(IFlowchart flowchart, string comment)
+        {
+            string dt = DateTime.Now.ToString("u");
+
+            string queryString = @"INSERT INTO data (owner, flowchart_name, flowchart_data, date) VALUES ('" + this.login + "', '" + flowchart.GetName() + "', '" + flowchart.GetCodeLikeStringList() + "','" + dt + "')";
 
             MySqlConnection connection = initializeDatabaseConnection("localhost", "flowchart", "root", "");
 
@@ -224,6 +247,11 @@ namespace FlowchartEditorMVP.Model
             }
 
             return new Flowchart(flowchart_name);
+        }
+
+        internal void ReviewerAddToDB(IFlowchart flowchart, string comment)
+        {
+            
         }
 
         internal string GetOwner()

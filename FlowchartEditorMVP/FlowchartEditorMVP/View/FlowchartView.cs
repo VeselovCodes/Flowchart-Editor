@@ -12,41 +12,57 @@ using System.Windows.Forms;
 
 namespace FlowchartEditorMVP.View
 {
-    public partial class MasterView : Form , IView
+    public partial class FlowchartView : Form , IView
     {
-        private int xCoordsClick;
-        private int yCoordsClick;
         private IFlowchartPresenter flowchartPresenter;
-
-        internal MasterView(DataManagement data, string path, string name, string type_code)
+        bool isMaster;
+        
+        internal FlowchartView(DataManagement data, string path, string name, string type_code)
         {            
             InitializeComponent();
             flowchartPresenter = new MasterPresenter(data, path, this, name, type_code);
+            commentTextBox.ReadOnly = true;
+            applyButton.Enabled = false;
+            declineButton.Enabled = false;
         }
-        internal MasterView(DataManagement data, string name)
+        internal FlowchartView(DataManagement data, string name, bool isMaster, string reviewer)
         {
             InitializeComponent();
-            flowchartPresenter = new MasterPresenter(data, this, name);
+            this.isMaster = isMaster;
+            if (isMaster && (reviewer == "" || reviewer == null))
+            {
+                flowchartPresenter = new MasterPresenter(data, this, name);
+                commentTextBox.ReadOnly = true;
+                applyButton.Enabled = false;
+                declineButton.Enabled = false;
+            }
+            else if (reviewer != "" && reviewer != null)
+            {
+                flowchartPresenter = new MasterViewChangesPresenter(data, this, name);
+                commentTextBox.ReadOnly = true;
+                toDatabaseButton.Enabled = false;
+                addBlockButton.Enabled = false;
+                editBlockButton.Enabled = false;
+                removeButton.Enabled = false;
+            }
+            else
+            {
+                flowchartPresenter = new ReviewerPresenter(data, this, name);
+                applyButton.Enabled = false;
+                declineButton.Enabled = false;
+            }
+            vScrollBar1.Maximum = flowchartPresenter.GetScrollBarBValue();
+
+            DrawFlowchart();
         }
 
-        private void MasterView_Load(object sender, EventArgs e)
+        private void FlowchartView_Load(object sender, EventArgs e)
         {
-            List<Tuple<string, string>> flowchartReviewsLogins = flowchartPresenter.GetReviewsAndLogins();
-
-            /*for (int i = 0; i < 10; i++)
-            {
-                reviewsDataGridView.Rows.Add();
-                reviewsDataGridView.Rows[i].Cells[0].Value = flowchartReviewsLogins[i].Item1;
-                reviewsDataGridView.Rows[i].Cells[1].Value = flowchartReviewsLogins[i].Item2;
-            }*/
-
-            vScrollBar1.Maximum = flowchartPresenter.GetScrollBarBValue();
-            DrawFlowchart();
         }
 
         private void addBlockButton_Click(object sender, EventArgs e)
         {
-            flowchartPresenter.AddBlock();
+            ((MasterPresenter)flowchartPresenter).AddBlock();
             DrawFlowchart();
             vScrollBar1.Maximum = flowchartPresenter.GetScrollBarBValue();
         }
@@ -57,7 +73,6 @@ namespace FlowchartEditorMVP.View
             {
                 blockContainsTextBox.BackColor = Color.White;
                 editBlockButton.Text = "Save changes";
-                //flowchartPresenter.EditBlock(codeTextbox.Text, id);
                 blockContainsTextBox.ReadOnly = false;
             }
             else
@@ -69,21 +84,20 @@ namespace FlowchartEditorMVP.View
                 {
                     str.Add(blockContainsTextBox.Lines[i]);
                 }
-                flowchartPresenter.EditBlock(str);
+                ((MasterPresenter)flowchartPresenter).EditBlock(str);
                 blockContainsTextBox.ReadOnly = true;
             }
         }
 
         private void removeButton_Click(object sender, EventArgs e)
         {
-            flowchartPresenter.RemoveBlock();
-
+            ((MasterPresenter)flowchartPresenter).RemoveBlock();
             DrawFlowchart();
         }
 
         private void toDatabaseButton_Click(object sender, EventArgs e)
         {
-            flowchartPresenter.ToDataBase();
+            flowchartPresenter.ToDataBase("");
         }
 
         private void toCodeButton_Click(object sender, EventArgs e)
@@ -93,24 +107,20 @@ namespace FlowchartEditorMVP.View
 
         private void applyButton_Click(object sender, EventArgs e)
         {
-            flowchartPresenter.Apply("Name", "Reviewer");
+            ((MasterViewChangesPresenter)flowchartPresenter).Apply("Name", "Reviewer");
         }
 
         private void declineButton_Click(object sender, EventArgs e)
         {
-            flowchartPresenter.Decline();
+            ((MasterViewChangesPresenter)flowchartPresenter).Decline();
         }
 
         private void flowchartPictureBox_MouseClick(object sender, MouseEventArgs e)
         {
-            xCoordsClick = e.X;
-            yCoordsClick = e.Y;
+            flowchartPresenter.FlowchartMouseClick(e.X - flowchartPictureBox.Location.X, e.Y - -flowchartPictureBox.Location.Y, vScrollBar1.Value);
 
-            flowchartPresenter.FlowchartMouseClick(xCoordsClick - flowchartPictureBox.Location.X, yCoordsClick - -flowchartPictureBox.Location.Y, vScrollBar1.Value);
-
-            if (flowchartPresenter.IsEdge(xCoordsClick, yCoordsClick, vScrollBar1.Value) && flowchartPresenter.GetSelectedBlock() == -1)
-            {
-                this.Text = flowchartPresenter.GetSelectedEdge()[0].ToString() + flowchartPresenter.GetSelectedEdge()[1].ToString();
+            if (flowchartPresenter.IsEdge(e.X, e.Y, vScrollBar1.Value) && flowchartPresenter.GetSelectedBlock() == -1)
+            {                
                 addBlockButton.Enabled = true;
             }
             else
@@ -136,14 +146,7 @@ namespace FlowchartEditorMVP.View
         {
             flowchartPresenter.ToChooseFlowchart();
         }
-
-        private void reviewsDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            
-            flowchartPresenter.LoadReviewedFlowchart(reviewsDataGridView.Rows[e.RowIndex].Cells[1].Value.ToString()
-                , reviewsDataGridView.Rows[e.RowIndex].Cells[0].Value.ToString());
-        }
-
+                
         private void vScrollBar1_ValueChanged(object sender, EventArgs e)
         {
             DrawFlowchart();
@@ -171,8 +174,6 @@ namespace FlowchartEditorMVP.View
                         blockContainsTextBox.Text += str + '\n';
                 }
             }
-            
-
         }
     }
 }
