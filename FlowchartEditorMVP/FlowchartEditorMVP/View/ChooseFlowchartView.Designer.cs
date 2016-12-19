@@ -33,6 +33,8 @@
             this.createNewButton = new System.Windows.Forms.Button();
             this.changeUserButton = new System.Windows.Forms.Button();
             this.excLabel = new System.Windows.Forms.Label();
+            this.commentRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.commentLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.flowchartDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -90,12 +92,32 @@
             this.excLabel.Size = new System.Drawing.Size(0, 13);
             this.excLabel.TabIndex = 2;
             // 
+            // commentRichTextBox
+            // 
+            this.commentRichTextBox.Location = new System.Drawing.Point(715, 156);
+            this.commentRichTextBox.Name = "commentRichTextBox";
+            this.commentRichTextBox.ReadOnly = true;
+            this.commentRichTextBox.Size = new System.Drawing.Size(256, 131);
+            this.commentRichTextBox.TabIndex = 3;
+            this.commentRichTextBox.Text = "";
+            // 
+            // commentLabel
+            // 
+            this.commentLabel.AutoSize = true;
+            this.commentLabel.Location = new System.Drawing.Point(712, 140);
+            this.commentLabel.Name = "commentLabel";
+            this.commentLabel.Size = new System.Drawing.Size(54, 13);
+            this.commentLabel.TabIndex = 4;
+            this.commentLabel.Text = "Comment:";
+            // 
             // ChooseFlowchartView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(984, 335);
+            this.Controls.Add(this.commentLabel);
+            this.Controls.Add(this.commentRichTextBox);
             this.Controls.Add(this.excLabel);
             this.Controls.Add(this.createNewButton);
             this.Controls.Add(this.changeUserButton);
@@ -117,5 +139,7 @@
         private System.Windows.Forms.Button createNewButton;
         private System.Windows.Forms.Button changeUserButton;
         private System.Windows.Forms.Label excLabel;
+        private System.Windows.Forms.RichTextBox commentRichTextBox;
+        private System.Windows.Forms.Label commentLabel;
     }
 }
