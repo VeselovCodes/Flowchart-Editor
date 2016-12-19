@@ -40,14 +40,15 @@ namespace FlowchartEditorMVP.View
                 reviewsDataGridView.Rows[i].Cells[1].Value = flowchartReviewsLogins[i].Item2;
             }*/
 
-            Model.IFlowchart fc = flowchartPresenter.getFlowchart();
-            vScrollBar1.Maximum = Math.Max(0, (fc.GetGraph().CountNodes()*125 - 675)/10);
+            vScrollBar1.Maximum = flowchartPresenter.GetScrollBarBValue();
             DrawFlowchart();
         }
 
         private void addBlockButton_Click(object sender, EventArgs e)
         {
-            flowchartPresenter.AddBlock(codeTextbox.Text);
+            flowchartPresenter.AddBlock();
+            DrawFlowchart();
+            vScrollBar1.Maximum = flowchartPresenter.GetScrollBarBValue();
         }
 
         private void editBlockButton_Click(object sender, EventArgs e)
@@ -106,13 +107,16 @@ namespace FlowchartEditorMVP.View
             yCoordsClick = e.Y;
 
             flowchartPresenter.FlowchartMouseClick(xCoordsClick - flowchartPictureBox.Location.X, yCoordsClick - -flowchartPictureBox.Location.Y, vScrollBar1.Value);
-            
-            DrawFlowchart();
 
-            if (flowchartPresenter.IsEdge(xCoordsClick, yCoordsClick, vScrollBar1.Value))
+            if (flowchartPresenter.IsEdge(xCoordsClick, yCoordsClick, vScrollBar1.Value) && flowchartPresenter.GetSelectedBlock() == -1)
+            {
+                this.Text = flowchartPresenter.GetSelectedEdge()[0].ToString() + flowchartPresenter.GetSelectedEdge()[1].ToString();
                 addBlockButton.Enabled = true;
+            }
             else
+            {
                 addBlockButton.Enabled = false;
+            }
 
             if (flowchartPresenter.GetSelectedBlock() != -1 && flowchartPresenter.IsSquareBlock(flowchartPresenter.GetSelectedBlock()))
             {
@@ -124,6 +128,8 @@ namespace FlowchartEditorMVP.View
                 editBlockButton.Enabled = false;
                 removeButton.Enabled = false;
             }
+
+            DrawFlowchart();
         }
 
         private void backButton_Click(object sender, EventArgs e)
@@ -147,7 +153,7 @@ namespace FlowchartEditorMVP.View
         {
             Model.IFlowchart fc = flowchartPresenter.getFlowchart();
             Model.FlowchartDraw fcd = new Model.FlowchartDraw();
-            flowchartPictureBox.BackgroundImage = fcd.Draw(fc.GetGraph(), vScrollBar1.Value, flowchartPresenter.GetSelectedBlock());
+            flowchartPictureBox.BackgroundImage = fcd.Draw(fc.GetGraph(), vScrollBar1.Value, flowchartPresenter.GetSelectedBlock(), flowchartPresenter.GetSelectedEdge());
             flowchartPictureBox.Refresh();
         }
 

@@ -10,7 +10,7 @@ namespace FlowchartEditorMVP.Presenter
 {
     interface IFlowchartPresenter : IPresenter
     {
-        void AddBlock(string str);
+        void AddBlock();
         void EditBlock(List<string> str);
         void RemoveBlock();
         bool IsEdge(int xCoordsClick, int yCoordsClick, int scroll);
@@ -27,6 +27,8 @@ namespace FlowchartEditorMVP.Presenter
         void FlowchartMouseClick(int x, int y, int scroll);
         void SelectBlock(int i);
         int GetSelectedBlock();
+        int[] GetSelectedEdge();
+        int GetScrollBarBValue();
     }
 
     class MasterPresenter : IFlowchartPresenter
@@ -36,6 +38,7 @@ namespace FlowchartEditorMVP.Presenter
         //private CodeFactory code;
         private MasterView view;
         private int selectedBlock;
+        private int[] selectedEdge;
 
         public MasterPresenter(DataManagement data, string path, MasterView view, string name, string type_code)
         {
@@ -55,6 +58,9 @@ namespace FlowchartEditorMVP.Presenter
             this.data = data;
             this.view = view;
             selectedBlock = -1;
+            selectedEdge = new int[2];
+            selectedEdge[0] = -1;
+            selectedEdge[1] = -1;
         }
 
         public void SelectBlock(int i)
@@ -65,6 +71,11 @@ namespace FlowchartEditorMVP.Presenter
         public int GetSelectedBlock()
         {
             return selectedBlock;
+        }
+
+        public int[] GetSelectedEdge()
+        {
+            return selectedEdge;
         }
 
         public void ToChooseFlowchart()
@@ -98,6 +109,13 @@ namespace FlowchartEditorMVP.Presenter
         }
         public bool IsEdge(int xCoordsClick, int yCoordsClick, int scroll)
         {
+            if (selectedBlock == -1)
+            {
+                selectedEdge = flowchart.GetEdge(xCoordsClick, yCoordsClick, scroll);
+                return true;
+            }
+            selectedEdge[0] = -1;
+            selectedEdge[1] = -1;
             return false;
         }
         public bool IsSquareBlock(int i)
@@ -105,9 +123,10 @@ namespace FlowchartEditorMVP.Presenter
             return flowchart.GetListOfBlocks()[i].IsSquare();
         }
         public void Run() { }
-        public void AddBlock(string str)
+        public void AddBlock()
         {
-            
+            if (selectedEdge[0] < selectedEdge[1])
+            flowchart.AddBlockOnEdge(selectedEdge);
         }
         public void EditBlock(List<string> str)
         {
@@ -119,8 +138,11 @@ namespace FlowchartEditorMVP.Presenter
         }
         public void RemoveBlock()
         {
-            flowchart.DeleteSquareBlock(selectedBlock);
-            selectedBlock = -1;    
+            if (flowchart.GetGraph().GetAdj()[selectedBlock][0] > selectedBlock)
+            {
+                flowchart.DeleteSquareBlock(selectedBlock);
+                selectedBlock = -1;
+            }
         }
         public List<Tuple<string, string>> GetReviewsAndLogins()
         {
@@ -147,6 +169,11 @@ namespace FlowchartEditorMVP.Presenter
             else
                 view.ShowBlockContent(flowchart.GetListOfBlocks()[selectedBlock]);
         }
+
+        public int GetScrollBarBValue()
+        {
+            return Math.Max(0, (flowchart.GetGraph().CountNodes() * 125 - 675) / 10);
+        }
     }
 
     class ReviewerPresenter : IFlowchartPresenter
@@ -155,6 +182,7 @@ namespace FlowchartEditorMVP.Presenter
         private DataManagement data;        
         private ReviewerView view;
         private int selectedBlock;
+        private int[] selectedEdge;
 
         public void SelectBlock(int i)
         {
@@ -164,6 +192,11 @@ namespace FlowchartEditorMVP.Presenter
         public int GetSelectedBlock()
         {
             return selectedBlock;
+        }
+
+        public int[] GetSelectedEdge()
+        {
+            return selectedEdge;
         }
 
         public void FlowchartMouseClick(int x, int y, int scroll)
@@ -210,9 +243,10 @@ namespace FlowchartEditorMVP.Presenter
             return true;
         }
         public void Run() { }
-        public void AddBlock(string str)
+        public void AddBlock()
         {
-            flowchart.AddBlock(new SquareBlock(), new Edge());
+            if (selectedEdge[0] < selectedEdge[1])
+                flowchart.AddBlockOnEdge(selectedEdge);
         }
         public void EditBlock(List<string> str)
         {
@@ -224,8 +258,11 @@ namespace FlowchartEditorMVP.Presenter
         }
         public void RemoveBlock()
         {
-            flowchart.DeleteSquareBlock(selectedBlock);
-            selectedBlock = -1;
+            if (flowchart.GetGraph().GetAdj()[selectedBlock][0] > selectedBlock)
+            {
+                flowchart.DeleteSquareBlock(selectedBlock);
+                selectedBlock = -1;
+            }
         }
         public List<Tuple<string, string>> GetReviewsAndLogins()
         {
@@ -243,6 +280,11 @@ namespace FlowchartEditorMVP.Presenter
         public IFlowchart getFlowchart()
         {
             return flowchart;
+        }
+
+        public int GetScrollBarBValue()
+        {
+            return Math.Max(0, (flowchart.GetGraph().CountNodes() * 125 - 675) / 10);
         }
     }
 }

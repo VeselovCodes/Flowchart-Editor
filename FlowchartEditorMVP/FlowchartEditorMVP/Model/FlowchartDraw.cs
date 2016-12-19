@@ -14,7 +14,7 @@ namespace FlowchartEditorMVP.Model
         int DIST_BETWEEN_BLOCKS = 125;
         int SCROLL_SCALE = 10;
 
-        public Bitmap Draw(OrientedGraph graph, int scroll, int selectedID)
+        public Bitmap Draw(OrientedGraph graph, int scroll, int selectedID, int[] selectedEdge)
         {
             btm = new Bitmap(500, 800);
             gr = Graphics.FromImage(btm);
@@ -59,16 +59,17 @@ namespace FlowchartEditorMVP.Model
                 }
                 for (int j = 0; j < graph.GetAdj()[i].Count; j++)
                 {
+                    if (selectedEdge[0] == i && selectedEdge[1] == graph.GetAdj()[i][j]) pen = Pens.Red; else pen = Pens.Black;
                     Point p1 = new Point(250 + graph.GetNodeShift(i) * 100, 75 + DIST_BETWEEN_BLOCKS * i - SCROLL_SCALE * scroll);
                     Point p2 = new Point(250 + graph.GetNodeShift(graph.GetAdj()[i][j]) * 100, 75 + DIST_BETWEEN_BLOCKS * graph.GetAdj()[i][j] - SCROLL_SCALE * scroll);
-                    Drawline(graph.GetNodeType(i), graph.GetNodeType(graph.GetAdj()[i][j]), p1, p2);
+                    Drawline(pen, graph.GetNodeType(i), graph.GetNodeType(graph.GetAdj()[i][j]), p1, p2);
                 }
             }
 
             return btm;
         }
 
-        void Drawline(int type1, int type2, Point p1, Point p2)
+        void Drawline(Pen pen, int type1, int type2, Point p1, Point p2)
         {
             if (p1.X == p2.X)
             {
@@ -113,44 +114,44 @@ namespace FlowchartEditorMVP.Model
 
             if (p1.Y > p2.Y)
             {
-                gr.DrawLine(Pens.Black, p1, new Point(p1.X - 50, p1.Y));
-                gr.DrawLine(Pens.Black, new Point(p1.X - 50, p1.Y), new Point(p1.X - 50, p2.Y));
-                gr.DrawLine(Pens.Black, new Point(p1.X - 50, p2.Y), p2);
+                gr.DrawLine(pen, p1, new Point(p1.X - 50, p1.Y));
+                gr.DrawLine(pen, new Point(p1.X - 50, p1.Y), new Point(p1.X - 50, p2.Y));
+                gr.DrawLine(pen, new Point(p1.X - 50, p2.Y), p2);
             }
             else
             if (p1.X == p2.X) 
             {
                 if (type1 == 2)
                 {
-                    gr.DrawLine(Pens.Black, new Point(p1.X - 50, p1.Y - 25), new Point(p1.X - 100, p1.Y - 25));
-                    gr.DrawLine(Pens.Black, new Point(p1.X - 100, p1.Y - 25), new Point(p1.X - 100, p2.Y - 15));
-                    gr.DrawLine(Pens.Black, new Point(p1.X - 100, p2.Y - 15), new Point(p2.X, p2.Y - 15));
-                    gr.DrawLine(Pens.Black, new Point(p2.X, p2.Y - 15), p2);
+                    gr.DrawLine(pen, new Point(p1.X - 50, p1.Y - 25), new Point(p1.X - 100, p1.Y - 25));
+                    gr.DrawLine(pen, new Point(p1.X - 100, p1.Y - 25), new Point(p1.X - 100, p2.Y - 15));
+                    gr.DrawLine(pen, new Point(p1.X - 100, p2.Y - 15), new Point(p2.X, p2.Y - 15));
+                    gr.DrawLine(pen, new Point(p2.X, p2.Y - 15), p2);
                 }
                 else
-                    gr.DrawLine(Pens.Black, p1, p2);
+                    gr.DrawLine(pen, p1, p2);
             }
             else
             if (p1.Y < p2.Y)
             {
                 if (type1 == 2)
                 {
-                    gr.DrawLine(Pens.Black, p1, new Point(p2.X, p1.Y));
-                    gr.DrawLine(Pens.Black, new Point(p2.X, p1.Y), p2);
+                    gr.DrawLine(pen, p1, new Point(p2.X, p1.Y));
+                    gr.DrawLine(pen, new Point(p2.X, p1.Y), p2);
                 }
                 else
                 if (type1 == 5)
                 {
-                    gr.DrawLine(Pens.Black, p1, new Point(p1.X + 50, p1.Y));
-                    gr.DrawLine(Pens.Black, new Point(p1.X + 50, p1.Y), new Point(p1.X + 50, p2.Y - 15));
-                    gr.DrawLine(Pens.Black, new Point(p1.X + 50, p2.Y - 15), new Point(p2.X, p2.Y - 15));
-                    gr.DrawLine(Pens.Black, new Point(p2.X, p2.Y - 15), p2);
+                    gr.DrawLine(pen, p1, new Point(p1.X + 50, p1.Y));
+                    gr.DrawLine(pen, new Point(p1.X + 50, p1.Y), new Point(p1.X + 50, p2.Y - 15));
+                    gr.DrawLine(pen, new Point(p1.X + 50, p2.Y - 15), new Point(p2.X, p2.Y - 15));
+                    gr.DrawLine(pen, new Point(p2.X, p2.Y - 15), p2);
                 }
                 else
                 {
-                    gr.DrawLine(Pens.Black, p1, new Point(p1.X, p2.Y-15));
-                    gr.DrawLine(Pens.Black, new Point(p1.X, p2.Y-15), new Point(p2.X, p2.Y-15));
-                    gr.DrawLine(Pens.Black, new Point(p2.X, p2.Y - 15), p2);
+                    gr.DrawLine(pen, p1, new Point(p1.X, p2.Y - 15));
+                    gr.DrawLine(pen, new Point(p1.X, p2.Y - 15), new Point(p2.X, p2.Y - 15));
+                    gr.DrawLine(pen, new Point(p2.X, p2.Y - 15), p2);
                 }
             }
         }
