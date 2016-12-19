@@ -31,7 +31,7 @@ namespace FlowchartEditorMVP.View
 
         private void addBlockButton_Click(object sender, EventArgs e)
         {
-            flowchartPresenter.AddBlock(codeTextbox.Text); //vScrollBar1.Value
+            flowchartPresenter.AddBlock(); //vScrollBar1.Value
         }
 
         private void editBlockButton_Click(object sender, EventArgs e)
