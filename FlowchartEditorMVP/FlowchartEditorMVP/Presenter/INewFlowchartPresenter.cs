@@ -1,10 +1,6 @@
 ﻿using FlowchartEditorMVP.Model;
 using FlowchartEditorMVP.View;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FlowchartEditorMVP.Presenter
 {
@@ -45,8 +41,8 @@ namespace FlowchartEditorMVP.Presenter
             {
                 throw new Exception("Enter name and path of code file for creating flowchart.");
             }
-            FlowchartView masterView = new FlowchartView(data, path, name, code_type);
             view.Hide();
+            FlowchartView masterView = new FlowchartView(data, path, name, code_type);
             masterView.Show();   
         }
     }    

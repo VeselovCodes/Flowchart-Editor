@@ -2,9 +2,6 @@
 using FlowchartEditorMVP.View;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FlowchartEditorMVP.Presenter
 {
@@ -85,12 +82,14 @@ namespace FlowchartEditorMVP.Presenter
         {
             return data.GetLogin();
         }       
+
         public void ToCode()
         {
             ICode code = new CppFactory().
                 CreateCode(flowchart);
             code.WriteFile(@"MyTest.cpp");
         }
+
         public bool IsEdge(int xCoordsClick, int yCoordsClick, int scroll)
         {
             if (selectedBlock == -1)
@@ -102,15 +101,18 @@ namespace FlowchartEditorMVP.Presenter
             selectedEdge[1] = -1;
             return false;
         }
+
         public bool IsSquareBlock(int i)
         {
             return flowchart.GetListOfBlocks()[i].IsSquare();
         }        
+
         public void AddBlock()
         {
             if (selectedEdge[0] < selectedEdge[1])
             flowchart.AddBlockOnEdge(selectedEdge);
         }
+
         public void EditBlock(List<string> str)
         {
             flowchart.GetListOfBlocks()[selectedBlock].clearText();
@@ -124,6 +126,7 @@ namespace FlowchartEditorMVP.Presenter
                 flowchart.GetListOfBlocks()[selectedBlock].AddStr(str[i]);
             }
         }
+
         public void RemoveBlock()
         {
             if (flowchart.GetGraph().GetAdj()[selectedBlock][0] > selectedBlock)
@@ -132,10 +135,12 @@ namespace FlowchartEditorMVP.Presenter
                 selectedBlock = -1;
             }
         }
+
         public void ToDataBase(string comment)
         {
             data.MasterAddToDB(flowchart, comment);
         }
+
         public IFlowchart getFlowchart()
         {
             return flowchart;
@@ -174,9 +179,12 @@ namespace FlowchartEditorMVP.Presenter
             selectedEdge[0] = -1;
             selectedEdge[1] = -1;
         }
-        public void Apply(string name, string owner)
+
+        public void Apply()
         {
-            //замена блоксхемы мастера текущей
+            data.MasterApply(flowchart);
+            data.Delete(flowchart);
+            ToChooseFlowchart();
         }
 
         public IFlowchart getFlowchart()
@@ -244,7 +252,8 @@ namespace FlowchartEditorMVP.Presenter
 
         public void Decline()
         {
-            //удаление текущей блоксхемы из бд
+            data.Delete(flowchart);
+            ToChooseFlowchart();
         }
     }
 

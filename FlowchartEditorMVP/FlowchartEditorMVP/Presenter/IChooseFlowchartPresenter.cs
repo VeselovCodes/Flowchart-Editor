@@ -1,11 +1,6 @@
 ﻿using FlowchartEditorMVP.Model;
 using FlowchartEditorMVP.View;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FlowchartEditorMVP.Presenter
 {
@@ -15,6 +10,7 @@ namespace FlowchartEditorMVP.Presenter
         void openClick();
         void ToCreateNew();
         void SelectFlowchart(string owner, string name, string reviewer);
+        void ShowComment(string owner, string reviewer, string name);
     }
 
     class ChooseFlowchartPresenter : IChooseFlowchartPresenter
@@ -34,17 +30,25 @@ namespace FlowchartEditorMVP.Presenter
             view.SetFlowchartsTable(table);
         }
 
+        public void ShowComment(string owner, string reviewer, string name)
+        {
+            string comment = data.GetComment(owner, reviewer, name);
+            view.SetCommentText(comment);
+        }
+
         public void openClick()
         {
             if (data.GetLogin().Equals(owner))
             {
-                data.SetOwner(owner);
+                data.SetOwner(data.GetLogin());
+                data.SetReviewer(reviewer);
                 view.Hide();
                 FlowchartView mView = new FlowchartView(data, flowchartName, true, reviewer);
                 mView.Show();
             }  
             else
             {
+                data.SetReviewer(data.GetLogin());
                 data.SetOwner(owner);
                 view.Hide();
                 FlowchartView mView = new FlowchartView(data, flowchartName, false, reviewer);

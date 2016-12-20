@@ -75,12 +75,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\FlowchartDrower.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="View\FlowchartDrower.Designer.cs">
-      <DependentUpon>FlowchartDrower.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\IView.cs" />
     <Compile Include="View\FlowchartView.cs">
       <SubType>Form</SubType>
@@ -115,9 +109,6 @@
     <EmbeddedResource Include="View\EnterView.resx">
       <DependentUpon>EnterView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\FlowchartDrower.resx">
-      <DependentUpon>FlowchartDrower.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\FlowchartView.resx">
       <DependentUpon>FlowchartView.cs</DependentUpon>
     </EmbeddedResource>
@@ -127,8 +118,6 @@
     <EmbeddedResource Include="View\RegisterView.resx">
       <DependentUpon>RegisterView.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="ClassDiagram1.cd" />
-    <None Include="ClassDiagram2.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
