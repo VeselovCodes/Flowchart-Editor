@@ -1,9 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 using MySql.Data.MySqlClient;
 
@@ -242,11 +237,11 @@ namespace FlowchartEditorMVP.Model
             }
         }
 
-        internal void MasterApply(string name, string owner, IFlowchart flowchart)
+        internal void MasterApply(IFlowchart flowchart)
         {
             string dt = DateTime.Now.ToString("u");
 
-            string query = @"UPDATE data SET flowchart_data = '" + flowchart.GetCodeLikeStringList() + "', date = '" + dt + "', comment = '' WHERE owner = '" + owner + "' AND flowchart_name = '" + name + "'";
+            string query = @"UPDATE data SET flowchart_data = '" + flowchart.GetCodeLikeStringList() + "', date = '" + dt + "', comment = '' WHERE owner = '" + login + "' AND flowchart_name = '" + flowchart.GetName() + "' AND reviewer = ''";
 
             MySqlConnection connection = initializeDatabaseConnection("localhost", "flowchart", "root", "");
 
@@ -288,9 +283,12 @@ namespace FlowchartEditorMVP.Model
         }
 
         internal IFlowchart LoadFlowchart(string flowchart_name)
-        {        
-            string queryString = @"SELECT flowchart_data FROM data WHERE flowchart_name = '" + flowchart_name + "' AND owner = '" + owner + "' AND reviewer = ''";
-
+        {
+            string queryString = "";
+            if (reviewer == login)
+                queryString = @"SELECT flowchart_data FROM data WHERE flowchart_name = '" + flowchart_name + "' AND owner = '" + owner + "' AND reviewer = ''";
+            else
+                queryString = @"SELECT flowchart_data FROM data WHERE flowchart_name = '" + flowchart_name + "' AND owner = '" + owner + "' AND reviewer = '" + reviewer + "'";
             MySqlConnection connection = initializeDatabaseConnection("localhost", "flowchart", "root", "");
 
             MySqlCommand com = new MySqlCommand(queryString, connection);
@@ -347,7 +345,7 @@ namespace FlowchartEditorMVP.Model
 
                 if (dr.HasRows)
                 {
-                    query = @"INSERT INTO data (owner, flowchart_name, flowchart_data, date, reviewer, comment) VALUES ('" + this.owner + "', '" + flowchart.GetName() + "', '" + flowchart.GetCodeLikeStringList() + "','" + dt + "', '" + this.reviewer + "', '" + comment + "')";
+                    query = @"INSERT INTO data (owner, flowchart_name, flowchart_data, date, reviewer, comment) VALUES ('" + this.owner + "', '" + flowchart.GetName() + "', '" + flowchart.GetCodeLikeStringList() + "','" + dt + "', '" + this.login + "', '" + comment + "')";
                     connection.Close();
                 }
 

@@ -2,12 +2,7 @@
 using FlowchartEditorMVP.Presenter;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FlowchartEditorMVP.View
@@ -33,22 +28,25 @@ namespace FlowchartEditorMVP.View
                 flowchartPresenter = new MasterPresenter(data, this, name);
                 applyButton.Enabled = false;
                 declineButton.Enabled = false;
+                this.Text = "Flowchart Editor (Master Mode)";
             }
-            else if (reviewer != "" && reviewer != null)
+            else if (isMaster && reviewer != "" && reviewer != null)
             {
                 flowchartPresenter = new MasterViewChangesPresenter(data, this, name);
                 commentTextBox.ReadOnly = true;
                 commentTextBox.Visible = false;
                 toDatabaseButton.Enabled = false;
-                addBlockButton.Enabled = false;
-                editBlockButton.Enabled = false;
-                removeButton.Enabled = false;
+                addBlockButton.Visible = false;
+                editBlockButton.Visible = false;
+                removeButton.Visible = false;
+                this.Text = "Flowchart Editor (Master View Changes Mode)";
             }
             else
             {
                 flowchartPresenter = new ReviewerPresenter(data, this, name);
                 applyButton.Enabled = false;
                 declineButton.Enabled = false;
+                this.Text = "Flowchart Editor (Reviewer Mode)";
             }
             vScrollBar1.Maximum = flowchartPresenter.GetScrollBarBValue();
 
@@ -113,7 +111,7 @@ namespace FlowchartEditorMVP.View
 
         private void applyButton_Click(object sender, EventArgs e)
         {
-            ((MasterViewChangesPresenter)flowchartPresenter).Apply("Name", "Reviewer");
+            ((MasterViewChangesPresenter)flowchartPresenter).Apply();
         }
 
         private void declineButton_Click(object sender, EventArgs e)
