@@ -176,7 +176,9 @@ namespace FlowchartEditorMVP.Presenter
         }
         public void Apply(string name, string owner)
         {
-            //замена блоксхемы мастера текущей
+            data.MasterApply(name, owner, flowchart);
+            data.Delete(flowchart);
+            ToChooseFlowchart();
         }
 
         public IFlowchart getFlowchart()
@@ -244,7 +246,8 @@ namespace FlowchartEditorMVP.Presenter
 
         public void Decline()
         {
-            //удаление текущей блоксхемы из бд
+            data.Delete(flowchart);
+            ToChooseFlowchart();
         }
     }
 

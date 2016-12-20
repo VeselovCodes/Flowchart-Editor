@@ -28,17 +28,9 @@ namespace FlowchartEditorMVP.View
             
         }
 
-        internal void SetFlowchartsTable(DataTable table)//List<Tuple<string, string>> table)
+        internal void SetFlowchartsTable(DataTable table)
         {
-            //for (int i = 0; i < table.Count; i++)
-            //{
-            //    flowchartDataGridView.Rows.Add();
-            //    flowchartDataGridView.Rows[i].Cells[0].Value = table[i].Item1;
-            //    flowchartDataGridView.Rows[i].Cells[1].Value = table[i].Item2;
-            //}
-
             flowchartDataGridView.DataSource = table;
-
         }
 
         private void changeUserButton_Click(object sender, EventArgs e)
@@ -65,14 +57,26 @@ namespace FlowchartEditorMVP.View
                 var owner = flowchartDataGridView.Rows[e.RowIndex].Cells[0].Value.ToString();
                 var reviewer = flowchartDataGridView.Rows[e.RowIndex].Cells[2].Value.ToString();
                 var name = flowchartDataGridView.Rows[e.RowIndex].Cells[1].Value.ToString();
-                presenter.SelectFlowchart(owner, name, reviewer);
-                openButton.Enabled = true;
+                presenter.ShowComment(owner, reviewer, name);
+                if (reviewer != "" && owner != presenter.GetLogin())
+                {
+                    openButton.Enabled = false;
+                }
+                else
+                {
+                    presenter.SelectFlowchart(owner, name, reviewer);
+                    openButton.Enabled = true;
+                }
             }
             catch (Exception exc)
             {
                 excLabel.Text = "Select one of the current flowcharts or create new.";
-            }
-            
+            }       
+        }
+
+        public void SetCommentText(string text)
+        {
+            commentRichTextBox.Text = text;
         }
     }
 }

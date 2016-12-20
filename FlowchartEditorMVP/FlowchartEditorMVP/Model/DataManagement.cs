@@ -15,6 +15,8 @@ namespace FlowchartEditorMVP.Model
 
         private string owner;
 
+        private string reviewer;
+
         private MySqlConnection initializeDatabaseConnection(string server_name, string database_name, string user_id, string database_password)
         {
             MySqlConnectionStringBuilder mysqlCSB = new MySqlConnectionStringBuilder();
@@ -66,6 +68,42 @@ namespace FlowchartEditorMVP.Model
 
                 return false;
             }
+        }
+
+        internal string GetComment(string owner, string reviewer, string name)
+        {
+            string queryString = @"SELECT comment FROM data WHERE flowchart_name = '" + name + "' AND owner = '" + owner + "' AND reviewer = '" + reviewer + "'";
+
+            MySqlConnection connection = initializeDatabaseConnection("localhost", "flowchart", "root", "");
+
+            MySqlCommand com = new MySqlCommand(queryString, connection);
+
+            try
+            {
+                string comment = "";
+
+                connection.Open();
+
+                MySqlDataReader dr = com.ExecuteReader();
+
+                dr.Read();
+
+                if (dr.HasRows)
+                {
+                    comment = dr.GetString("comment");
+                }
+
+                dr.Close();
+
+                connection.Close();
+
+                return comment;
+            }
+            catch (Exception e)
+            {
+                connection.Close();
+            }
+            return "";
         }
 
         internal bool IsLoginExist(string login)
@@ -161,22 +199,40 @@ namespace FlowchartEditorMVP.Model
             this.login = login;
         }
 
-        internal void AddToDB(IFlowchart flowchart)
-        {            
+        internal void MasterAddToDB(IFlowchart flowchart, string comment)
+        {
+            string dt = DateTime.Now.ToString("u");
 
-            string dt = DateTime.Now.ToString("u");            
-
-            string queryString = @"INSERT INTO data (owner, flowchart_name, flowchart_data, date) VALUES ('" + this.login + "', '" + flowchart.GetName() + "', '" + flowchart.GetCodeLikeStringList() + "','" + dt + "')";
+            string querySelect = @"SELECT flowchart_name FROM data WHERE flowchart_name = '" + flowchart.GetName() + "' AND owner = '" + this.login + "'";
 
             MySqlConnection connection = initializeDatabaseConnection("localhost", "flowchart", "root", "");
 
-            MySqlCommand com = new MySqlCommand(queryString, connection);
+            MySqlCommand com = new MySqlCommand(querySelect, connection);
+            
+            try {
 
-            try
-            {
                 connection.Open();
 
                 MySqlDataReader dr = com.ExecuteReader();
+
+                string query = "";
+
+                if (dr.HasRows)
+                {
+                    query = @"UPDATE data SET owner = '" + this.login + "', flowchart_name = '" + flowchart.GetName() + "', flowchart_data = '" + flowchart.GetCodeLikeStringList() + "', date = '" + dt + "', comment = '" + comment + "' WHERE owner = '" + this.login + "' AND flowchart_name = '" + flowchart.GetName() + "'";
+                    connection.Close();
+                }
+                else
+                {
+                    query = @"INSERT INTO data (owner, flowchart_name, flowchart_data, date, comment) VALUES ('" + this.login + "', '" + flowchart.GetName() + "', '" + flowchart.GetCodeLikeStringList() + "','" + dt + "', '" + comment + "')";
+                    connection.Close();
+                }
+
+                com = new MySqlCommand(query, connection);
+
+                connection.Open();
+
+                dr = com.ExecuteReader();
 
                 connection.Close();
             }
@@ -186,22 +242,43 @@ namespace FlowchartEditorMVP.Model
             }
         }
 
-        internal void MasterAddToDB(IFlowchart flowchart, string comment)
+        internal void MasterApply(string name, string owner, IFlowchart flowchart)
         {
             string dt = DateTime.Now.ToString("u");
 
-            string queryString = @"INSERT INTO data (owner, flowchart_name, flowchart_data, date) VALUES ('" + this.login + "', '" + flowchart.GetName() + "', '" + flowchart.GetCodeLikeStringList() + "','" + dt + "')";
+            string query = @"UPDATE data SET flowchart_data = '" + flowchart.GetCodeLikeStringList() + "', date = '" + dt + "', comment = '' WHERE owner = '" + owner + "' AND flowchart_name = '" + name + "'";
 
             MySqlConnection connection = initializeDatabaseConnection("localhost", "flowchart", "root", "");
 
-            MySqlCommand com = new MySqlCommand(queryString, connection);
+            MySqlCommand com = new MySqlCommand(query, connection);
 
             try
             {
                 connection.Open();
-
                 MySqlDataReader dr = com.ExecuteReader();
+                connection.Close();
+            }
+            catch (Exception e)
+            {
+                connection.Close();
+            }
+        }
 
+        internal void Delete(IFlowchart flowchart)
+        {
+            string dt = DateTime.Now.ToString("u");
+
+            string query = @"DELETE FROM data WHERE owner = '" + login + "' AND reviewer = '" + reviewer + "' AND flowchart_name = '" + flowchart.GetName() + "'";
+
+            MySqlConnection connection = initializeDatabaseConnection("localhost", "flowchart", "root", "");
+
+            MySqlCommand com = new MySqlCommand(query, connection);
+
+            
+            try
+            {
+                connection.Open();
+                MySqlDataReader dr = com.ExecuteReader();
                 connection.Close();
             }
             catch (Exception e)
@@ -251,7 +328,41 @@ namespace FlowchartEditorMVP.Model
 
         internal void ReviewerAddToDB(IFlowchart flowchart, string comment)
         {
-            
+            string dt = DateTime.Now.ToString("u");
+
+            string querySelect = @"SELECT flowchart_name FROM data WHERE flowchart_name = '" + flowchart.GetName() + "' AND owner = '" + this.owner + "' AND reviewer = ''";
+
+            MySqlConnection connection = initializeDatabaseConnection("localhost", "flowchart", "root", "");
+
+            MySqlCommand com = new MySqlCommand(querySelect, connection);
+
+            try
+            {
+
+                connection.Open();
+
+                MySqlDataReader dr = com.ExecuteReader();
+
+                string query = "";
+
+                if (dr.HasRows)
+                {
+                    query = @"INSERT INTO data (owner, flowchart_name, flowchart_data, date, reviewer, comment) VALUES ('" + this.owner + "', '" + flowchart.GetName() + "', '" + flowchart.GetCodeLikeStringList() + "','" + dt + "', '" + this.reviewer + "', '" + comment + "')";
+                    connection.Close();
+                }
+
+                com = new MySqlCommand(query, connection);
+
+                connection.Open();
+
+                dr = com.ExecuteReader();
+
+                connection.Close();
+            }
+            catch (Exception e)
+            {
+                connection.Close();
+            }
         }
 
         internal string GetOwner()
@@ -262,6 +373,11 @@ namespace FlowchartEditorMVP.Model
         internal void SetOwner(string owner)
         {
             this.owner = owner;
+        }
+
+        internal void SetReviewer(string reviewer)
+        {
+            this.reviewer = reviewer;
         }
 
         internal string GetLogin()

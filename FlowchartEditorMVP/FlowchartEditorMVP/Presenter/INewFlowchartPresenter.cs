@@ -45,8 +45,8 @@ namespace FlowchartEditorMVP.Presenter
             {
                 throw new Exception("Enter name and path of code file for creating flowchart.");
             }
-            FlowchartView masterView = new FlowchartView(data, path, name, code_type);
             view.Hide();
+            FlowchartView masterView = new FlowchartView(data, path, name, code_type);
             masterView.Show();   
         }
     }    

@@ -15,13 +15,12 @@ namespace FlowchartEditorMVP.View
     public partial class FlowchartView : Form , IView
     {
         private IFlowchartPresenter flowchartPresenter;
-        bool isMaster;
+        bool isMaster = true;
         
         internal FlowchartView(DataManagement data, string path, string name, string type_code)
         {            
             InitializeComponent();
             flowchartPresenter = new MasterPresenter(data, path, this, name, type_code);
-            commentTextBox.ReadOnly = true;
             applyButton.Enabled = false;
             declineButton.Enabled = false;
         }
@@ -32,7 +31,6 @@ namespace FlowchartEditorMVP.View
             if (isMaster && (reviewer == "" || reviewer == null))
             {
                 flowchartPresenter = new MasterPresenter(data, this, name);
-                commentTextBox.ReadOnly = true;
                 applyButton.Enabled = false;
                 declineButton.Enabled = false;
             }
@@ -40,6 +38,7 @@ namespace FlowchartEditorMVP.View
             {
                 flowchartPresenter = new MasterViewChangesPresenter(data, this, name);
                 commentTextBox.ReadOnly = true;
+                commentTextBox.Visible = false;
                 toDatabaseButton.Enabled = false;
                 addBlockButton.Enabled = false;
                 editBlockButton.Enabled = false;
@@ -97,7 +96,14 @@ namespace FlowchartEditorMVP.View
 
         private void toDatabaseButton_Click(object sender, EventArgs e)
         {
-            flowchartPresenter.ToDataBase("");
+            if (isMaster)
+            {
+                ((MasterPresenter)flowchartPresenter).ToDataBase(commentTextBox.Text);
+            }
+            else
+            {
+                ((ReviewerPresenter)flowchartPresenter).ToDataBase(commentTextBox.Text);
+            }
         }
 
         private void toCodeButton_Click(object sender, EventArgs e)
