@@ -40,13 +40,8 @@ namespace FlowchartEditorMVP.Presenter
         {
             if (data.GetLogin().Equals(owner))
             {
-<<<<<<< HEAD
-                data.SetOwner(owner);
-                data.SetReviewer("");
-=======
                 data.SetOwner(data.GetLogin());
                 data.SetReviewer(reviewer);
->>>>>>> 8dd159111155f316997a860ffb0a842a53b0b3e5
                 view.Hide();
                 FlowchartView mView = new FlowchartView(data, flowchartName, true, reviewer);
                 mView.Show();

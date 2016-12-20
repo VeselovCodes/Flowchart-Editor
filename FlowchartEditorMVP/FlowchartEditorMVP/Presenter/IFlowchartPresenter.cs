@@ -182,11 +182,7 @@ namespace FlowchartEditorMVP.Presenter
 
         public void Apply()
         {
-<<<<<<< HEAD
-            data.MasterApply(name, owner, flowchart);
-=======
             data.MasterApply(flowchart);
->>>>>>> 8dd159111155f316997a860ffb0a842a53b0b3e5
             data.Delete(flowchart);
             ToChooseFlowchart();
         }
