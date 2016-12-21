@@ -16,7 +16,7 @@ namespace FlowchartEditorMVP.Model
         string GetCodeLikeStringList();
 
         void AddBlockOnEdge(int[] edge);
-
+        void PushStrToBlock(int selectedBlock, List<string> str);
     }
 
     class Flowchart : IFlowchart
@@ -193,6 +193,19 @@ namespace FlowchartEditorMVP.Model
         {
             ICode code = new CppCode(this);
             return code.GetCodeLikeString();
+        }
+
+        public void PushStrToBlock(int selectedBlock, List<string> str)
+        {
+            for (int i = 0; i < str.Count; i++)
+            {
+                if (GetGraph().GetNodeShift(selectedBlock) == 0)
+                    str[i] = "\t" + str[i];
+                else
+                    str[i] = "\t\t" + str[i];
+                if (GetGraph().GetNodeType(selectedBlock - 1) == 5) str[i] = "\t" + str[i];
+                GetListOfBlocks()[selectedBlock].AddStr(str[i]);
+            }
         }
     }
 }
