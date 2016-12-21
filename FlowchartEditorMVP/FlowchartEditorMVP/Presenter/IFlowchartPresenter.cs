@@ -116,15 +116,7 @@ namespace FlowchartEditorMVP.Presenter
         public void EditBlock(List<string> str)
         {
             flowchart.GetListOfBlocks()[selectedBlock].clearText();
-            for (int i = 0; i < str.Count; i++)
-            {
-                if (flowchart.GetGraph().GetNodeShift(selectedBlock) == 0)
-                    str[i] = "\t" + str[i];
-                else 
-                    str[i] = "\t\t" + str[i];
-                if (flowchart.GetGraph().GetNodeType(selectedBlock - 1) == 5) str[i] = "\t" + str[i];
-                flowchart.GetListOfBlocks()[selectedBlock].AddStr(str[i]);
-            }
+            flowchart.PushStrToBlock(selectedBlock, str);            
         }
 
         public void RemoveBlock()
